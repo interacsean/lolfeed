@@ -5,6 +5,7 @@ import { ComRepEvtResponse, ComRepGuestToken, ComRepGuestTokenResponse } from '.
 import { ApiErrorOr } from '../../../../utils/api/ApiErrorOr';
 import normaliseComedyRepublicEvents from './normaliseComedyRepublicEvents';
 import { ComEvent } from '../../../events/types';
+import catchErrors from '../../../../utils/api/catchErrors';
 
 const makePayload =() => ({
   "SaleSearch": {
@@ -49,11 +50,15 @@ const makeConfig = ({ guestToken }: { guestToken: ComRepGuestToken}) => ({
 
 const getComedyRepublic = (cfg: {} = {}): Promise<ApiErrorOr<ComEvent[]>> =>
   axios.get<ComRepGuestTokenResponse>('https://api.ticketsearch.com/Auth/OnlineToken/GetGuestToken?orgCode=tccinc&guestId=')
-    .then(({ data }): ApiErrorOr<any> => {
+    .then(({ data }) => {
       if (data.Errors !== null) {
-        return err({ message: 'Error getting guest token for comedy republic', errors: data.Errors })
+        const message = 'Error getting guest token for comedy republic';
+        reportError(message);
+        return err({ message, errors: data.Errors })
       } else if (!data.Result?.GuestToken) {
-        return err({ message: 'Guest token was not present for comedy republic', errors: data })
+        const message = 'Guest token was not present for comedy republic';
+        reportError(message);
+        return err({ message, errors: data })
       }
       return data.Result?.GuestToken;
     })
@@ -65,9 +70,6 @@ const getComedyRepublic = (cfg: {} = {}): Promise<ApiErrorOr<ComEvent[]>> =>
     .then(ifNotErr(({ data }) => {
       // check data.Errors
       return normaliseComedyRepublicEvents(data.Result?.SalesEventDetails || [])
-    })).catch(e => {
-      reportError('Error getting sale events for comedy republic');
-      return err({ message: 'Error getting sale events for comedy republic', e })
-  });
+    })).catch(catchErrors('Error getting sale events for comedy republic'));
 
 export default getComedyRepublic;
