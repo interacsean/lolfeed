@@ -1,5 +1,7 @@
-export type EventSummary = {
+export type ComEventSummary = {
   title: string,
+  subTitle?: string,
+  timestamp: number,
   venue: {
     name: string,
     slug?: string,
@@ -8,7 +10,7 @@ export type EventSummary = {
   tags?: string[],
 }
 
-export type Event = EventSummary & {
+export type ComEvent = ComEventSummary & {
   description?: string,
   orderLink: string,
 }

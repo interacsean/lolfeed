@@ -1,4 +1,4 @@
-import useEventFeed from '../services/data/useEventFeed';
+import useEventFeed from '../services/events/useEventFeed';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import { NextPage } from 'next';
 

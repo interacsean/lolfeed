@@ -1,6 +1,6 @@
-import { EventSummary } from './types';
+import { ComEventSummary } from './types';
 
-const sampleEvents: EventSummary[] = [
+const sampleEvents: ComEventSummary[] = [
   {
     title: 'Jimeoin',
     venue: {

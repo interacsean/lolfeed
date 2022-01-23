@@ -1,5 +1,5 @@
 const App = {
-  apiUri: '',
+  apiUri: '/api',
 }
 
 export default App;

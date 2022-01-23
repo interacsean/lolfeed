@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import useEventFeed from '../../services/data/useEventFeed';
+import useEventFeed from '../../services/events/useEventFeed';
 
 type Props = {
   children: React.ReactNode,

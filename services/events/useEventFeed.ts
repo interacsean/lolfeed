@@ -1,26 +1,21 @@
-import React from 'react';
+import * as React from 'react';
 import axios from 'axios';
 import App from '../../config/App';
-import { Event, EventSummary } from './types';
-import sampleEvents from './sampleEvents';
+import { ComEventSummary } from './types';
+import { EventResponse } from '../../pages/api/events';
 
 const useEventFeed = () => {
   const [ loading, setLoading ] = React.useState(false);
-  const [ events, setEvents ] = React.useState<EventSummary[]>([]);
+  const [ events, setEvents ] = React.useState<ComEventSummary[]>([]);
 
   const requestEvents = React.useCallback(
     () => {
       setLoading(true);
-      setTimeout(() => {
-        setEvents(sampleEvents);
-        setLoading(false);
-      }, 500)
-      return;
-      // axios.get(`${App.apiUri}/`).then(
-      //   ({ data }) => {
-      //
-      //   }
-      // )
+      axios.get<EventResponse>(`${App.apiUri}/events`).then(
+        ({ data }) => {
+          setEvents(data.events);
+        }
+      ).finally(() => setLoading(false));
     },
     [],
   );
