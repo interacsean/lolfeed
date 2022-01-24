@@ -2,7 +2,7 @@
   "name": "lolfeed",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,6 +11,7 @@
     "@chakra-ui/react": "1.7.4",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@types/ramda": "0.27.64",
     "axios": "0.25.0",
     "date-fns-timezone": "0.1.4",
     "errable": "1.0.0",

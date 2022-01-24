@@ -11,7 +11,7 @@ export type ComRepGuestTokenResponse = {
     'GuestToken': ComRepGuestToken
   }
 }
-export type ComRepEvt = {
+export type ComRepEvtRaw = {
   "EventId": number,
   "EventLine1": string,
   "EventLine2": string,
@@ -50,6 +50,6 @@ export type ComRepEvtResponse = {
   "Errors": any,
   "Result": {
     "RecordCount": number,
-    "SalesEventDetails": ComRepEvt[]
+    "SalesEventDetails": ComRepEvtRaw[]
   }
 }

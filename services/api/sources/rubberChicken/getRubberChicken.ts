@@ -3,7 +3,7 @@ import scrapy from 'node-scrapy';
 
 const scrapeModel = {
   events: [
-    '.products li',
+    '.products > li',
     {
       imgSrc: '.entry-featured > a > img (datasrc)',
       descCombined: 'h3 > a',
@@ -17,10 +17,9 @@ const getRubberChicken = () => axios.get(
   `https://therubberchicken.com.au/buy-tickets/`
 ).then
   (({ data }) => {
-    // console.log(data);
     const structured = scrapy.extract(data.replace(/data-src/g, 'datasrc'), scrapeModel);
-    console.log(structured);
-    return [];
+    // todo: clean
+    return structured?.events;
   });
 
 export default getRubberChicken;
