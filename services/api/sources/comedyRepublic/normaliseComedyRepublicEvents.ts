@@ -1,6 +1,6 @@
-import { ComRepEvtRaw, ComRepGuestTokenResponse } from './types';
+import { ComRepEvtRaw } from './types';
 import { ComEvent } from '../../../events/types';
-import { not, isEmpty } from 'ramda';
+import { not, isEmpty, compose } from 'ramda';
 import { parseFromTimeZone } from 'date-fns-timezone';
 
 const convertTime = (dateTime: string) => {
@@ -14,7 +14,7 @@ const normaliseComedyRepublicEvents = (crEvents: ComRepEvtRaw[]): ComEvent[] =>
       ...cre.EventLine2 && { subTitle: cre.EventLine2 },
       ...cre.Description && { description: cre.Description },
       venue: {
-        name: [cre.VenueName, cre.VenueSuburb].filter(e => not(isEmpty(e))).join(', '),
+        name: [cre.VenueName, cre.VenueSuburb].filter(compose(not, isEmpty)).join(', '),
       },
       timestamp: convertTime(cre.EventStartDate),
       orderLink: `https://tccinc.sales.ticketsearch.com/sales/salesevent/${cre.EventId}`,

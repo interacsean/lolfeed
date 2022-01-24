@@ -1,7 +1,7 @@
 export type ComEventSummary = {
   title: string,
   subTitle?: string,
-  timestamp: number,
+  timestamp: number | null,
   venue: {
     name: string,
     slug?: string,

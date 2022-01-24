@@ -13,6 +13,7 @@
     "@emotion/styled": "^11",
     "@types/ramda": "0.27.64",
     "axios": "0.25.0",
+    "date-fns": "2.28.0",
     "date-fns-timezone": "0.1.4",
     "errable": "1.0.0",
     "framer-motion": "^5",

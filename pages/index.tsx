@@ -1,6 +1,7 @@
 import useEventFeed from '../services/events/useEventFeed';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import { NextPage } from 'next';
+import { format } from 'date-fns';
 
 
 const defaultImageSrc = '';
@@ -16,12 +17,13 @@ const Home: NextPage = () => {
           'loading!'
         ) : (
           events.map(e => (
-            <Box>
+            <Box mb={1}>
               <Box>
                 <img src={e.imgSrc || defaultImageSrc} />
               </Box>
               <Heading variant="heading">{e.title}</Heading>
               <Text variant="subTitle">{e.venue?.name}</Text>
+              <Text variant="titleDetail">{format(e.timestamp, 'do MMM yyyy h:mm a')}</Text>
             </Box>
           ))
         )}

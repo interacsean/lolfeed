@@ -1,25 +1,44 @@
-import { ComLngEvtRaw, ComRepEvt, ComRepGuestTokenResponse } from './types';
+import { ComLngEvtRaw } from './types';
 import { ComEvent } from '../../../events/types';
-import { not, isEmpty } from 'ramda';
-import { parseFromTimeZone } from 'date-fns-timezone';
+import { not, isEmpty, compose } from 'ramda';
+import { parseFromTimeZone, parseFromString } from 'date-fns-timezone';
+import replaceMonthWithNumeric from '../../../../utils/string/replaceMonthWithNumeric';
 
 const convertTime = (date: string, time: string) => {
-  return parseFromTimeZone(date, { timeZone: 'Australia/Melbourne' }).getTime()
+  try {
+    const dateOnly = date.match(/\d+\s+\w+\s+\d\d\d\d/) || null;
+
+    const dateCleaned = dateOnly ? dateOnly[0].replaceAll(/\s+/g, ' ') : null;
+    const dateWithNumMonth = dateCleaned ? replaceMonthWithNumeric(dateCleaned).padStart(10, '0') : null;
+
+    const timeOnly = time.match(/[\d\.\:apm]+/i) || null;
+    const timeCleaned = timeOnly ? timeOnly[0].replaceAll(/\s/g, ' ').replace('.', ':') : null;
+    const timeWithMins = !timeCleaned ? null : timeCleaned.includes(':') ?  timeCleaned :
+      `${timeCleaned.substring(0, timeCleaned.length - 2)}:00${timeCleaned.substring(timeCleaned.length - 2)}`;
+
+    return parseFromString(`${dateWithNumMonth} ${timeWithMins}`, 'DD MM YYYY H:mmA').getTime();
+  } catch (e) {
+    return null;
+  }
 }
 
 const normaliseComicsLoungeEvents = (cEvents: ComLngEvtRaw[]): ComEvent[] =>
   cEvents.map(
-    ce => ({
-      title: ce.title,
-      ...ce.subTitle && { subTitle: ce.subTitle },
-      venue: {
-        name: 'Comics Lounge, North Melbourne',
-      },
-      timestamp: 0, // convertTime(ce.dateRaw, ce.timeRaw),
-      orderLink: `https://thecomicslounge.com.au${ce.bookingLinkRaw}`,
-      ...ce.imgSrc && { imgSrc: `https://thecomicslounge.com.au${ce.imgSrc}` },
-      // save original datas
-    }),
-  )
+    (ce): ComEvent | null => {
+      const timestamp = convertTime(ce.dateRawStart, ce.timeRaw);
+      if (!timestamp) return null;
+      return ({
+        title: ce.title,
+        ...ce.subTitle && { subTitle: ce.subTitle },
+        venue: {
+          name: 'Comics Lounge, North Melbourne',
+        },
+        timestamp,
+        orderLink: `https://thecomicslounge.com.au${ce.bookingLinkRaw}`,
+        ...ce.imgSrc && { imgSrc: `https://thecomicslounge.com.au${ce.imgSrc}` },
+        // save original datas
+      });
+    },
+  ).filter(compose(not, isEmpty)) as ComEvent[]
 
 export default normaliseComicsLoungeEvents;

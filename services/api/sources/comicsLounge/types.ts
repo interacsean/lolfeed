@@ -2,7 +2,8 @@ export type ComLngEvtRaw = {
   imgSrc: string,
   title: string,
   subTitle: string,
-  dateRaw: string,
+  dateRawStart: string,
+  dateRawFinish: string,
   timeRaw: string,
   bookingLinkRaw: string,
 }

@@ -8,7 +8,12 @@ const Text = {
     },
     subTitle: {
       fontWeight: fontWeights.normal,
-      fontSize: '0.8rem',
+      fontSize: '1.2rem',
+      color: 'black.90',
+    },
+    titleDetail: {
+      fontWeight: fontWeights.normal,
+      fontSize: '0.9rem',
       color: 'black.70',
     },
     content: {
