@@ -10,11 +10,11 @@ const Home: NextPage = () => {
   const { events, loading } = useEventFeed();
 
   return (
-    <>
+    <Box px="bodyH" pt="bodyTop">
       <h3>Events</h3>
       <Box>
         {loading ? (
-          'loading!'
+          <Box textAlign="center">Loading...</Box>
         ) : (
           events.map(e => (
             <Box mb={1}>
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
           ))
         )}
       </Box>
-    </>
+    </Box>
   )
 }
 

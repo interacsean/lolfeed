@@ -30,6 +30,8 @@ const space = {
   6: `${getSpace(6)}rem`,
   7: `${getSpace(7)}rem`,
   8: `${getSpace(8)}rem`,
+  'bodyH': `${getSpace(1)}rem`,
+  'bodyTop': `${getSpace(1 / 2)}rem`,
 }
 
 export default space;
