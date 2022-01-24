@@ -6,6 +6,7 @@ import getRubberChicken from '../../services/api/sources/rubberChicken/getRubber
 import getComicsLounge from '../../services/api/sources/comicsLounge/getComicsLounge';
 import normaliseComedyRepublicEvents from '../../services/api/sources/comedyRepublic/normaliseComedyRepublicEvents';
 import normaliseComicsLoungeEvents from '../../services/api/sources/comicsLounge/normaliseComicsLoungeEvents';
+import normaliseRubberChickenEvents from '../../services/api/sources/rubberChicken/normaliseRubberChickenEvents';
 
 export type EventResponse = {
   events: ComEventSummary[]
@@ -20,13 +21,13 @@ export default function handler(
   return Promise.all([
     getComicsLounge(),
     getComedyRepublic(),
-    // getRubberChicken(),
+    getRubberChicken(),
   ]).then(
     ([comicLoungeEvents, comedyRepublicEvents, rubberChickenEvents]) =>
       [
       ...notErr(comicLoungeEvents) ? normaliseComicsLoungeEvents(comicLoungeEvents) : [],
       ...notErr(comedyRepublicEvents) ? normaliseComedyRepublicEvents(comedyRepublicEvents) : [],
-      // ...notErr(rubberChickenEvents) ? normaliseComedyRepublicEvents(rubberChickenEvents) : [],
+      ...notErr(rubberChickenEvents) ? normaliseRubberChickenEvents(rubberChickenEvents) : [],
     ]
   ).then(
     // sortEvents

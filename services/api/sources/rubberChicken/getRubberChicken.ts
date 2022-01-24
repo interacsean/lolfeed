@@ -1,5 +1,8 @@
 import axios from 'axios';
 import scrapy from 'node-scrapy';
+import { RbrChkEvtRaw } from './types';
+import { ApiErrorOr } from '../../../../utils/api/ApiErrorOr';
+import { err } from 'errable';
 
 const scrapeModel = {
   events: [
@@ -13,13 +16,13 @@ const scrapeModel = {
   ],
 }
 
-const getRubberChicken = () => axios.get(
+const getRubberChicken = (): Promise<ApiErrorOr<RbrChkEvtRaw[]>> => axios.get(
   `https://therubberchicken.com.au/buy-tickets/`
 ).then
   (({ data }) => {
-    const structured = scrapy.extract(data.replace(/data-src/g, 'datasrc'), scrapeModel);
+    const structured = scrapy.extract(data.replace(/data-src/g, 'datasrc'), scrapeModel) as { events?: RbrChkEvtRaw[] };
     // todo: clean
-    return structured?.events;
+    return structured?.events || err({ message: 'Could not get Rubber Chicken events', errors: structured });
   });
 
 export default getRubberChicken;
