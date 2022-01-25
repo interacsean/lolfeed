@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
-import useEventFeed from '../../services/events/useEventFeed';
+import BodyBox from './BodyBox';
 
 type Props = {
   children: React.ReactNode,
@@ -8,11 +7,13 @@ type Props = {
 
 const Layout = (props: Props) => {
   return (
-    <Box>
-      <Text variant="heading1">
-
-      </Text>
-    </Box>
+    <>
+      {/*<BodyBox as="header">*/}
+      {/*</BodyBox>*/}
+      <BodyBox>
+        {props.children}
+      </BodyBox>
+    </>
   );
 };
 

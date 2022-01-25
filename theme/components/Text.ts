@@ -1,23 +1,36 @@
 import fontWeights from '../fontWeights';
+import space, { getSpace } from '../space';
+
+const getFontSize = (n: number) =>
+  getSpace(n, true, 1.22);
 
 const Text = {
   variants: {
     heading: {
-      fontSize: '1.5rem',
+      fontSize: getFontSize(2),
+      fontWeight: fontWeights.bold,
+      lineHeight: 1.3,
+    },
+    title: {
+      fontSize: getFontSize(3),
       fontWeight: fontWeights.medium,
+      lineHeight: 1.3,
     },
     subTitle: {
       fontWeight: fontWeights.normal,
-      fontSize: '1.2rem',
+      fontSize: getFontSize(2),
       color: 'black.90',
+      lineHeight: 1.3,
     },
-    titleDetail: {
+    detail: {
       fontWeight: fontWeights.normal,
-      fontSize: '0.9rem',
+      fontSize: getFontSize(1/2),
       color: 'black.70',
+      lineHeight: 1.3,
     },
     content: {
-      fontSize: '1rem',
+      fontSize: getFontSize(1),
+      lineHeight: 1.3,
     }
   },
 };
