@@ -1,5 +1,5 @@
 import { ComLngEvtRaw } from './types';
-import { ComEvent } from '../../../events/types';
+import { ComEvent, TimestampPrecision } from '../../../events/types';
 import { not, isEmpty, compose } from 'ramda';
 import { parseFromTimeZone, parseFromString } from 'date-fns-timezone';
 import replaceMonthWithNumeric from '../../../../utils/string/replaceMonthWithNumeric';
@@ -33,9 +33,11 @@ const normaliseComicsLoungeEvents = (cEvents: ComLngEvtRaw[]): ComEvent[] =>
         venue: {
           name: 'Comics Lounge, North Melbourne',
         },
-        timestamp,
+        timestamp: [timestamp],
+        timestampPrecision: TimestampPrecision.TIME,
         orderLink: `https://thecomicslounge.com.au${ce.bookingLinkRaw}`,
         ...ce.imgSrc && { imgSrc: `https://thecomicslounge.com.au${ce.imgSrc}` },
+        // price: ce && parseFloat(ce.price) || undefined,
         // save original datas
       });
     },

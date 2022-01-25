@@ -7,6 +7,12 @@ const colors = {
     90: '#111111e8',
     70: '#111111aa', // check math
   },
+  primary: {
+    100: '#421fba'
+  },
+  secondary: {
+    100: '#3cd273'
+  },
 };
 
 export default colors;
