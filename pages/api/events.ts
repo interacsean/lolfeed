@@ -1,12 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ComEvent, ComEventSummary } from '../../services/events/types';
-import { fork, notErr } from 'errable';
-import getComedyRepublic from '../../services/api/sources/comedyRepublic/getComedyRepublic';
-import getRubberChicken from '../../services/api/sources/rubberChicken/getRubberChicken';
-import getComicsLounge from '../../services/api/sources/comicsLounge/getComicsLounge';
-import normaliseComedyRepublicEvents from '../../services/api/sources/comedyRepublic/normaliseComedyRepublicEvents';
-import normaliseComicsLoungeEvents from '../../services/api/sources/comicsLounge/normaliseComicsLoungeEvents';
-import normaliseRubberChickenEvents from '../../services/api/sources/rubberChicken/normaliseRubberChickenEvents';
+import { fork } from 'errable';
+import getSpecialEvents from '../../services/api/sources/getSpecialEvents';
 
 export type EventResponse = {
   events: ComEventSummary[]
@@ -16,23 +11,9 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<EventResponse>
 ) {
-  // todo: get events from cache... not the below!
+  // todo: get events from cache
 
-  return Promise.all([
-    getComicsLounge(),
-    getComedyRepublic(),
-    getRubberChicken(),
-  ]).then(
-    ([comicLoungeEvents, comedyRepublicEvents, rubberChickenEvents]) =>
-      [
-      ...notErr(comicLoungeEvents) ? normaliseComicsLoungeEvents(comicLoungeEvents) : [],
-      ...notErr(comedyRepublicEvents) ? normaliseComedyRepublicEvents(comedyRepublicEvents) : [],
-      ...notErr(rubberChickenEvents) ? normaliseRubberChickenEvents(rubberChickenEvents) : [],
-    ]
-  ).then(
-    // sortEvents
-    normalisedEvents => normalisedEvents
-  ).then(
+  return getSpecialEvents().then(
     fork<any, ComEvent[]>(
       (comedyEventResult) => {
         res.json({ events: comedyEventResult });
