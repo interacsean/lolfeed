@@ -26,8 +26,11 @@ const normaliseComicsLoungeEvents = (cEvents: ComLngEvtRaw[]): ComEvent[] =>
   cEvents.map(
     (ce): ComEvent | null => {
       const timestamp = convertTime(ce.dateRawStart, ce.timeRaw);
+      const pathParts = ce.bookingLinkRaw.split('-detail').reverse().filter(compose(not, isEmpty))[0]?.split('/'); ///index.php/events/cl22_26-29jan-detail
+
       if (!timestamp) return null;
       return ({
+        uid: `CLG-${pathParts[pathParts.length - 1]}`,
         title: ce.title,
         ...ce.subTitle && { subTitle: ce.subTitle },
         venue: {

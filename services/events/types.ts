@@ -1,4 +1,5 @@
 export type ComEventSummary = {
+  uid: string;
   title: string,
   subTitle?: string,
   timestamp: number[],

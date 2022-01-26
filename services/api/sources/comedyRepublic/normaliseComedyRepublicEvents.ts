@@ -10,6 +10,7 @@ const convertTime = (dateTime: string) => {
 const normaliseComedyRepublicEvents = (crEvents: ComRepEvtRaw[]): ComEvent[] =>
   crEvents.map(
     cre => ({
+      uid: `CRP-${cre.EventId}`,
       title: cre.EventLine1,
       ...cre.EventLine2 && { subTitle: cre.EventLine2 },
       ...cre.Description && { description: cre.Description },

@@ -1,4 +1,4 @@
-import { ComLngEvtRaw, RbrChkEvtRaw } from './types';
+import { RbrChkEvtRaw } from './types';
 import { ComEvent, TimestampPrecision } from '../../../events/types';
 import { not, isEmpty, compose } from 'ramda';
 import { parseFromTimeZone, parseFromString } from 'date-fns-timezone';
@@ -63,6 +63,7 @@ const normaliseRubberEvents = (cEvents: RbrChkEvtRaw[]): ComEvent[] =>
       if (!timestamp || !title || !timestampPrecision) return null;
 
       return ({
+        uid: `RBC-${ce.id}`,
         title,
         // ...ce.subTitle && { subTitle: ce.subTitle },
         venue: {
