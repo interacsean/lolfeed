@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ComEvent, ComEventSummary } from '../../services/events/types';
 import { fork } from 'errable';
-import getSpecialEvents from '../../services/api/sources/getSpecialEvents';
+import getSpecialEvents from '../../services/database/events/getSpecialEvents';
 
 export type EventResponse = {
   events: ComEventSummary[]
@@ -17,7 +17,6 @@ export default function handler(
     res.json(cachedResult);
     return;
   }
-  // todo: get events from cache
 
   return getSpecialEvents().then(
     fork<any, ComEvent[]>(

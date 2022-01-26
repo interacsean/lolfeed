@@ -15,7 +15,7 @@ const scrapeModel = {
       // todo: deal with events that have different finish date
       dateRawFinish: '.eventsdate > div:nth-child(3)',
       timeRaw: '.otherinfo > div:nth-child(2)',
-      bookingLinkRaw: '.otherinfo > div > .msbuy > a (href)',
+      bookingLink: '.otherinfo > div > .msbuy > a (href)',
       // price NA
     }
   ],

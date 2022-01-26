@@ -3,7 +3,7 @@ import { err, ifNotErrAsync, ifNotErr } from 'errable';
 import reportError from '../../../reporting/reportError';
 import { ComRepEvtRaw, ComRepEvtResponse, ComRepGuestToken, ComRepGuestTokenResponse } from './types';
 import { ApiErrorOr } from '../../../../utils/api/ApiErrorOr';
-import normaliseComedyRepublicEvents from './normaliseComedyRepublicEvents';
+import normaliseComedyRepublicEvent from './normaliseComedyRepublicEvent';
 import { ComEvent } from '../../../events/types';
 import catchErrors from '../../../../utils/api/catchErrors';
 

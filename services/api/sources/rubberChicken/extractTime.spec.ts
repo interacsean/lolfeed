@@ -1,4 +1,4 @@
-import { extractTime } from './normaliseRubberChickenEvents';
+import { extractTime } from './normaliseRubberChickenEvent';
 import { TimestampPrecision } from '../../../events/types';
 
 describe('extractTime', () => {

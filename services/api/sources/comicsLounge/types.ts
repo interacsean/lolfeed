@@ -5,5 +5,5 @@ export type ComLngEvtRaw = {
   dateRawStart: string,
   dateRawFinish: string,
   timeRaw: string,
-  bookingLinkRaw: string,
+  bookingLink: string,
 }

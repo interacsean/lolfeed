@@ -1,5 +1,5 @@
 import { RbrChkEvtRaw } from './types';
-import { ComEvent, TimestampPrecision } from '../../../events/types';
+import { ComEvent, Sources, TimestampPrecision } from '../../../events/types';
 import { not, isEmpty, compose } from 'ramda';
 import { parseFromTimeZone, parseFromString } from 'date-fns-timezone';
 import replaceMonthWithNumeric from '../../../../utils/string/replaceMonthWithNumeric';
@@ -56,27 +56,27 @@ export const extractTime = (rawDesc: string) => {
   return Array(3).fill(null)
 }
 
-const normaliseRubberEvents = (cEvents: RbrChkEvtRaw[]): ComEvent[] =>
-  cEvents.map(
-    (ce): ComEvent | null => {
-      const [title, timestamp, timestampPrecision] = extractTime(ce.descCombined);
-      if (!timestamp || !title || !timestampPrecision) return null;
+export const getRubberChickenId = (event: RbrChkEvtRaw) => `RBC-${event.id}`
 
-      return ({
-        uid: `RBC-${ce.id}`,
-        title,
-        // ...ce.subTitle && { subTitle: ce.subTitle },
-        venue: {
-          name: 'The Rubber Chicken, South Melbourne',
-        },
-        timestamp,
-        timestampPrecision,
-        orderLink: `https://therubberchicken.com.au/${ce.bookingLink}`,
-        ...ce.imgSrc && { imgSrc: ce.imgSrc },
-        price: ce.price && parseFloat(ce.price) || undefined,
-        // save original datas
-      });
+const normaliseRubberChickenEvent = (ce: RbrChkEvtRaw): ComEvent | null => {
+  const [title, timestamp, timestampPrecision] = extractTime(ce.descCombined);
+  if (!timestamp || !title || !timestampPrecision) return null;
+
+  return ({
+    uid: getRubberChickenId(ce),
+    source: Sources.RUBBER_CHICKEN,
+    title,
+    // ...ce.subTitle && { subTitle: ce.subTitle },
+    venue: {
+      name: 'The Rubber Chicken, South Melbourne',
     },
-  ).filter(compose(not, isEmpty)) as ComEvent[]
+    timestamp,
+    timestampPrecision,
+    orderLink: `https://therubberchicken.com.au/${ce.bookingLink}`,
+    ...ce.imgSrc && { imgSrc: ce.imgSrc },
+    price: ce.price && parseFloat(ce.price) || undefined,
+    // save original datas
+  });
+}
 
-export default normaliseRubberEvents;
+export default normaliseRubberChickenEvent;
