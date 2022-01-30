@@ -1,17 +1,19 @@
 import { ComEvent, Sources, TimestampPrecision } from '../../types';
 import { Tags } from '../../tags/tags';
 import getNextNDates, { DayOfWeek } from '../../../../utils/date/getNextNDates';
+import { unconfirmedMessage } from './common';
 
 const getGeorgesBarId = (date: Date) => `GGB-${date.toISOString().substring(0,10)}`;
 
 const getGeorgesBarWeeklies = (now: number = Date.now()): ComEvent[] => {
-  const nextFourThu = getNextNDates(4, DayOfWeek.Wednesday, 19, 30);
+  const nextFourOccurrances = getNextNDates(4, DayOfWeek.Wednesday, 19, 30);
 
-  return nextFourThu.map((date) => {
+  return nextFourOccurrances.map((date) => {
     return {
       uid: getGeorgesBarId(date),
       timestampPrecision: TimestampPrecision.TIME,
       title: 'Comedy Wednesday at Georges',
+      description: unconfirmedMessage,
       //subTitle: Headliner usually available
       venue: {
         name: 'Georges Bar',

@@ -1,5 +1,6 @@
 import useEventFeed from '../services/events/useEventFeed';
-import { Box, Heading, Text, Img } from '@chakra-ui/react';
+import { IconButton, Box, Heading, Text, Img } from '@chakra-ui/react';
+import { ArrowForwardIcon } from '@chakra-ui/icons/src/ArrowForward';
 import { NextPage } from 'next';
 import { format } from 'date-fns';
 import Layout from '../components/layouts/Layout';
@@ -27,14 +28,22 @@ const Home: NextPage = () => {
               ? null
             : `$${price[0]}`;
           return (
-            <Box mb={1} display="flex" backgroundColor="white.100" border="4px solid" borderColor="secondary.100"
-                 borderRadius={getSpace(1 / 3)}>
+            <Box
+              mb={1}
+              display="flex"
+              alignItems="stretch"
+              backgroundColor="white.100"
+              border="4px solid"
+              borderColor="secondary.100"
+              borderRadius={getSpace(1 / 3)}
+            >
               <Box sx={{ minWidth: '150px' }} position="relative">
                 <Img
                   src={e.imgSrc || defaultImageSrc}
                   objectFit="cover"
                   width={150}
-                  height={150}
+                  minHeight={150}
+                  maxHeight={165}
                   borderLeftRadius={getSpace(1 / 5)}
                   opacity={!e.imgSrc ? 0.1 : undefined}
                 />
@@ -42,16 +51,30 @@ const Home: NextPage = () => {
                   <Text variant="tag" position="absolute" left={1 / 3} bottom={1 / 4}>{priceDesc}</Text>
                 ) : null}
               </Box>
-              <Box py={1 / 3} px={1 / 2}>
+              <Box py={1 / 3} px={1 / 2}
+                   flex="1 0 0">
                 <Heading variant="title">{e.title}</Heading>
-                <Text variant="subTitle">{e.venue?.name}</Text>
-                {e.timestamp[1] ? (
-                  // todo: formatrange
-                  <Text
-                    variant="detail">{format(e.timestamp[0], 'do MMM')} – {format(e.timestamp[1], 'do MMM yyyy')}</Text>
-                ) : (
-                  <Text variant="detail">{format(e.timestamp[0], 'do MMM yyyy h:mm a')}</Text>
-                )}
+                <Text variant="subTitle" mb={1 / 4}>{e.venue?.name}</Text>
+                <Box display="flex" justifyContent="space-between" alignItems="center" mt={1 / 4}>
+                  <Box flex="1 0 0" alignSelf="stretch">
+                    <Text variant="detail" mb={1 / 5}>
+                      {e.timestamp[1] ? (
+                        // todo: formatrange
+                        `${format(e.timestamp[0], 'EEEE do MMM')} – ${format(e.timestamp[1], 'EEEE do MMM yyyy')}`
+                      ) : (
+                        format(e.timestamp[0], 'EEEE do MMM yyyy h:mm a')
+                      )}
+                    </Text>
+                    {e.description && (
+                        <Text variant="content">{e.description}</Text>
+                    )}
+                  </Box>
+                  <Box display="flex" width={'auto'} justifyContent="end">
+                    <IconButton
+                      icon={<ArrowForwardIcon />}
+                    />
+                  </Box>
+                </Box>
               </Box>
             </Box>
           )})

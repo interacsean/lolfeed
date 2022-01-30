@@ -22,13 +22,13 @@ const getNextNDates = (
   const localDate = convertToTimeZone(timestamp, { timeZone: timezone });
   const localDayOfWeek = getDay(localDate);
   const daysTilNextThu = dayOfWeek + localDayOfWeek % 7
-  const firstThu = pipe(
+  const firstOccur = pipe(
     addDays(daysTilNextThu),
     setHours(hours),
-    mins ? setMinutes(mins) : x => x,
+    mins !== undefined ? setMinutes(mins) : x => x,
   )(localDate);
   return Array(num).fill(null).map((_n, i) =>
-    i === 0 ? firstThu : addDays(i * 7, firstThu)
+    i === 0 ? firstOccur : addDays(i * 7, firstOccur)
   );
 }
 
