@@ -16,7 +16,7 @@ export type ComEventSummary = {
 export type ComEvent = ComEventSummary & {
   source: string,
   description?: string,
-  orderLink: string,
+  orderLink?: string,
 }
 
 export enum TimestampPrecision {
@@ -30,4 +30,5 @@ export enum Sources {
   COMICS_LOUNGE = 'COMICS_LOUNGE',
   COMEDY_REPUBLIC = 'COMEDY_REPUBLIC',
   GENERATED_BOBBY_PEELS = 'GENERATED_BOBBY_PEELS',
+  GENERATED_GEORGES_BAR = 'GENERATED_GEORGES_BAR',
 }

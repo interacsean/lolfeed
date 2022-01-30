@@ -1,14 +1,17 @@
 import { ComEvent } from '../types';
-import bobbiePeels from './weeklies/bobbiePeels';
+import getBobbiePeelsWeeklies from './weeklies/getBobbiePeelsWeeklies';
+import getGeorgesBarWeeklies from './weeklies/getGeorgesBarWeeklies';
 
 const addWeeklyEvents = (evts: ComEvent[]): ComEvent[] => {
   const now = Date.now();
 
   const baseWeeklies = [
-    ...bobbiePeels(now),
+    ...getBobbiePeelsWeeklies(now),
+    ...getGeorgesBarWeeklies(now),
   ];
-  // Check evts for overrides, add in weeklies that don't exist
-  // For now, hardcoded, then can pull from db
+
+  // Replace weeklies that have a db record
+
   return evts.concat(baseWeeklies);
 }
 

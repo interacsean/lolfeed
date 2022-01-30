@@ -4,7 +4,7 @@ import getNextNDates, { DayOfWeek } from '../../../../utils/date/getNextNDates';
 
 const getBobbiePeelId = (date: Date) => `BBP-${date.toISOString().substring(0,10)}`;
 
-const bobbiePeels = (now: number = Date.now()): ComEvent[] => {
+const getBobbiePeelsWeeklies = (now: number = Date.now()): ComEvent[] => {
   const nextFourThu = getNextNDates(4, DayOfWeek.Thursday, 20, 30);
 
   return nextFourThu.map((date) => {
@@ -13,15 +13,17 @@ const bobbiePeels = (now: number = Date.now()): ComEvent[] => {
       timestampPrecision: TimestampPrecision.TIME,
       title: 'Comedy upstairs',
       subTitle: 'Open mic at Bobbie Peels',
+      description: 'Signup at the venue from 7.30pm',
       venue: {
         name: 'Bobbie Peels',
       },
-      orderLink: '#',
+      orderLink: 'https://www.facebook.com/ComedyUpstairsMelb/events/',
       timestamp: [date.getTime()],
+      price: 0,
       source: Sources.GENERATED_BOBBY_PEELS,
       tags: [Tags.OPEN_MIC, Tags.FREE],
     };
   });
 }
 
-export default bobbiePeels;
+export default getBobbiePeelsWeeklies;
