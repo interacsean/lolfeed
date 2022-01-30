@@ -2,7 +2,7 @@ import { RbrChkEvtRaw } from './types';
 import { ComEvent, Sources, TimestampPrecision } from '../../../events/types';
 import { not, isEmpty, compose } from 'ramda';
 import { parseFromTimeZone, parseFromString } from 'date-fns-timezone';
-import replaceMonthWithNumeric from '../../../../utils/string/replaceMonthWithNumeric';
+import replaceMonthWithNumeric from '../../../../utils/date/replaceMonthWithNumeric';
 
 export const extractTime = (rawDesc: string) => {
   // todo: Fix if there's a year rollover

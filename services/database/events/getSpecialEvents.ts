@@ -1,9 +1,8 @@
 import { map } from 'ramda';
 
 import getEvents from '../../database/events/getEvents';
-import { ComEvent } from '../../events/types';
 import processCustomRules from '../../events/processCustomRules/processCustomRules';
-import addWeeklyEvents from '../../events/addWeeklyEvents';
+import addWeeklyEvents from '../../events/weeklyEvents/addWeeklyEvents';
 
 const getSpecialEvents = () => {
   return getEvents().then(

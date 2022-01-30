@@ -2,7 +2,7 @@ import { ComLngEvtRaw } from './types';
 import { ComEvent, Sources, TimestampPrecision } from '../../../events/types';
 import { not, isEmpty, compose } from 'ramda';
 import { parseFromTimeZone, parseFromString } from 'date-fns-timezone';
-import replaceMonthWithNumeric from '../../../../utils/string/replaceMonthWithNumeric';
+import replaceMonthWithNumeric from '../../../../utils/date/replaceMonthWithNumeric';
 
 const convertTime = (date: string, time: string) => {
   try {
