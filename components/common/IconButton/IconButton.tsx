@@ -1,0 +1,25 @@
+import React from 'react';
+import { IconButton as ChakraIconButton, IconButtonProps, IconProps } from '@chakra-ui/react';
+import { ArrowForwardIcon } from '@chakra-ui/icons/src/ArrowForward';
+
+type Props = Omit<IconButtonProps, 'icon'> & {
+  icon: React.JSXElementConstructor<any>,
+  iconProps: IconProps,
+};
+
+const IconButton = (props: Props) => {
+  const { icon: Icon, ...iconButtonProps } = props
+  return (
+    <ChakraIconButton
+      {...iconButtonProps}
+      variant="ghost"
+      icon={<Icon
+        fontSize="24px"
+        color="action.100"
+        {...props.iconProps}
+      />}
+    />
+  );
+};
+
+export default IconButton;

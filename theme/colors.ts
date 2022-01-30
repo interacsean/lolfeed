@@ -13,6 +13,9 @@ const colors = {
   secondary: {
     100: '#3cd273'
   },
+  action: {
+    100: '#789094'
+  }
 };
 
 export default colors;
