@@ -10,7 +10,11 @@ export type ComEventSummary = {
   },
   imgSrc?: string,
   tags?: string[],
-  price?: number,
+  price?:
+    | number
+    | [number]
+    | [number, string]
+    | [number, number, string],
 }
 
 export type ComEvent = ComEventSummary & {
