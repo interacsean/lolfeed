@@ -21,6 +21,7 @@ const getGuerillaResistanceWeeklies = (now: number = Date.now()): ComEvent[] => 
    source: Sources.GENERATED_GUERILLA_RESISTANCE,
    price: 0,
    tags: [Tags.SHOWCASE, Tags.FREE],
+   timezone: 'Australia/Melbourne',
   };
  });
 }

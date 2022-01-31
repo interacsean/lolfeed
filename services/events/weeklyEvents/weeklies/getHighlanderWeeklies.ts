@@ -22,6 +22,7 @@ ${unconfirmedMessage}`,
       price: 0,
       source: Sources.GENERATED_HIGHLANDER,
       tags: [Tags.OPEN_MIC, Tags.FREE],
+      timezone: 'Australia/Melbourne',
     };
   });
 }

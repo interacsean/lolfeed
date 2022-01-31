@@ -20,6 +20,7 @@ const getVoltaireWeeklies = (now: number = Date.now()): ComEvent[] => {
       price: 10,
       source: Sources.GENERATED_VOLTAIRE,
       tags: [Tags.SHOWCASE],
+      timezone: 'Australia/Melbourne',
     };
   });
 }

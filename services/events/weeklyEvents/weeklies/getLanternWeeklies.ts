@@ -21,6 +21,7 @@ const getLanternWeeklies = (now: number = Date.now()): ComEvent[] => {
       price: 0,
       source: Sources.GENERATED_LAUGHS_AT_LANTERN,
       tags: [Tags.SHOWCASE, Tags.FREE],
+      timezone: 'Australia/Melbourne',
     };
   });
 }

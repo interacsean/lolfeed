@@ -23,6 +23,7 @@ const getDirtySecretsWeeklies = (now: number = Date.now()): ComEvent[] => {
       price: 10,
       source: Sources.GENERATED_DIRTY_SECRETS,
       tags: [Tags.SHOWCASE, Tags.OPEN_MIC],
+      timezone: 'Australia/Melbourne',
     };
   });
 }

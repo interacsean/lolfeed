@@ -18,7 +18,7 @@ export const extractTime = (rawDesc: string) => {
     return [
       desc,
       timestamp,
-      TimestampPrecision.DAY_RANGE
+      TimestampPrecision.DAY
     ] as const;
   }
 
@@ -68,12 +68,12 @@ const normaliseRubberChickenEvent = (ce: RbrChkEvtRaw): ComEvent | null => {
     title,
     // ...ce.subTitle && { subTitle: ce.subTitle },
     venueName: 'The Rubber Chicken, South Melbourne',
+    timezone: 'Australia/Melbourne',
     timestamp,
     timestampPrecision,
     orderLink: `https://therubberchicken.com.au/${ce.bookingLink}`,
     ...ce.imgSrc && { imgSrc: ce.imgSrc },
     price: ce.price && parseFloat(ce.price) || null,
-    // save original datas
   });
 }
 

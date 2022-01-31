@@ -8,6 +8,7 @@ import { ComEventSummary } from '../../../services/events/types';
 import IconButton from '../../common/IconButton/IconButton';
 import { lensPath, set } from 'ramda';
 import saveEventOverrides from './saveEventOverrides';
+import renderDate from '../../../utils/date/renderDate';
 
 type EventCardProps = {
   event: ComEventSummary,
@@ -108,12 +109,7 @@ const EventCardEditable = ({ event: initEvent, ...props }: EventCardProps) => {
         <Box display="flex" justifyContent="space-between" alignItems="center" mt={1 / 4}>
           <Box flex="1 0 0" alignSelf="stretch">
             <Text variant="detail" mb={1 / 5}>
-              {event.timestamp[1] ? (
-                // todo: formatrange
-                `${format(event.timestamp[0], 'EEEE do MMM')} – ${format(event.timestamp[1], 'EEEE do MMM yyyy')}`
-              ) : (
-                format(event.timestamp[0], 'EEEE do MMM yyyy h:mm a')
-              )}
+              {renderDate(event.timestamp, event.timestampPrecision, event.timezone)}
             </Text>
             <Text variant="content">
               <Editable

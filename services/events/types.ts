@@ -2,8 +2,9 @@ export type ComEventSummary = {
   uid: string;
   title: string,
   subTitle?: string,
-  timestamp: number[],
+  timestamp: [number] | [number, number],
   timestampPrecision: TimestampPrecision,
+  timezone: string,
   venueName: string,
   venueSlug?: string,
   imgSrc?: string,
@@ -15,17 +16,17 @@ export type ComEventSummary = {
     | [number, string]
     | [number, number, string],
   description?: string,
+  orderLink?: string | null,
+  source: Sources,
 }
 
 export type ComEvent = ComEventSummary & {
-  source: Sources,
-  orderLink?: string | null,
+  writeup?: string,
 }
 
 export enum TimestampPrecision {
   TIME = 'TIME',
   DAY = 'DAY',
-  DAY_RANGE = 'DAY_RANGE',
 }
 
 export enum Sources {

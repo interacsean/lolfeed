@@ -11,7 +11,7 @@ const applyOverrides = (evt: EvtRecord) => {
   );
 };
 
-const getSpecialEvents = () => {
+const getComedyEvents = () => {
   return getEvents()
     .then(map(processCustomRules))
     .then(map(applyOverrides))
@@ -27,4 +27,4 @@ const getSpecialEvents = () => {
     );
 }
 
-export default getSpecialEvents;
+export default getComedyEvents;

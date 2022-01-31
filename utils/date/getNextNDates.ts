@@ -21,9 +21,9 @@ const getNextNDates = (
 ) => {
   const localDate = convertToTimeZone(timestamp, { timeZone: timezone });
   const localDayOfWeek = getDay(localDate);
-  const daysTilNextThu = dayOfWeek + localDayOfWeek % 7
+  const daysTilFirstOccur = (dayOfWeek - localDayOfWeek + 7) % 7;
   const firstOccur = pipe(
-    addDays(daysTilNextThu),
+    addDays(daysTilFirstOccur),
     setSeconds(0),
     setMilliseconds(0),
     setHours(hours),

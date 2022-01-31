@@ -21,6 +21,7 @@ const getGeorgesBarWeeklies = (now: number = Date.now()): ComEvent[] => {
       source: Sources.GENERATED_GEORGES_BAR,
       price: 10,
       tags: [Tags.SHOWCASE, Tags.FREE],
+      timezone: 'Australia/Melbourne',
     };
   });
 }

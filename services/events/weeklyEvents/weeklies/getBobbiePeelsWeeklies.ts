@@ -23,6 +23,7 @@ ${unconfirmedMessage}`,
       price: 0,
       source: Sources.GENERATED_BOBBY_PEELS,
       tags: [Tags.OPEN_MIC, Tags.FREE],
+      timezone: 'Australia/Melbourne',
     };
   });
 }

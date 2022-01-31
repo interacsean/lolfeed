@@ -14,19 +14,17 @@ const normaliseComedyRepublicEvent = (cre: ComRepEvtRaw): ComEvent => ({
   source: Sources.COMEDY_REPUBLIC,
   title: cre.EventLine1,
   ...cre.EventLine2 && { subTitle: cre.EventLine2 },
-  ...cre.Description && { description: cre.Description },
+  ...cre.Description && { writeup: cre.Description },
   venueName: [cre.VenueName, cre.VenueSuburb].filter(compose(not, isEmpty)).join(', '),
   timestamp: [
     convertTime(cre.EventStartDate),
     ...(cre.EventEndDate && cre.EventStartDate !== cre.EventEndDate ? [convertTime(cre.EventEndDate)] : [])
   ],
-  timestampPrecision: cre.EventEndDate
-    ? TimestampPrecision.DAY_RANGE
-    : TimestampPrecision.TIME,
+  timestampPrecision: TimestampPrecision.TIME,
+  timezone: 'Australia/Melbourne',
   orderLink: `https://tccinc.sales.ticketsearch.com/sales/salesevent/${cre.EventId}`,
   price: cre.PriceRangeStart || null,
   ...cre.DefaultImagePath && { imgSrc: cre.DefaultImagePath },
-  // save original datas
 });
 
 export default normaliseComedyRepublicEvent;
