@@ -1,8 +1,7 @@
-import firebaseAdmin from '../';
 import FirebaseFirestore from '@google-cloud/firestore';
-import updateRecordComEvent from './updateRecordComEvent';
-import { EvtRecord } from './types';
 import { mergeDeepLeft } from 'ramda';
+import firebaseAdmin from '../';
+import { EvtRecord } from './types';
 
 export type StoredEvt<T = any> = EvtRecord
 
@@ -14,7 +13,7 @@ const eventsCollection = firebaseAdmin.firestore().collection('events').withConv
     const fsData = snapshot.data();
     return mergeDeepLeft(
       {
-        meta: { id: snapshot.id },
+        meta: { uid: snapshot.id },
       },
       fsData,
     )

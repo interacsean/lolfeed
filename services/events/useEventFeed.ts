@@ -11,7 +11,7 @@ const useEventFeed = () => {
   const requestEvents = React.useCallback(
     () => {
       setLoading(true);
-      axios.get<EventResponse>(`${App.apiUri}/events`).then(
+      axios.get<EventResponse>(`${App.apiUri}/event`).then(
         ({ data }) => {
           setEvents(data.events);
         }

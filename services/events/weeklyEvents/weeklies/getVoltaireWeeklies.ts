@@ -14,9 +14,7 @@ const getVoltaireWeeklies = (now: number = Date.now()): ComEvent[] => {
       timestampPrecision: TimestampPrecision.TIME,
       title: 'Stand Up Comedy',
       description: `${unconfirmedMessage}`,
-      venue: {
-        name: 'Club Voltaire',
-      },
+      venueName: 'Club Voltaire',
       orderLink: 'https://www.trybooking.com/events/landing?eid=680324&',
       timestamp: [date.getTime()],
       price: 10,

@@ -1,19 +1,27 @@
-import { MixedEvtRaw } from './types';
-import { Sources } from '../../events/types';
-import normaliseComedyRepublicEvent, { getComedyRepublicId } from './comedyRepublic/normaliseComedyRepublicEvent';
-import normaliseComicsLoungeEvent, { getComicsLoungeId } from './comicsLounge/normaliseComicsLoungeEvent';
-import normaliseRubberChickenEvent, { getRubberChickenId } from './rubberChicken/normaliseRubberChickenEvent';
+import { ComEvent, Sources } from '../../events/types';
+import { prop } from 'ramda';
+import normaliseComedyRepublicEvent from './comedyRepublic/normaliseComedyRepublicEvent';
+import normaliseComicsLoungeEvent from './comicsLounge/normaliseComicsLoungeEvent';
+import normaliseRubberChickenEvent from './rubberChicken/normaliseRubberChickenEvent';
 import { EvtRecord } from '../../database/events/types';
 
-const getIdMap = {
+const getIdMap: Record<Sources, (evt: any) => ComEvent | null> = {
   [Sources.COMEDY_REPUBLIC]: normaliseComedyRepublicEvent,
   [Sources.COMICS_LOUNGE]: normaliseComicsLoungeEvent,
   [Sources.RUBBER_CHICKEN]: normaliseRubberChickenEvent,
+  [Sources.GENERATED_GENERAL]: prop('rawEvent'),
+  [Sources.GENERATED_DIRTY_SECRETS]: prop('rawEvent'),
+  [Sources.GENERATED_LAUGHS_AT_LANTERN]: prop('rawEvent'),
+  [Sources.GENERATED_BOBBY_PEELS]: prop('rawEvent'),
+  [Sources.GENERATED_GEORGES_BAR]: prop('rawEvent'),
+  [Sources.GENERATED_GUERILLA_RESISTANCE]: prop('rawEvent'),
+  [Sources.GENERATED_HIGHLANDER]: prop('rawEvent'),
+  [Sources.GENERATED_VOLTAIRE]: prop('rawEvent'),
 }
 
-const normaliseMixedEvent = (event: Pick<EvtRecord, 'source' | 'rawEvent'>) => {
-  if (!Sources[event.source]) {
-    throw Error(`invalid event source: ${event.source}`)
+const normaliseMixedEvent = (event: Pick<EvtRecord, 'source' | 'rawEvent'>): ComEvent => {
+  if (!Sources[event.source] || !getIdMap[Sources[event.source]]) {
+    throw new Error(`Unknown source when normalising rawEvent: ${event.source}`)
   }
   // @ts-ignore (should work if mapping is correct above)
   return (getIdMap[event.source])(event.rawEvent);

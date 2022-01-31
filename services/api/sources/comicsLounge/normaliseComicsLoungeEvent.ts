@@ -36,12 +36,11 @@ const normaliseComicsLoungeEvent = (ce: ComLngEvtRaw): ComEvent | null => {
     source: Sources.COMICS_LOUNGE,
     title: ce.title,
     ...ce.subTitle && { subTitle: ce.subTitle },
-    venue: {
-      name: 'Comics Lounge, North Melbourne',
-    },
+    venueName: 'Comics Lounge, North Melbourne',
     timestamp: [timestamp],
     timestampPrecision: TimestampPrecision.TIME,
     orderLink: `https://thecomicslounge.com.au${ce.bookingLink}`,
+    price: null,
     ...ce.imgSrc && { imgSrc: `https://thecomicslounge.com.au${ce.imgSrc}` },
     // price: ce && parseFloat(ce.price) || undefined,
     // save original datas

@@ -1,5 +1,5 @@
 import { convertToTimeZone } from 'date-fns-timezone';
-import { addDays, getDay, setHours, setMinutes } from 'date-fns/fp';
+import { addDays, getDay, setHours, setMilliseconds, setMinutes, setSeconds } from 'date-fns/fp';
 import { pipe } from 'ramda';
 
 export enum DayOfWeek {
@@ -24,6 +24,8 @@ const getNextNDates = (
   const daysTilNextThu = dayOfWeek + localDayOfWeek % 7
   const firstOccur = pipe(
     addDays(daysTilNextThu),
+    setSeconds(0),
+    setMilliseconds(0),
     setHours(hours),
     mins !== undefined ? setMinutes(mins) : x => x,
   )(localDate);

@@ -1,10 +1,9 @@
 import React from 'react';
 import { IconButton as ChakraIconButton, IconButtonProps, IconProps } from '@chakra-ui/react';
-import { ArrowForwardIcon } from '@chakra-ui/icons/src/ArrowForward';
 
 type Props = Omit<IconButtonProps, 'icon'> & {
   icon: React.JSXElementConstructor<any>,
-  iconProps: IconProps,
+  iconProps?: IconProps,
 };
 
 const IconButton = (props: Props) => {

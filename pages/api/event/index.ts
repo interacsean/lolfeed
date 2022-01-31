@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { ComEvent, ComEventSummary } from '../../services/events/types';
+import { ComEvent, ComEventSummary } from '../../../services/events/types';
 import { fork } from 'errable';
-import getSpecialEvents from '../../services/database/events/getSpecialEvents';
+import getSpecialEvents from '../../../services/events/getSpecialEvents';
 
 export type EventResponse = {
   events: ComEventSummary[]
@@ -9,7 +9,7 @@ export type EventResponse = {
 
 let cachedResult: EventResponse | null = null;
 
-export default function handler(
+export default function eventsRoute(
   req: NextApiRequest,
   res: NextApiResponse<EventResponse>
 ) {

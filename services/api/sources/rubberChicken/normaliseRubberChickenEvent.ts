@@ -67,14 +67,12 @@ const normaliseRubberChickenEvent = (ce: RbrChkEvtRaw): ComEvent | null => {
     source: Sources.RUBBER_CHICKEN,
     title,
     // ...ce.subTitle && { subTitle: ce.subTitle },
-    venue: {
-      name: 'The Rubber Chicken, South Melbourne',
-    },
+    venueName: 'The Rubber Chicken, South Melbourne',
     timestamp,
     timestampPrecision,
     orderLink: `https://therubberchicken.com.au/${ce.bookingLink}`,
     ...ce.imgSrc && { imgSrc: ce.imgSrc },
-    price: ce.price && parseFloat(ce.price) || undefined,
+    price: ce.price && parseFloat(ce.price) || null,
     // save original datas
   });
 }

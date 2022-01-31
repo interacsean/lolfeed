@@ -5,7 +5,7 @@ import { getComicsLoungeId } from '../../api/sources/comicsLounge/normaliseComic
 import { getRubberChickenId } from '../../api/sources/rubberChicken/normaliseRubberChickenEvent';
 import { MixedEvtRaw } from '../../api/sources/types';
 import normaliseMixedEvent from '../../api/sources/normaliseMixedEvent';
-import updateRecordComEvent from './updateRecordComEvent';
+import fillEventRecord from './fillEventRecord';
 import { EvtRecord } from './types';
 import getEventRecord from './getEventRecord';
 import { FieldPath } from '@google-cloud/firestore';
@@ -21,13 +21,13 @@ const getEventId = (event: MixedEvtRaw, source: Sources) => {
 }
 
 const addNewEvents = async (events: Pick<EvtRecord, 'source' | 'rawEvent'>[]) => {
-  for(const e in events.slice(0,3)) {
+  for(const e in events) {
     const event = events[e];
     const eventId = getEventId(event.rawEvent, event.source);
     if (!eventId) continue;
 
     const currRecord = await getEventRecord(eventId);
-    const processedEvent = updateRecordComEvent(event, currRecord);
+    const processedEvent = fillEventRecord(event, currRecord);
     if (!event.source) {
       continue;
     }

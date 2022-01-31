@@ -59,7 +59,7 @@ const EventCard = ({ event: e, ...props }: EventCardProps) => {
             />
           )}
         </Box>
-        <Text variant="subTitle" mb={1 / 4}>{e.venue?.name}</Text>
+        <Text variant="subTitle" mb={1 / 4}>{e.venueName}</Text>
         <Box display="flex" justifyContent="space-between" alignItems="center" mt={1 / 4}>
           <Box flex="1 0 0" alignSelf="stretch">
             <Text variant="detail" mb={1 / 5}>

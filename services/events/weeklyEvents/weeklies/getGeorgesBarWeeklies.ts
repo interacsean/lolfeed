@@ -15,9 +15,7 @@ const getGeorgesBarWeeklies = (now: number = Date.now()): ComEvent[] => {
       title: 'Comedy Wednesday at Georges',
       description: unconfirmedMessage,
       //subTitle: Headliner usually available
-      venue: {
-        name: 'Georges Bar',
-      },
+      venueName: 'Georges Bar',
       orderLink: 'https://www.eventbrite.com.au/o/georges-bar-32126450903',
       timestamp: [date.getTime()],
       source: Sources.GENERATED_GEORGES_BAR,

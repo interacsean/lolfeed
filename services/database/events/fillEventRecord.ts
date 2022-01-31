@@ -2,9 +2,14 @@ import normaliseMixedEvent from '../../api/sources/normaliseMixedEvent';
 import { mergeDeepLeft } from 'ramda';
 import { EvtApproval, EvtRecord } from './types';
 
-const updateRecordComEvent = (
-  event: Partial<EvtRecord> & Pick<EvtRecord, 'source' | 'rawEvent'>,
-  currRecord: null | EvtRecord,
+/**
+ * Prefill an EvtRecord based on source data, and optional existing EvtRecord
+ */
+const fillEventRecord = (
+  event: Partial<Omit<EvtRecord, 'meta'>>
+    & { meta?: Partial<EvtRecord['meta']> }
+    & Pick<EvtRecord, 'source' | 'rawEvent'>,
+  currRecord: null | EvtRecord = null,
 ): EvtRecord | null => {
   const comEvent = normaliseMixedEvent(event);
   if (!comEvent) return null;
@@ -32,4 +37,4 @@ const updateRecordComEvent = (
   );
 }
 
-export default updateRecordComEvent;
+export default fillEventRecord;

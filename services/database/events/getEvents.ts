@@ -1,5 +1,4 @@
-import { compose, not, isEmpty, mergeDeepLeft } from 'ramda';
-
+import { compose, isEmpty, not } from 'ramda';
 import eventsCollection from './events';
 import { EvtRecord } from './types';
 
@@ -7,11 +6,7 @@ import { EvtRecord } from './types';
 const getEvents = () => eventsCollection.get().then(
   ds => {
     return ds.docs
-      .map(snap => {
-        const data = snap.data();
-        console.log(data);
-        return data;
-      })
+      .map(snap => snap.data())
       .filter(compose(not, isEmpty)) as EvtRecord[];
   }
 );

@@ -17,9 +17,7 @@ const getBobbiePeelsWeeklies = (now: number = Date.now()): ComEvent[] => {
       description: `Signup at the venue from 7.30pm.
       
 ${unconfirmedMessage}`,
-      venue: {
-        name: 'Bobbie Peels',
-      },
+      venueName: 'Bobbie Peels',
       orderLink: 'https://www.facebook.com/ComedyUpstairsMelb/events/',
       timestamp: [date.getTime()],
       price: 0,

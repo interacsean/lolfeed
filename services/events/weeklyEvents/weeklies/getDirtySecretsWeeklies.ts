@@ -16,9 +16,7 @@ const getDirtySecretsWeeklies = (now: number = Date.now()): ComEvent[] => {
       timestampPrecision: TimestampPrecision.TIME,
       title: 'Dirty Secrets Comedy',
       description: `${unconfirmedMessage}`,
-      venue: {
-        name: 'Caz Reitop\'s Dirty Secrets',
-      },
+      venueName: 'Caz Reitop\'s Dirty Secrets',
       imgSrc: 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F138312863%2F312750544563%2F1%2Foriginal.20210610-165940?w=800&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=321ba869a50277ef8ca6913b8bc8afb9',
       orderLink: 'https://www.eventbrite.com/e/dirty-secrets-comedy-tickets-130092932463',
       timestamp: [date.getTime()],

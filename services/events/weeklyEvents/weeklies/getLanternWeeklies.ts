@@ -14,9 +14,7 @@ const getLanternWeeklies = (now: number = Date.now()): ComEvent[] => {
       timestampPrecision: TimestampPrecision.TIME,
       title: 'Laughs at Lantern',
       description: `${unconfirmedMessage}`,
-      venue: {
-        name: 'Lantern Lounge',
-      },
+      venueName: 'Lantern Lounge',
       orderLink: 'https://www.eventbrite.com.au/e/laughs-at-lantern-tickets-196930373047',
       // Runner: Gavin Sempel
       timestamp: [date.getTime()],

@@ -15,9 +15,7 @@ const getGuerillaResistanceWeeklies = (now: number = Date.now()): ComEvent[] => 
    title: 'Guerilla Stand-up Comedy',
    description: unconfirmedMessage,
    //subTitle: Headliner usually available
-   venue: {
-    name: 'The Resistance',
-   },
+   venueName: 'The Resistance',
    orderLink: 'https://theresistance.net.au/',
    timestamp: [date.getTime()],
    source: Sources.GENERATED_GUERILLA_RESISTANCE,

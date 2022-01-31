@@ -4,13 +4,12 @@ export type ComEventSummary = {
   subTitle?: string,
   timestamp: number[],
   timestampPrecision: TimestampPrecision,
-  venue: {
-    name: string,
-    slug?: string,
-  },
+  venueName: string,
+  venueSlug?: string,
   imgSrc?: string,
   tags?: string[],
   price?:
+    | null
     | number
     | [number]
     | [number, string]
@@ -19,8 +18,8 @@ export type ComEventSummary = {
 }
 
 export type ComEvent = ComEventSummary & {
-  source: string,
-  orderLink?: string,
+  source: Sources,
+  orderLink?: string | null,
 }
 
 export enum TimestampPrecision {
@@ -40,4 +39,5 @@ export enum Sources {
   GENERATED_LAUGHS_AT_LANTERN = 'GENERATED_LAUGHS_AT_LANTERN',
   GENERATED_VOLTAIRE = 'GENERATED_VOLTAIRE',
   GENERATED_DIRTY_SECRETS = 'GENERATED_DIRTY_SECRETS',
+  GENERATED_GENERAL = 'GENERATED_GENERAL',
 }

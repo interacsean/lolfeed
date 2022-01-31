@@ -17,9 +17,7 @@ const getHighlanderWeeklies = (now: number = Date.now()): ComEvent[] => {
       description: `Limited sign-up spots.
       
 ${unconfirmedMessage}`,
-      venue: {
-        name: 'Highlander Bar',
-      },
+      venueName: 'Highlander Bar',
       timestamp: [date.getTime()],
       price: 0,
       source: Sources.GENERATED_HIGHLANDER,

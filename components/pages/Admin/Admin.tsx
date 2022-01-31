@@ -21,7 +21,7 @@ const Admin: NextPage = () => {
           editing === e.uid ? (
             <EventCardEditable
               event={e}
-              onEdit={() => setEditing(e.uid)}
+              onExit={() => setEditing(null)}
             />
           ) : (
             <EventCard
