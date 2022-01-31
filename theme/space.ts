@@ -30,8 +30,8 @@ const space = {
   7: getSpace(7),
   8: getSpace(8),
   'bodyHPadBase': getSpace(1),
-  'bodyTop': getSpace(1 / 2),
-  'bodyBottom': getSpace(2),
+  'bodyTopPad': getSpace(1 / 2),
+  'bodyBottomPad': getSpace(2),
 }
 
 export default space;
