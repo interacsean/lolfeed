@@ -5,9 +5,10 @@ import useEventFeed from '../../../services/events/useEventFeed';
 import Layout from '../../layouts/Layout';
 import EventCard from '../../modules/EventCard/EventCard';
 import EventCardEditable from '../../modules/EventCard/EventCardEditable';
+import { ComEventSummary } from '../../../services/events/types';
 
 const Admin: NextPage = () => {
-  const { events, loading } = useEventFeed();
+  const { events, setEvents, loading } = useEventFeed();
 
   const [ editing, setEditing ] = React.useState<null | string>();
 
@@ -21,7 +22,12 @@ const Admin: NextPage = () => {
           editing === e.uid ? (
             <EventCardEditable
               event={e}
-              onExit={() => setEditing(null)}
+              onExit={(updatedEvent: ComEventSummary) => {
+                setEvents(evts => evts.map(
+                  e => e.uid === updatedEvent.uid ? updatedEvent : e
+                ))
+                setEditing(null)
+              }}
             />
           ) : (
             <EventCard

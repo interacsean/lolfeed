@@ -2,7 +2,7 @@ import * as React from 'react';
 import axios from 'axios';
 import App from '../../config/App';
 import { ComEventSummary } from './types';
-import { EventResponse } from '../../pages/api/events';
+import { EventResponse } from '../../pages/api/event';
 
 const useEventFeed = () => {
   const [ loading, setLoading ] = React.useState(false);
@@ -30,6 +30,7 @@ const useEventFeed = () => {
   return {
     loading,
     events,
+    setEvents,
   }
 }
 

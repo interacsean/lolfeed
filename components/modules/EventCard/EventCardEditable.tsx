@@ -12,7 +12,7 @@ import renderDate from '../../../utils/date/renderDate';
 
 type EventCardProps = {
   event: ComEventSummary,
-  onExit?: () => void,
+  onExit?: (event: ComEventSummary) => void,
 }
 
 const defaultImageSrc = '/images/mic.jpg';
@@ -22,7 +22,7 @@ const EventCardEditable = ({ event: initEvent, ...props }: EventCardProps) => {
   const saveThenExitEdit = React.useCallback(
     () => {
       saveEventOverrides(event).then(
-        props.onExit
+        () => props.onExit(event)
       )
     },
     [props.onExit, event],
@@ -43,8 +43,6 @@ const EventCardEditable = ({ event: initEvent, ...props }: EventCardProps) => {
     },
     [],
   );
-
-  console.log(event);
 
   const price = typeof event.price === 'number' ? [event.price] : event.price;
   const priceDesc = !price ? null
