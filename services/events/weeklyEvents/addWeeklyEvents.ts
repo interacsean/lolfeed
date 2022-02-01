@@ -1,6 +1,6 @@
 import { ComEvent } from '../types';
 import getBobbiePeelsWeeklies from './weeklies/getBobbiePeelsWeeklies';
-import getGeorgesBarWeeklies from './weeklies/getGeorgesBarWeeklies';
+// import getGeorgesBarWeeklies from './weeklies/archive/getGeorgesBarWeeklies';
 import getGuerillaResistanceWeeklies from './weeklies/getGuerillaResistanceWeeklies';
 import getVoltaireWeeklies from './weeklies/getVoltaireWeeklies';
 import getLanternWeeklies from './weeklies/getLanternWeeklies';
@@ -19,7 +19,7 @@ const addWeeklyEvents = (evts: ComEvent[]): ComEvent[] => {
 
   const baseWeeklies = [
     ...getBobbiePeelsWeeklies(now),
-    ...getGeorgesBarWeeklies(now),
+    // ...getGeorgesBarWeeklies(now),
     ...getGuerillaResistanceWeeklies(now),
     ...getVoltaireWeeklies(now),
     ...getLanternWeeklies(now),

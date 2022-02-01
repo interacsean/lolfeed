@@ -14,4 +14,12 @@ const x = `
  Coopers https://www.facebook.com/coopersinncomedy/?__cft__[0]=AZWv9HG5qu2dE85mRY4rWQp-988f8ssi0sTG-pzgxHUM2Boah-6a6jBvzqbwGhMvMe1D33SOC9QlwRdKN12akZQ31mh0mz8biks8LKj8kq0-IX2tuFINvjYHn0hQoY3b2yazguAlOaE9hKLhNvAX7-gTvY_0dO8qYea0Jn_wHj_yRinWP_1zoM5EZdb2Jpgl0z-sanQ6bm9D6Ksza9ar3yRc&__tn__=-UC%2CP-y-R
 
  Sloth
+ 
+ Lyrebird St Kilda Thursday
+ Funny near the brunny - Brunswick - Monday wkly
+ Funny Bunny - Thursday Weekly
+ Hairbrush comedy
+ Temple comedy (ftnt)
+ Kent comedy (Monday wkly)
+ Red eye bar (monthly)
 `

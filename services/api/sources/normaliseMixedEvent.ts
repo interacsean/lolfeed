@@ -1,14 +1,16 @@
-import { ComEvent, Sources } from '../../events/types';
 import { prop } from 'ramda';
+import { ComEvent, Sources } from '../../events/types';
+import { EvtRecord } from '../../database/events/types';
 import normaliseComedyRepublicEvent from './comedyRepublic/normaliseComedyRepublicEvent';
 import normaliseComicsLoungeEvent from './comicsLounge/normaliseComicsLoungeEvent';
 import normaliseRubberChickenEvent from './rubberChicken/normaliseRubberChickenEvent';
-import { EvtRecord } from '../../database/events/types';
+import normaliseGeorgesBarEvent from './georgesBar/normaliseGeorgesBarEvent';
 
 const getIdMap: Record<Sources, (evt: any) => ComEvent | null> = {
   [Sources.COMEDY_REPUBLIC]: normaliseComedyRepublicEvent,
   [Sources.COMICS_LOUNGE]: normaliseComicsLoungeEvent,
   [Sources.RUBBER_CHICKEN]: normaliseRubberChickenEvent,
+  [Sources.GEORGES_BAR]: normaliseGeorgesBarEvent,
   [Sources.GENERATED_GENERAL]: prop('rawEvent'),
   [Sources.GENERATED_DIRTY_SECRETS]: prop('rawEvent'),
   [Sources.GENERATED_LAUGHS_AT_LANTERN]: prop('rawEvent'),

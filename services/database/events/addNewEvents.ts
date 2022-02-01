@@ -1,16 +1,17 @@
-import eventsCollection from './events';
+import { FieldPath } from '@google-cloud/firestore';
 import { Sources } from '../../events/types';
+import { MixedEvtRaw } from '../../api/sources/types';
 import { getComedyRepublicId } from '../../api/sources/comedyRepublic/normaliseComedyRepublicEvent';
 import { getComicsLoungeId } from '../../api/sources/comicsLounge/normaliseComicsLoungeEvent';
 import { getRubberChickenId } from '../../api/sources/rubberChicken/normaliseRubberChickenEvent';
-import { MixedEvtRaw } from '../../api/sources/types';
-import normaliseMixedEvent from '../../api/sources/normaliseMixedEvent';
+import { getGeorgesBarId } from '../../api/sources/georgesBar/normaliseGeorgesBarEvent';
+import eventsCollection from './events';
 import fillEventRecord from './fillEventRecord';
 import { EvtRecord } from './types';
 import getEventRecord from './getEventRecord';
-import { FieldPath } from '@google-cloud/firestore';
 
 const getIdMap = {
+  [Sources.GEORGES_BAR]: getGeorgesBarId,
   [Sources.COMEDY_REPUBLIC]: getComedyRepublicId,
   [Sources.COMICS_LOUNGE]: getComicsLoungeId,
   [Sources.RUBBER_CHICKEN]: getRubberChickenId,

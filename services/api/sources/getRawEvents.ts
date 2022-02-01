@@ -1,19 +1,23 @@
 import getComicsLounge from './comicsLounge/getComicsLounge';
 import getComedyRepublic from './comedyRepublic/getComedyRepublic';
 import getRubberChicken from './rubberChicken/getRubberChicken';
+import getGeorgesBar from './georgesBar/getGeorgesBar';
 import { notErr } from 'errable';
-import normaliseComicsLoungeEvent from './comicsLounge/normaliseComicsLoungeEvent';
-import normaliseComedyRepublicEvent from './comedyRepublic/normaliseComedyRepublicEvent';
-import normaliseRubberChickenEvent from './rubberChicken/normaliseRubberChickenEvent';
 import { Sources } from '../../events/types';
 import { MixedEvtRaw } from './types';
 
 const getRawEvents = (): Promise<{ source: Sources, rawEvent: MixedEvtRaw }[]> => Promise.all([
   getComicsLounge(),
   getComedyRepublic(),
+  getGeorgesBar(),
   getRubberChicken(),
-]).then(
-  ([comicLoungeEvents, comedyRepublicEvents, rubberChickenEvents]) =>
+])
+  .then(([
+    comicLoungeEvents,
+    comedyRepublicEvents,
+    georgesBarEvents,
+    rubberChickenEvents,
+  ]) =>
     ([
       ...notErr(comicLoungeEvents)
         ? comicLoungeEvents.map(rawEvent => ({
@@ -27,6 +31,12 @@ const getRawEvents = (): Promise<{ source: Sources, rawEvent: MixedEvtRaw }[]> =
           rawEvent,
         }))
         : [],
+      ...notErr(georgesBarEvents)
+        ? georgesBarEvents.map(rawEvent => ({
+          source: Sources.GEORGES_BAR,
+          rawEvent,
+        }))
+        : [],
       ...notErr(rubberChickenEvents)
         ? rubberChickenEvents.map(rawEvent => ({
           source: Sources.RUBBER_CHICKEN,
@@ -34,6 +44,6 @@ const getRawEvents = (): Promise<{ source: Sources, rawEvent: MixedEvtRaw }[]> =
         }))
         : [],
     ])
-);
+  );
 
 export default getRawEvents;

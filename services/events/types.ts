@@ -14,6 +14,7 @@ export type ComEventSummary = {
     | number
     | [number]
     | [number, string]
+    | [number, number]
     | [number, number, string],
   description?: string,
   orderLink?: string | null,
@@ -33,6 +34,7 @@ export enum Sources {
   RUBBER_CHICKEN = 'RUBBER_CHICKEN',
   COMICS_LOUNGE = 'COMICS_LOUNGE',
   COMEDY_REPUBLIC = 'COMEDY_REPUBLIC',
+  GEORGES_BAR = 'GEORGES_BAR',
   GENERATED_BOBBY_PEELS = 'GENERATED_BOBBY_PEELS',
   GENERATED_GEORGES_BAR = 'GENERATED_GEORGES_BAR',
   GENERATED_GUERILLA_RESISTANCE = 'GENERATED_GUERILLA_RESISTANCE',
