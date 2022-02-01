@@ -23,9 +23,11 @@ const Layout = (props: Props) => {
           </HStack>
         </Container>
       </Box>
-      <Container pt="bodyTopPad" pb="bodyBottomPad" backgroundColor="primary.100">
-        {props.children}
-      </Container>
+      <Box  pt="bodyTopPad" pb="bodyBottomPad" backgroundColor="primary.100">
+        <Container>
+          {props.children}
+        </Container>
+      </Box>
     </>
   );
 };
