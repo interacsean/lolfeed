@@ -5,19 +5,25 @@ import normaliseComedyRepublicEvent from './comedyRepublic/normaliseComedyRepubl
 import normaliseComicsLoungeEvent from './comicsLounge/normaliseComicsLoungeEvent';
 import normaliseRubberChickenEvent from './rubberChicken/normaliseRubberChickenEvent';
 import normaliseGeorgesBarEvent from './georgesBar/normaliseGeorgesBarEvent';
+import normaliseRocheyEvent from './rochey/normaliseRocheyEvent';
+import normaliseBobbiePeelsEvent from './bobbiePeels/normaliseBobbiePeelsEvent';
+import normaliseDirtySecretsEvent from './dirtySecrets/normaliseDirtySecretsEvent';
 
 const getIdMap: Record<Sources, (evt: any) => ComEvent | null> = {
+  [Sources.BOBBIE_PEELS]: normaliseBobbiePeelsEvent,
   [Sources.COMEDY_REPUBLIC]: normaliseComedyRepublicEvent,
   [Sources.COMICS_LOUNGE]: normaliseComicsLoungeEvent,
-  [Sources.RUBBER_CHICKEN]: normaliseRubberChickenEvent,
+  [Sources.DIRTY_SECRETS]: normaliseDirtySecretsEvent,
   [Sources.GEORGES_BAR]: normaliseGeorgesBarEvent,
+  [Sources.ROCHEY]: normaliseRocheyEvent,
+  [Sources.RUBBER_CHICKEN]: normaliseRubberChickenEvent,
   [Sources.GENERATED_GENERAL]: prop('rawEvent'),
-  [Sources.GENERATED_DIRTY_SECRETS]: prop('rawEvent'),
-  [Sources.GENERATED_LAUGHS_AT_LANTERN]: prop('rawEvent'),
   [Sources.GENERATED_BOBBY_PEELS]: prop('rawEvent'),
+  [Sources.GENERATED_DIRTY_SECRETS]: prop('rawEvent'),
   [Sources.GENERATED_GEORGES_BAR]: prop('rawEvent'),
   [Sources.GENERATED_GUERILLA_RESISTANCE]: prop('rawEvent'),
   [Sources.GENERATED_HIGHLANDER]: prop('rawEvent'),
+  [Sources.GENERATED_LAUGHS_AT_LANTERN]: prop('rawEvent'),
   [Sources.GENERATED_VOLTAIRE]: prop('rawEvent'),
 }
 

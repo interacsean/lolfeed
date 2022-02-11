@@ -1,22 +1,6 @@
-export type GrgBarEvtRaw = {
-  startDate: string,
-  endDate: string,
-  name: string,
-  url: string,
-  image: string,
-  offers: {
-    url?: string,
-    lowPrice?: string,
-    highPrice?: string,
-    priceCurrency?: string,
-  },
-  location: {
-    address: {},
-    geo: {},
-    name: string,
-  },
-  description: string,
-}
+import { EvtBrtEvtRaw } from '../common/types';
+
+export type GrgBarEvtRaw = EvtBrtEvtRaw;
 
 // export type GrgBarEvtScrapedRaw = {
 //   titleCombined: string,

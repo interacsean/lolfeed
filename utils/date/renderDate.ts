@@ -8,7 +8,7 @@ const renderDate = (
   precision: TimestampPrecision,
   timeZone: string = 'Australia/Melbourne',
 ) => {
-  const today = dateFnsTz.convertToTimeZone(Date.now() + (1000 * 60 * 60 * 24 * 5), { timeZone });
+  const today = dateFnsTz.convertToTimeZone(Date.now(), { timeZone });
   const start = dateFnsTz.convertToTimeZone(
     times[0],
     { timeZone },
@@ -17,8 +17,9 @@ const renderDate = (
     times[1],
     { timeZone },
   );
-  const thisYear = ((end || start).getFullYear() === today.getFullYear());
-  const thisMonth = thisYear && ((end || start).getMonth() === today.getMonth());
+  const thisYear = (start.getFullYear() === today.getFullYear());
+  const thisMonth = thisYear && (start.getMonth() === today.getMonth());
+  const isToday = thisYear && thisMonth && (start.getDate() === today.getDate());
 
   const sameYear = end && (start.getFullYear() === end.getFullYear());
   const sameMonth = end && sameYear && (start.getMonth() === end.getMonth());
@@ -33,21 +34,27 @@ const renderDate = (
   const showEndYear = !thisYear && end;
   const showEndMonth = !thisMonth && end;
 
-  const startFmt = format(
+  const startTimeFmt = showStartTime && format(
     start,
-    `${showStartTime ? ' h:mmaaa ' : ''}EEE do${showStartMonth ? ' MMM' : ''}${showStartYear ? ' yyyy' : ''}`,
+    `h:mm${showEndTime ? '' : 'aaa'}`,
   );
 
-  const endFmt = end && (
-    showEndTime
-      ? format(end, ' – h:mmaaa')
-      : format(
-        end,
-        ` – EEE do${showEndMonth ? ' MMM' : ''}${showEndYear ? ' yyyy' : ''}`,
-      )
+  const endTimeFmt = showEndTime && format(
+    end,
+    `-h:mmaaa`,
   );
 
-  return `${startFmt}${endFmt || ''}`;
+  const startDateFmt = isToday ? `To${start.getHours() > 17 ? 'night' : 'day'}` : format(
+    start,
+    `EEE do${showStartMonth ? ' MMM' : ''}${showStartYear ? ' yyyy' : ''}`,
+  );
+
+  const endDateFmt = end && !sameDate && format(
+    end,
+    ` – EEE do${showEndMonth ? ' MMM' : ''}${showEndYear ? ' yyyy' : ''}`,
+  );
+
+  return `${startTimeFmt || ''}${endTimeFmt || ''} ${startDateFmt}${endDateFmt || ''}`;
 }
 
 export default renderDate;

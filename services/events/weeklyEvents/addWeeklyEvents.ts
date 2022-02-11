@@ -1,10 +1,10 @@
 import { ComEvent } from '../types';
-import getBobbiePeelsWeeklies from './weeklies/getBobbiePeelsWeeklies';
+// import getBobbiePeelsWeeklies from './weeklies/archive/getBobbiePeelsWeeklies';
+// import getDirtySecretsWeeklies from './weeklies/archive/getDirtySecretsWeeklies';
 // import getGeorgesBarWeeklies from './weeklies/archive/getGeorgesBarWeeklies';
 import getGuerillaResistanceWeeklies from './weeklies/getGuerillaResistanceWeeklies';
 import getVoltaireWeeklies from './weeklies/getVoltaireWeeklies';
 import getLanternWeeklies from './weeklies/getLanternWeeklies';
-import getDirtySecretsWeeklies from './weeklies/getDirtySecretsWeeklies';
 
 const addWeeklyEvents = (evts: ComEvent[]): ComEvent[] => {
   const now = Date.now();
@@ -18,12 +18,12 @@ const addWeeklyEvents = (evts: ComEvent[]): ComEvent[] => {
   );
 
   const baseWeeklies = [
-    ...getBobbiePeelsWeeklies(now),
+    // ...getBobbiePeelsWeeklies(now),
+    // ...getDirtySecretsWeeklies(now),
     // ...getGeorgesBarWeeklies(now),
     ...getGuerillaResistanceWeeklies(now),
     ...getVoltaireWeeklies(now),
     ...getLanternWeeklies(now),
-    ...getDirtySecretsWeeklies(now),
   ];
 
   const weekliesToAdd = baseWeeklies.filter(
