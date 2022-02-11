@@ -1,11 +1,11 @@
 import { ComEvent, Sources } from '../../../events/types';
-import { EvtBrtEvtRaw } from '../common/types';
-import getNormalisedEventbriteEvent from '../common/getNormalisedEventbriteEvent';
-import getEventbriteEvtId from '../common/getEventbriteEvtId';
+import getNormalisedEventbriteEvent from '../common/eventbrite/getNormalisedEventbriteEvent';
+import getEventbriteEvtId from '../common/eventbrite/getEventbriteEvtId';
+import { EvtBrtSeriesDataRaw } from '../common/eventbrite/types';
 
-export const getDirtySecretsId = (ce: EvtBrtEvtRaw) => getEventbriteEvtId('DTS', ce)
+export const getDirtySecretsId = (ce: EvtBrtSeriesDataRaw) => getEventbriteEvtId('DTS', ce)
 
-const normaliseDirtySecretsEvent = (ce: EvtBrtEvtRaw): ComEvent | null => {
+const normaliseDirtySecretsEvent = (ce: EvtBrtSeriesDataRaw): ComEvent | null => {
   const rest = getNormalisedEventbriteEvent('DTS', ce);
 
   if (!rest) return null;

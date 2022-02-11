@@ -1,6 +1,6 @@
-import { TryBkgEvtRaw } from './types';
 import getTryBookingEvtId from './getTryBookingEvtId';
-import { ComEvent, Sources, TimestampPrecision } from '../../../events/types';
+import { ComEvent, Sources, TimestampPrecision } from '../../../../events/types';
+import { TryBkgEvtRaw } from './types';
 
 const getNormalisedTryBookingEvent = (
   eid: string,

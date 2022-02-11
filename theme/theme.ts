@@ -1,14 +1,14 @@
 import { extendTheme } from '@chakra-ui/react';
 import colors from './colors';
-import Text from './components/Text';
-import Heading from './components/Heading';
+import TextTheme from './components/TextTheme';
+import HeadingTheme from './components/HeadingTheme';
 import space from './space';
 
 const theme = extendTheme({
   colors,
   components: {
-    Text,
-    Heading,
+    Text: TextTheme,
+    Heading: HeadingTheme,
   },
 });
 

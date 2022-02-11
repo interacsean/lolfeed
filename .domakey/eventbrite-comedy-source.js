@@ -10,13 +10,14 @@ export default get{{FileName}};
 
 const tmplNormalise = `import { ComEvent, Sources } from '../../../events/types';
 import { EvtBrtEvtRaw } from '../common/types';
-import getPartialNormalisedEventbriteEvent from '../common/getPartialNormalisedEventbriteEvent';
+import getNormalisedEventbriteEvent from '../common/eventbrite/getNormalisedEventbriteEvent';
 import getEventbriteEvtId from '../common/getEventbriteEvtId';
+import { {{ShortHand}}EvtRaw } from './types';
 
-export const get{{FileName}}Id = (ce: EvtBrtEvtRaw) => getEventbriteEvtId('{{code}}', ce)
+export const get{{FileName}}Id = (ce: {{ShortHand}}EvtRaw) => getEventbriteEvtId('{{code}}', ce)
 
-const normalise{{FileName}}Event = (ce: EvtBrtEvtRaw): ComEvent | null => {
-  const rest = getPartialNormalisedEventbriteEvent('{{code}}', ce);
+const normalise{{FileName}}Event = (ce: {{ShortHand}}EvtRaw): ComEvent | null => {
+  const rest = getNormalisedEventbriteEvent('{{code}}', ce);
 
   if (!rest) return null;
   return ({

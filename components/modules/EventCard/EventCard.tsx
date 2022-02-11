@@ -50,6 +50,7 @@ const EventCard = ({ event, ...props }: EventCardProps) => {
       </Box>
       <Box py={1 / 3} px={1 / 2}
            flex="1 0 0">
+        {props.allowEdit && (<Text variant="detail">{event.uid}</Text>)}
         <Box display="flex">
           <Heading variant="title" flex="1 0 0">{event.title}</Heading>
           {props.allowEdit && (

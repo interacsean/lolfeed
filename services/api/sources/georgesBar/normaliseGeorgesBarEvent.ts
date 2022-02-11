@@ -1,11 +1,11 @@
 import { ComEvent, Sources } from '../../../events/types';
-import { EvtBrtEvtRaw } from '../common/types';
-import getNormalisedEventbriteEvent from '../common/getNormalisedEventbriteEvent';
-import getEventbriteEvtId from '../common/getEventbriteEvtId';
+import getNormalisedEventbriteEvent from '../common/eventbrite/getNormalisedEventbriteEvent';
+import getEventbriteEvtId from '../common/eventbrite/getEventbriteEvtId';
+import { EvtBrtSeriesDataRaw } from '../common/eventbrite/types';
 
-export const getGeorgesBarId = (ce: EvtBrtEvtRaw) => getEventbriteEvtId(`GRB`, ce)
+export const getGeorgesBarId = (ce: EvtBrtSeriesDataRaw) => getEventbriteEvtId(`GRB`, ce)
 
-const normaliseGeorgesBarEvent = (ce: EvtBrtEvtRaw): ComEvent | null => {
+const normaliseGeorgesBarEvent = (ce: EvtBrtSeriesDataRaw): ComEvent | null => {
   const rest = getNormalisedEventbriteEvent('GRB', ce);
 
   if (!rest) return null;

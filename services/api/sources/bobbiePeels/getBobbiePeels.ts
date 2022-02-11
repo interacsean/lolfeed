@@ -1,5 +1,5 @@
 import { ApiErrorOr } from '../../../../utils/api/ApiErrorOr';
-import getEventbriteOrganizerEvents from '../common/getEventbriteOrganizerEvents';
+import getEventbriteOrganizerEvents from '../common/eventbrite/getEventbriteOrganizerEvents';
 import { BbiPlsEvtRaw } from './types';
 
 const getBobbiePeels = (): Promise<ApiErrorOr<BbiPlsEvtRaw[]>> =>

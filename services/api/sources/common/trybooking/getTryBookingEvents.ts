@@ -1,6 +1,6 @@
 import axios from 'axios';
 import scrapy from 'node-scrapy';
-import { ComLngEvtRaw } from '../comicsLounge/types';
+import { ComLngEvtRaw } from '../../comicsLounge/types';
 import { err } from 'errable';
 import { TryBkgEvtRaw } from './types';
 

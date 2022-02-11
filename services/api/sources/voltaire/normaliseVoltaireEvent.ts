@@ -1,12 +1,12 @@
 import { ComEvent, Sources } from '../../../events/types';
-import { EvtBrtEvtRaw } from '../common/types';
-import getPartialNormalisedEventbriteEvent from '../common/getPartialNormalisedEventbriteEvent';
-import getEventbriteEvtId from '../common/getEventbriteEvtId';
+import getEventbriteEvtId from '../common/eventbrite/getEventbriteEvtId';
+import getNormalisedEventbriteEvent from '../common/eventbrite/getNormalisedEventbriteEvent';
+import { VltEvtRaw } from './types';
 
-export const getVoltaireId = (ce: EvtBrtEvtRaw) => getEventbriteEvtId('VLT', ce)
+export const getVoltaireId = (ce: VltEvtRaw) => getEventbriteEvtId('VLT', ce)
 
-const normaliseVoltaireEvent = (ce: EvtBrtEvtRaw): ComEvent | null => {
-  const rest = getPartialNormalisedEventbriteEvent('VLT', ce);
+const normaliseVoltaireEvent = (ce: VltEvtRaw): ComEvent | null => {
+  const rest = getNormalisedEventbriteEvent('VLT', ce);
 
   if (!rest) return null;
   return ({

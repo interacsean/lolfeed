@@ -15,38 +15,43 @@ import { getGeorgesBarId } from './georgesBar/normaliseGeorgesBarEvent';
 import { getRubberChickenId } from './rubberChicken/normaliseRubberChickenEvent';
 import getDirtySecrets from './dirtySecrets/getDirtySecrets';
 import { getDirtySecretsId } from './dirtySecrets/normaliseDirtySecretsEvent';
+import getVoltaire from './voltaire/getVoltaire';
+import { getVoltaireId } from './voltaire/normaliseVoltaireEvent';
 
 const rawEventPairs = [
   [getBobbiePeels, getBobbiePeelsId, Sources.BOBBIE_PEELS] as const,
-  [getComicsLounge, getComicsLoungeId, Sources.COMICS_LOUNGE] as const,
-  [getComedyRepublic, getComedyRepublicId, Sources.COMEDY_REPUBLIC] as const,
-  [getDirtySecrets, getDirtySecretsId, Sources.DIRTY_SECRETS] as const,
-  [getGeorgesBar, getGeorgesBarId, Sources.GEORGES_BAR] as const,
-  [getRochey, getRocheyId, Sources.ROCHEY] as const,
-  [getRubberChicken, getRubberChickenId, Sources.RUBBER_CHICKEN] as const,
+  // [getComicsLounge, getComicsLoungeId, Sources.COMICS_LOUNGE] as const,
+  // [getComedyRepublic, getComedyRepublicId, Sources.COMEDY_REPUBLIC] as const,
+  // [getDirtySecrets, getDirtySecretsId, Sources.DIRTY_SECRETS] as const,
+  // [getGeorgesBar, getGeorgesBarId, Sources.GEORGES_BAR] as const,
+  // [getRochey, getRocheyId, Sources.ROCHEY] as const,
+  // [getRubberChicken, getRubberChickenId, Sources.RUBBER_CHICKEN] as const,
+  // [getVoltaire, getVoltaireId, Sources.VOLTAIRE] as const,
 ]
 
 export type RawEventAndInfo = { source: Sources, rawEvent: MixedEvtRaw, uid: string }
+
+const mapRawEventWithInfo = (venueNumber: number) => (rawEvent: MixedEvtRaw) => {
+  // @ts-ignore (mixed array confuses this)
+  const uid = rawEventPairs[venueNumber][1](rawEvent);
+  if (!uid) return null;
+  return ({
+    source: rawEventPairs[venueNumber][2],
+    uid,
+    rawEvent,
+  });
+}
 
 const getRawEvents = (): Promise<RawEventAndInfo[]> => {
   return Promise.all(
     rawEventPairs.map(([getter, _getId, _source]) => getter())
   )
-    .then((rawEventSets) =>
-      rawEventSets.map(
-        (rawEventSet, i) => notErr(rawEventSet)
-          ? rawEventSet
-            .map(rawEvent => {
-              // @ts-ignore (mixed array confuses this)
-              const uid = rawEventPairs[i][1](rawEvent);
-              if (!uid) return null;
-              return ({
-                source: rawEventPairs[i][2],
-                uid,
-                rawEvent,
-              });
-            })
-            .filter(x => !!x) as RawEventAndInfo[]
+    .then((venuesEvents) =>
+      venuesEvents.map(
+        (venueEvents, i) => notErr(venueEvents)
+          ? venueEvents
+            .map(mapRawEventWithInfo(i))
+            .filter(x => x !== null) as RawEventAndInfo[]
           : []
       ).flat()
     );

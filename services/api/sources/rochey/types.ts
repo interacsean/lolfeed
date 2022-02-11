@@ -1,3 +1,3 @@
-import { TryBkgEvtRaw } from '../common/types';
+import { TryBkgEvtRaw } from '../common/trybooking/types';
 
 export type RocheyEvtRaw =  TryBkgEvtRaw;

@@ -1,7 +1,7 @@
 import { RocheyEvtRaw } from './types';
 import { ApiErrorOr } from '../../../../utils/api/ApiErrorOr';
-import getTryBookingEvents from '../common/getTryBookingEvents';
-import getTryBookingEvtId from '../common/getTryBookingEvtId';
+import getTryBookingEvents from '../common/trybooking/getTryBookingEvents';
+import getTryBookingEvtId from '../common/trybooking/getTryBookingEvtId';
 
 export const rocheyTrybookingEid = '686198';
 

@@ -16,7 +16,7 @@ const getComedyEvents = () => {
     .then(map(processCustomRules))
     .then(map(applyOverrides))
     .then(map(prop('comEvent')))
-    .then(addWeeklyEvents)
+    // .then(addWeeklyEvents)
     .then(
       events => events.filter(e => e && (e.timestamp[1] || e.timestamp[0]) > Date.now()),
     )

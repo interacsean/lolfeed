@@ -1,3 +1,3 @@
-import { EvtBrtEvtRaw } from '../common/types';
+import { EvtBrtEvtRaw } from '../common/eventbrite/types';
 
 export type VltEvtRaw = EvtBrtEvtRaw;

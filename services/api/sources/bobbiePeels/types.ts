@@ -1,3 +1,3 @@
-import { EvtBrtEvtRaw } from '../common/types';
+import { EvtBrtSeriesDataRaw } from '../common/eventbrite/types';
 
-export type BbiPlsEvtRaw = EvtBrtEvtRaw;
+export type BbiPlsEvtRaw = EvtBrtSeriesDataRaw;

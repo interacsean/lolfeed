@@ -8,6 +8,7 @@ import normaliseGeorgesBarEvent from './georgesBar/normaliseGeorgesBarEvent';
 import normaliseRocheyEvent from './rochey/normaliseRocheyEvent';
 import normaliseBobbiePeelsEvent from './bobbiePeels/normaliseBobbiePeelsEvent';
 import normaliseDirtySecretsEvent from './dirtySecrets/normaliseDirtySecretsEvent';
+import normaliseVoltaireEvent from './voltaire/normaliseVoltaireEvent';
 
 const getIdMap: Record<Sources, (evt: any) => ComEvent | null> = {
   [Sources.BOBBIE_PEELS]: normaliseBobbiePeelsEvent,
@@ -17,6 +18,7 @@ const getIdMap: Record<Sources, (evt: any) => ComEvent | null> = {
   [Sources.GEORGES_BAR]: normaliseGeorgesBarEvent,
   [Sources.ROCHEY]: normaliseRocheyEvent,
   [Sources.RUBBER_CHICKEN]: normaliseRubberChickenEvent,
+  [Sources.VOLTAIRE]: normaliseVoltaireEvent,
   [Sources.GENERATED_GENERAL]: prop('rawEvent'),
   [Sources.GENERATED_BOBBY_PEELS]: prop('rawEvent'),
   [Sources.GENERATED_DIRTY_SECRETS]: prop('rawEvent'),

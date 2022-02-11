@@ -1,6 +1,6 @@
-import { EvtBrtEvtRaw } from './types';
+import { EvtBrtSeriesDataRaw } from './types';
 
-const extractEventbriteEvtTime = (ce: EvtBrtEvtRaw) => {
+const extractEventbriteEvtTime = (ce: EvtBrtSeriesDataRaw) => {
   return [
     new Date(ce.startDate).getTime(),
     ...ce.endDate ? [new Date(ce.endDate).getTime()] : []

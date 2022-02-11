@@ -44,12 +44,13 @@ const renderDate = (
     `-h:mmaaa`,
   );
 
-  const startDateFmt = isToday ? `To${start.getHours() > 17 ? 'night' : 'day'}` : format(
+  const endsOnDifferentDate = end && !sameDate;
+  const startDateFmt = (isToday && !endsOnDifferentDate) ? `To${start.getHours() > 17 ? 'night' : 'day'}` : format(
     start,
     `EEE do${showStartMonth ? ' MMM' : ''}${showStartYear ? ' yyyy' : ''}`,
   );
 
-  const endDateFmt = end && !sameDate && format(
+  const endDateFmt = endsOnDifferentDate && format(
     end,
     ` – EEE do${showEndMonth ? ' MMM' : ''}${showEndYear ? ' yyyy' : ''}`,
   );

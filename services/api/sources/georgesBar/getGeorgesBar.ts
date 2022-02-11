@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { GrgBarEvtRaw } from './types';
 import { ApiErrorOr } from '../../../../utils/api/ApiErrorOr';
-import getEventbriteOrganizerEvents from '../common/getEventbriteOrganizerEvents';
+import getEventbriteOrganizerEvents from '../common/eventbrite/getEventbriteOrganizerEvents';
 
 // const scrapeModel = {
 //   events: [

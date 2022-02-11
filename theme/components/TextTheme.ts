@@ -4,7 +4,7 @@ import { getSpace } from '../space';
 const getFontSize = (n: number) =>
   getSpace(n, true, 1.22);
 
-const Text = {
+const TextTheme = {
   variants: {
     heading: {
       fontSize: getFontSize(2),
@@ -44,4 +44,4 @@ const Text = {
   },
 };
 
-export default Text;
+export default TextTheme;
