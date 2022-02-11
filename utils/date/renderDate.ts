@@ -26,8 +26,8 @@ const renderDate = (
   const sameDate = end && sameMonth && sameYear && (start.getDate() === end.getDate());
 
   const showStartTime = precision === TimestampPrecision.TIME;
-  const showStartYear = !thisYear && (!end || !sameYear);
-  const showStartMonth = !thisMonth && (!end || !sameMonth);
+  const showStartYear = !thisYear && (sameDate || !end || !sameYear);
+  const showStartMonth = !thisMonth && (sameDate || !end || !sameMonth);
 
   const showEndTime = precision === TimestampPrecision.TIME
     && end && sameDate;
