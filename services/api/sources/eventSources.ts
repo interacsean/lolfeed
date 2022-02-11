@@ -1,6 +1,6 @@
 import getBobbiePeels from './bobbiePeels/getBobbiePeels';
 import normaliseBobbiePeelsEvent, { getBobbiePeelsId } from './bobbiePeels/normaliseBobbiePeelsEvent';
-import { Sources } from '../../events/types';
+import { ComEvent, Sources } from '../../events/types';
 import normaliseComicsLoungeEvent, { getComicsLoungeId } from './comicsLounge/normaliseComicsLoungeEvent';
 import getComicsLounge from './comicsLounge/getComicsLounge';
 import normaliseComedyRepublicEvent, { getComedyRepublicId } from './comedyRepublic/normaliseComedyRepublicEvent';
@@ -15,8 +15,17 @@ import normaliseVoltaireEvent, { getVoltaireId } from './voltaire/normaliseVolta
 import getVoltaire from './voltaire/getVoltaire';
 import normaliseRocheyEvent from './rochey/normaliseRocheyEvent';
 import getDirtySecrets from './dirtySecrets/getDirtySecrets';
+import { MixedEvtRaw } from './types';
+import { ApiErrorOr } from '../../../utils/api/ApiErrorOr';
 
-export const eventSources = [
+type EventMeta<T extends MixedEvtRaw> = {
+  source: Sources,
+  getId: (ev: T) => string | null,
+  getEvents: () => Promise<ApiErrorOr<T[]>>,
+  normalise: (ev: T) => ComEvent | null
+}
+
+export const eventSources: EventMeta<any>[] = [
   {
     source: Sources.BOBBIE_PEELS,
     getId: getBobbiePeelsId,
