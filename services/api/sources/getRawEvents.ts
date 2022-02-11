@@ -1,42 +1,16 @@
-import getComicsLounge from './comicsLounge/getComicsLounge';
-import getComedyRepublic from './comedyRepublic/getComedyRepublic';
-import getRubberChicken from './rubberChicken/getRubberChicken';
-import getGeorgesBar from './georgesBar/getGeorgesBar';
 import { notErr } from 'errable';
 import { Sources } from '../../events/types';
 import { MixedEvtRaw } from './types';
-import getRochey, { getRocheyId } from './rochey/getRochey';
-import getBobbiePeels from './bobbiePeels/getBobbiePeels';
-import { getBobbiePeelsId } from './bobbiePeels/normaliseBobbiePeelsEvent';
-import { ApiErrorOr } from '../../../utils/api/ApiErrorOr';
-import { getComicsLoungeId } from './comicsLounge/normaliseComicsLoungeEvent';
-import { getComedyRepublicId } from './comedyRepublic/normaliseComedyRepublicEvent';
-import { getGeorgesBarId } from './georgesBar/normaliseGeorgesBarEvent';
-import { getRubberChickenId } from './rubberChicken/normaliseRubberChickenEvent';
-import getDirtySecrets from './dirtySecrets/getDirtySecrets';
-import { getDirtySecretsId } from './dirtySecrets/normaliseDirtySecretsEvent';
-import getVoltaire from './voltaire/getVoltaire';
-import { getVoltaireId } from './voltaire/normaliseVoltaireEvent';
-
-const rawEventPairs = [
-  [getBobbiePeels, getBobbiePeelsId, Sources.BOBBIE_PEELS] as const,
-  // [getComicsLounge, getComicsLoungeId, Sources.COMICS_LOUNGE] as const,
-  // [getComedyRepublic, getComedyRepublicId, Sources.COMEDY_REPUBLIC] as const,
-  // [getDirtySecrets, getDirtySecretsId, Sources.DIRTY_SECRETS] as const,
-  // [getGeorgesBar, getGeorgesBarId, Sources.GEORGES_BAR] as const,
-  // [getRochey, getRocheyId, Sources.ROCHEY] as const,
-  // [getRubberChicken, getRubberChickenId, Sources.RUBBER_CHICKEN] as const,
-  // [getVoltaire, getVoltaireId, Sources.VOLTAIRE] as const,
-]
+import { eventSources } from './eventSources';
 
 export type RawEventAndInfo = { source: Sources, rawEvent: MixedEvtRaw, uid: string }
 
 const mapRawEventWithInfo = (venueNumber: number) => (rawEvent: MixedEvtRaw) => {
   // @ts-ignore (mixed array confuses this)
-  const uid = rawEventPairs[venueNumber][1](rawEvent);
+  const uid = eventSources[venueNumber].getId(rawEvent);
   if (!uid) return null;
   return ({
-    source: rawEventPairs[venueNumber][2],
+    source: eventSources[venueNumber].source,
     uid,
     rawEvent,
   });
@@ -44,7 +18,7 @@ const mapRawEventWithInfo = (venueNumber: number) => (rawEvent: MixedEvtRaw) => 
 
 const getRawEvents = (): Promise<RawEventAndInfo[]> => {
   return Promise.all(
-    rawEventPairs.map(([getter, _getId, _source]) => getter())
+    eventSources.map(({ getEvents }) => getEvents())
   )
     .then((venuesEvents) =>
       venuesEvents.map(
