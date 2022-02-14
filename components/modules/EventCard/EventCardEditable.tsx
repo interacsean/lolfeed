@@ -55,13 +55,8 @@ const EventCardEditable = ({ event: initEvent, ...props }: EventCardProps) => {
           : `$${price[0]}`;
   return (
     <Box
-      mb={1}
       display="flex"
       alignItems="stretch"
-      backgroundColor="white.100"
-      border="4px solid"
-      borderColor="secondary.100"
-      borderRadius={getSpace(1 / 3)}
     >
       <Box sx={{ minWidth: '150px' }} position="relative">
         <Img
@@ -70,7 +65,6 @@ const EventCardEditable = ({ event: initEvent, ...props }: EventCardProps) => {
           width={150}
           minHeight={150}
           maxHeight={165}
-          borderLeftRadius={getSpace(1 / 5)}
           opacity={!event.imgSrc ? 0.1 : undefined}
         />
         {priceDesc ? (
