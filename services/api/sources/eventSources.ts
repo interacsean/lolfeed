@@ -17,6 +17,8 @@ import normaliseRocheyEvent from './rochey/normaliseRocheyEvent';
 import getDirtySecrets from './dirtySecrets/getDirtySecrets';
 import { MixedEvtRaw } from './types';
 import { ApiErrorOr } from '../../../utils/api/ApiErrorOr';
+import getLimboVoltaire from './limboVoltaire/getLimboVoltaire';
+import normaliseLimboVoltaireEvent, { getLimboVoltaireId } from './limboVoltaire/normaliseLimboVoltaireEvent';
 
 type EventMeta<T extends MixedEvtRaw> = {
   source: Sources,
@@ -73,5 +75,11 @@ export const eventSources: EventMeta<any>[] = [
     getId: getVoltaireId,
     getEvents: getVoltaire,
     normalise: normaliseVoltaireEvent,
-  }
+  },
+  {
+    source: Sources.LIMBO_VOLTAIRE,
+    getId: getLimboVoltaireId,
+    getEvents: getLimboVoltaire,
+    normalise: normaliseLimboVoltaireEvent,
+  },
 ];

@@ -1,5 +1,5 @@
 const tmplBody = `import { ApiErrorOr } from '../../../../utils/api/ApiErrorOr';
-import getEventbriteOrganizerEvents from '../common/getEventbriteOrganizerEvents';
+import getEventbriteOrganizerEvents from '../common/eventbrite/getEventbriteOrganizerEvents';
 import { {{ShortHand}}EvtRaw } from './types';
 
 const get{{FileName}} = (): Promise<ApiErrorOr<{{ShortHand}}EvtRaw[]>> =>
@@ -9,9 +9,9 @@ export default get{{FileName}};
 `;
 
 const tmplNormalise = `import { ComEvent, Sources } from '../../../events/types';
-import { EvtBrtEvtRaw } from '../common/types';
+import { EvtBrtEvtRaw } from '../common/eventbrite/types';
+import getEventbriteEvtId from '../common/eventbrite/getEventbriteEvtId';
 import getNormalisedEventbriteEvent from '../common/eventbrite/getNormalisedEventbriteEvent';
-import getEventbriteEvtId from '../common/getEventbriteEvtId';
 import { {{ShortHand}}EvtRaw } from './types';
 
 export const get{{FileName}}Id = (ce: {{ShortHand}}EvtRaw) => getEventbriteEvtId('{{code}}', ce)
@@ -68,7 +68,7 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
 
   makey.createFile(
     `./services/api/sources/${fileName}/types.ts`,
-    `import { EvtBrtEvtRaw } from '../common/types';
+    `import { EvtBrtEvtRaw } from '../common/eventbrite/types';
 
 export type ${ShortHand}EvtRaw = EvtBrtEvtRaw;
 `
