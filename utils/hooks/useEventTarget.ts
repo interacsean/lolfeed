@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
-const useEventTarget = (
-  fn: (value: string, event: { target: { value: string } }) => Function | void,
+const useEventTarget = <T extends string = string>(
+  fn: (value: T, event: { target: { value: T } }) => Function | void,
 ) => {
   return useCallback(
-    (e: { target: { value } }) => {
+    (e: { target: { value: T } }) => {
       return fn(e.target.value, e);
     },
     [fn],

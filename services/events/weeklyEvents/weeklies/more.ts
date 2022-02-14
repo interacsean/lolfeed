@@ -24,4 +24,10 @@ const x = `
  Red eye bar (monthly)
 
 Kings of Comedy
+
+Last Thu of month @ The Distiller
+https://www.facebook.com/groups/285368744865301/posts/4406327766102691/?comment_id=4800891993312931&__cft__[0]=AZVsw6Hwn6R-tpQW6Wx263Xwm_xDmxwJ3URTG3AmCjHonuLIx5qaVr2PC4NoYJAo8MSEN2K6iMF5jj1ALehH08htQerrTOGwkgFBWo_E1R3pJ_k2IuTQM2ZgDKc2OTGfo3jCLxXN1fXbjfxLIvtMJdUxIF645VZycExl5sVoeMfCje14E0RvHn3k8MwWuVRDChs&__tn__=R]-R
+
+Cornerstone, Mondays
+https://www.facebook.com/cornerstonecomedyaus/
 `
