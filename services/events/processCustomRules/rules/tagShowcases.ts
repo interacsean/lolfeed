@@ -5,8 +5,8 @@ import { Tags } from '../../tags/tags';
 
 const tagOpenMics = (evt: EvtRecord) => {
   if (
-    (evt.source === Sources.BOBBIE_PEELS && evt.comEvent.title === 'Free Comedy Upstairs at Bobbie Peels')
-    || (evt.source === Sources.VOLTAIRE && startsWith('Fresh Friday Comedy', evt.comEvent.title))
+    (evt.source === Sources.ROCHEY && evt.comEvent.title === 'Rochey Courtyard Comedy')
+    || (evt.source === Sources.VOLTAIRE && startsWith('Sunday Night', evt.comEvent.title))
   ) {
     return {
       ...evt,
@@ -14,7 +14,7 @@ const tagOpenMics = (evt: EvtRecord) => {
         ...evt.comEvent,
         tags: uniq([
           ...(evt.comEvent.tags || []),
-          Tags.OPEN_MIC,
+          Tags.SHOWCASE,
         ])
       }
     }

@@ -1,3 +1,5 @@
+import { Tags } from './tags/tags';
+
 export type ComEventSummary = {
   uid: string;
   title: string,
@@ -8,7 +10,7 @@ export type ComEventSummary = {
   venueName?: string,
   venueSlug?: string,
   imgSrc?: string,
-  tags?: string[],
+  tags?: Tags[],
   price?:
     | null
     | number

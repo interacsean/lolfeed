@@ -1,6 +1,7 @@
 import { Box, Heading, Img, Text } from '@chakra-ui/react';
 import { ArrowForwardIcon, EditIcon } from '@chakra-ui/icons';
 import { format } from 'date-fns';
+import Tag from '../../common/Tag/Tag';
 import { getSpace } from '../../../theme/space';
 import { ComEventSummary } from '../../../services/events/types';
 import IconButton from '../../common/IconButton/IconButton';
@@ -34,13 +35,18 @@ const EventCard = ({ event, ...props }: EventCardProps) => {
       borderColor="secondary.100"
       borderRadius={getSpace(1 / 3)}
     >
-      <Box sx={{ minWidth: '150px' }} position="relative">
+      <Box
+        sx={{ minWidth: '150px' }}
+        position="relative"
+        display="flex"
+        alignItems="stretch"
+      >
         <Img
           src={event.imgSrc || defaultImageSrc}
           objectFit="cover"
           width={150}
           minHeight={150}
-          maxHeight={165}
+          maxHeight={180}
           borderLeftRadius={getSpace(1 / 5)}
           opacity={!event.imgSrc ? 0.1 : undefined}
         />
@@ -69,6 +75,13 @@ const EventCard = ({ event, ...props }: EventCardProps) => {
             </Text>
             {event.description && (
               <Text variant="content">{event.description}</Text>
+            )}
+            {event.tags && (
+              <Box>
+                {event.tags.map(
+                  t => <Tag tag={t} />
+                )}
+              </Box>
             )}
           </Box>
           <Box display="flex" width={'auto'} justifyContent="end">
