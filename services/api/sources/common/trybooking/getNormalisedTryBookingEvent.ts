@@ -1,28 +1,27 @@
 import getTryBookingEvtId from './getTryBookingEvtId';
 import { ComEvent, Sources, TimestampPrecision } from '../../../../events/types';
 import { TryBkgEvtRaw } from './types';
+import extractTryBookingEvtTime from './extractTryBookingEvtTime';
 
 const getNormalisedTryBookingEvent = (
   eid: string,
   idPrefix: string,
   ev: TryBkgEvtRaw,
-): ComEvent | null => {
+): Omit<ComEvent, 'source'> | null => {
   const uid = getTryBookingEvtId(idPrefix, ev);
-  // const timestamp = extractTryBookingEvtTime(ev);
+  const timestamp = extractTryBookingEvtTime(ev);
 
   if (!uid) return null;
 
   return {
     uid,
     title: ev.eventName,
-    venueName: 'Rochey',
-    source: Sources.ROCHEY,
-    // subTitle: ev.subTitle,
+    venueName: '',
     timezone: 'Australia/Melbourne',
-    timestamp: [1],
+    timestamp,
     timestampPrecision: TimestampPrecision.TIME,
     orderLink: `https://www.trybooking.com/events/${eid}/sessions/${ev.orderEdid}/sections/${ev.orderAid}/tickets`,
-    imgSrc: ev.imgSrc || undefined,
+    imgSrc: ev.imgSrc ? `https://www.trybooking.com${ev.imgSrc}` : undefined,
   }
 };
 

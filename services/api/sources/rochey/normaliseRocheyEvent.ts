@@ -1,9 +1,15 @@
 import { RocheyEvtRaw } from './types';
-import { ComEvent } from '../../../events/types';
+import { ComEvent, Sources } from '../../../events/types';
 import getNormalisedTryBookingEvent from '../common/trybooking/getNormalisedTryBookingEvent';
 import { rocheyTrybookingEid } from './getRochey';
 
-const normaliseRocheyEvent = (ce: RocheyEvtRaw): ComEvent | null =>
-  getNormalisedTryBookingEvent(rocheyTrybookingEid, 'RCY', ce)
+const normaliseRocheyEvent = (ce: RocheyEvtRaw): ComEvent | null => {
+  const rchEvt = getNormalisedTryBookingEvent(rocheyTrybookingEid, 'RCY', ce)
+  return !rchEvt ? null : {
+    source: Sources.ROCHEY,
+    ...rchEvt,
+  }
+}
+
 
 export default normaliseRocheyEvent;
