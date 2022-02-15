@@ -26,6 +26,23 @@ import layers from '../../../theme/layers';
 import { LinkOverlay } from '../../common/Link/Link';
 import Tag from '../../common/Tag/Tag';
 import useEventCardLogic from './useEventCardLogic';
+import ComicLink from '../ComicLink';
+import {
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from '@choc-ui/chakra-autocomplete';
+
+const aclProps = {
+  mt: 1 / 4,
+  py: 1 / 3,
+};
+const aciProps = {
+  mx: 1 / 4,
+  py: 1 / 4,
+  px: 1 / 2,
+}
 
 export type EventCardProps = {
   event: ComEventSummary,
@@ -49,6 +66,7 @@ const EventCardEditable = (props: EventCardProps) => {
     newTagOptions,
     approvalOptions,
     onStatusChange,
+    comics,
   } = useEventCardLogic(props);
 
   const price = typeof event.price === 'number' ? [event.price] : event.price;
@@ -110,8 +128,8 @@ const EventCardEditable = (props: EventCardProps) => {
                     defaultValue={event.title || (props.isEditing ? '{title}' : undefined)}
                     onSubmit={sendEmptyIf(setEventField(['title']), '{title}')}
                   >
-                    <EditablePreview display="block" />
-                    <EditableInput as="textarea" />
+                    <EditablePreview display="block"/>
+                    <EditableInput as="textarea"/>
                   </Editable>
                 </Heading>
               </TitleWrapper>
@@ -130,8 +148,8 @@ const EventCardEditable = (props: EventCardProps) => {
                   icon={CloseIcon}
                 />
               </>
-              ) : (
-                props.enableEdit && (
+            ) : (
+              props.enableEdit && (
                 <IconButton
                   zIndex={layers.foreground}
                   onClick={() => props.onEdit(props.event.uid)}
@@ -147,8 +165,8 @@ const EventCardEditable = (props: EventCardProps) => {
               defaultValue={event.venueName || (props.isEditing ? '{venueName}' : undefined)}
               onSubmit={sendEmptyIf(setEventField(['venueName']), '{venueName}')}
             >
-              <EditablePreview display="block" />
-              <EditableInput as="textarea" />
+              <EditablePreview display="block"/>
+              <EditableInput as="textarea"/>
             </Editable>
           </Text>
           <Box display="flex" justifyContent="space-between" alignItems="center" mt={1 / 4}>
@@ -162,13 +180,54 @@ const EventCardEditable = (props: EventCardProps) => {
                   defaultValue={event.description || (props.isEditing ? '{description}' : undefined)}
                   onSubmit={sendEmptyIf(setEventField(['description']), '{description}')}
                 >
-                  <EditablePreview display="block" />
-                  <EditableInput as="textarea" />
+                  <EditablePreview display="block"/>
+                  <EditableInput as="textarea"/>
                 </Editable>
               </Text>
-              {(event.comicsHeadline?.length && (
-                <Text variant="x">x</Text>
-              ))}
+              <Box>
+                {(!!event.comicsHeadline?.length || props.isEditing) && (
+                  <>
+                    <Text variant="detail" as="span">Headliner:</Text>
+                    {(event.comicsHeadline || []).map(c => (
+                      <ComicLink>{c}</ComicLink>
+                    ))}
+                    {props.isEditing && (
+                      <AutoComplete>
+                        <AutoCompleteInput
+                          placeholder="Search comics"
+                        />
+                        <AutoCompleteList {...aclProps}>
+                          {comics.map((comic) => (
+                            <AutoCompleteItem
+                              {...aciProps}
+                              key={`option-${comic}`}
+                              value={comic}
+                            >
+                              {comic}
+                            </AutoCompleteItem>
+                          ))}
+                        </AutoCompleteList>
+                      </AutoComplete>
+                    )}
+                  </>
+                )}
+                {(!!event.comicsSupport?.length || props.isEditing) && (
+                  <>
+                    <Text variant="detail" as="span">Supporting:</Text>
+                    {(event.comicsSupport || []).map(c => (
+                      <ComicLink>{c}</ComicLink>
+                    ))}
+                  </>
+                )}
+                {(!!event.comicsFeatured?.length || props.isEditing) && (
+                  <>
+                    <Text variant="detail" as="span">Featuring:</Text>
+                    {(event.comicsFeatured || []).map(c => (
+                      <ComicLink>{c}</ComicLink>
+                    ))}
+                  </>
+                )}
+              </Box>
               {(event.tags || props.isEditing) && (
                 <HStack wrap="wrap">
                   {(event.tags || []).map(
@@ -183,7 +242,7 @@ const EventCardEditable = (props: EventCardProps) => {
                       <Select
                         size="sm"
                         onChange={addTag}
-                        placeholder="(add)"
+                        placeholder="(add tag)"
                       >
                         {newTagOptions.map(
                           t => (
