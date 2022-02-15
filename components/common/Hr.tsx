@@ -4,9 +4,9 @@ import { Box, BoxProps } from '@chakra-ui/react';
 const Hr = (props: BoxProps) => {
   return (
     <Box
-      borderBottomColor="black.20"
+      borderBottomColor="guide.100"
       borderWidth={0}
-      borderBottomWidth={1}
+      borderBottomWidth={2}
       {...props}
     />
   );

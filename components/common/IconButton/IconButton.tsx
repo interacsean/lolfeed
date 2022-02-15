@@ -7,7 +7,7 @@ type Props = Omit<IconButtonProps, 'icon'> & {
 };
 
 const IconButton = (props: Props) => {
-  const { icon: Icon, ...iconButtonProps } = props
+  const { icon: Icon, iconProps, ...iconButtonProps } = props
   return (
     <ChakraIconButton
       {...iconButtonProps}
@@ -15,7 +15,7 @@ const IconButton = (props: Props) => {
       icon={<Icon
         fontSize="24px"
         color="action.100"
-        {...props.iconProps}
+        {...iconProps}
       />}
     />
   );

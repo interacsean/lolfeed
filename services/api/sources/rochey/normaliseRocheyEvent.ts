@@ -7,6 +7,7 @@ const normaliseRocheyEvent = (ce: RocheyEvtRaw): ComEvent | null => {
   const rchEvt = getNormalisedTryBookingEvent(rocheyTrybookingEid, 'RCY', ce)
   return !rchEvt ? null : {
     source: Sources.ROCHEY,
+    venueName: 'The Rochester',
     ...rchEvt,
   }
 }

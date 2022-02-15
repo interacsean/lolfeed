@@ -9,11 +9,19 @@ const theme = extendTheme({
   components: {
     Text: TextTheme,
     Heading: HeadingTheme,
+    Editable: {
+      baseStyle: {
+        preview: {
+          py: 0,
+        }
+      }
+    }
   },
 });
 
 // override values
 theme.components.Heading.sizes = {};
 theme.space = space;
+theme.components.Editable.baseStyle.preview.py = undefined;
 
 export default theme;
