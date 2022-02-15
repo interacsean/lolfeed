@@ -1,1 +1,1 @@
-type StrRecord<T = any> = { [key: string]: T | undefined };
+export type StrRecord<T = any> = { [key: string]: T | undefined };

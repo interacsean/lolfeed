@@ -1,6 +1,7 @@
 import normaliseMixedEvent from '../../api/sources/normaliseMixedEvent';
 import { mergeDeepLeft } from 'ramda';
-import { EvtApproval, EvtRecord } from './types';
+import { EvtRecord } from './types';
+import { ComEvent, defaultEvtApproval, EvtApproval } from '../../events/types';
 
 /**
  * Prefill an EvtRecord based on source data, and optional existing EvtRecord
@@ -18,23 +19,27 @@ const fillEventRecord = (
     event,
     {
       rawEvent: {},
-      fieldOverrides: {},
-      comEvent,
+      fieldOverrides: {} as Partial<ComEvent>,
+      comEvent: mergeDeepLeft(
+        comEvent,
+        { approval: defaultEvtApproval },
+      ),
       meta: {
         uid: comEvent.uid,
         parseTime: Date.now(),
-        approval: EvtApproval.DEFAULT
       },
     },
   );
+
   const comEventWithOverrides = mergeDeepLeft(
       currRecord?.fieldOverrides || event.fieldOverrides || {},
       evtRecordWithDefaults.comEvent,
     );
+
   return mergeDeepLeft(
     { comEvent: comEventWithOverrides },
     evtRecordWithDefaults,
-  );
+  ) as EvtRecord;
 }
 
 export default fillEventRecord;

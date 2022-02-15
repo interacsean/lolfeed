@@ -1,5 +1,5 @@
 import { RbrChkEvtRaw } from './types';
-import { ComEvent, Sources, TimestampPrecision } from '../../../events/types';
+import { ComEvent, defaultEvtApproval, Sources, TimestampPrecision } from '../../../events/types';
 import { not, isEmpty, compose } from 'ramda';
 import { parseFromTimeZone, parseFromString } from 'date-fns-timezone';
 import replaceMonthWithNumeric from '../../../../utils/date/replaceMonthWithNumeric';
@@ -74,6 +74,7 @@ const normaliseRubberChickenEvent = (ce: RbrChkEvtRaw): ComEvent | null => {
     orderLink: `https://therubberchicken.com.au/${ce.bookingLink}`,
     ...ce.imgSrc && { imgSrc: ce.imgSrc },
     price: ce.price && parseFloat(ce.price) || null,
+    approval: defaultEvtApproval,
   });
 }
 

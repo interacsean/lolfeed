@@ -1,4 +1,4 @@
-import { ComEvent, Sources, TimestampPrecision } from '../../types';
+import { ComEvent, defaultEvtApproval, EvtApproval, Sources, TimestampPrecision } from '../../types';
 import { Tags } from '../../tags/tags';
 import getNextNDates, { DayOfWeek } from '../../../../utils/date/getNextNDates';
 import { unconfirmedMessage } from './common';
@@ -21,6 +21,7 @@ const getVoltaireWeeklies = (now: number = Date.now()): ComEvent[] => {
       source: Sources.GENERATED_VOLTAIRE,
       tags: [Tags.SHOWCASE],
       timezone: 'Australia/Melbourne',
+      approval: defaultEvtApproval,
     };
   });
 }

@@ -4,8 +4,14 @@ import { lensPath, set, uniq } from 'ramda';
 import { Tags } from '../../../services/events/tags/tags';
 import { EventCardProps } from './EventCardEditable';
 import useEventTarget from '../../../utils/hooks/useEventTarget';
+import { EvtApproval } from '../../../services/events/types';
 
 const newTagOptions = Object.keys(Tags);
+const approvalOptions = [
+  EvtApproval.PENDING_APPROVAL,
+  EvtApproval.APPROVED_MANUALLY,
+  EvtApproval.REJECTED,
+];
 
 const useEventCardLogic = (props: EventCardProps) => {
   const [ event, setEvent ] = React.useState(props.event);
@@ -60,6 +66,7 @@ const useEventCardLogic = (props: EventCardProps) => {
     },
     [],
   );
+  const onStatusChange = useEventTarget(setEventField(['approval']));
 
   return {
     event,
@@ -70,6 +77,8 @@ const useEventCardLogic = (props: EventCardProps) => {
     removeTag,
     newTagOptions,
     addTag: useEventTarget(addTag),
+    approvalOptions,
+    onStatusChange,
   }
 
 }

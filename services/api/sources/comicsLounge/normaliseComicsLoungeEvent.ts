@@ -1,5 +1,5 @@
 import { ComLngEvtRaw } from './types';
-import { ComEvent, Sources, TimestampPrecision } from '../../../events/types';
+import { ComEvent, defaultEvtApproval, Sources, TimestampPrecision } from '../../../events/types';
 import { not, isEmpty, compose } from 'ramda';
 import { parseFromTimeZone, parseFromString } from 'date-fns-timezone';
 import replaceMonthWithNumeric from '../../../../utils/date/replaceMonthWithNumeric';
@@ -43,7 +43,7 @@ const normaliseComicsLoungeEvent = (ce: ComLngEvtRaw): ComEvent | null => {
     orderLink: `https://thecomicslounge.com.au${ce.bookingLink}`,
     price: null,
     ...ce.imgSrc && { imgSrc: `https://thecomicslounge.com.au${ce.imgSrc}` },
-    // price: ce && parseFloat(ce.price) || undefined,
+    approval: defaultEvtApproval,
   });
 };
 

@@ -3,6 +3,7 @@ import {
   Link as ChakraLink,
   LinkOverlay as ChakraLinkOverlay, LinkProps,
 } from '@chakra-ui/react';
+import { StrRecord } from '../../../types/StrRecord';
 
 const isButton = (linkProps: StrRecord<any>) =>
   !!Object.values(linkProps).find(

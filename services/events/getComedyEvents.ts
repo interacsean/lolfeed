@@ -8,7 +8,7 @@ const applyOverrides = (evt: EvtRecord) => {
   return mergeDeepLeft(
     { comEvent: evt.fieldOverrides },
     evt,
-  );
+  ) as EvtRecord;
 };
 
 const getComedyEvents = () => {
@@ -18,6 +18,7 @@ const getComedyEvents = () => {
     .then(map(prop('comEvent')))
     // .then(addWeeklyEvents)
     .then(
+      // @ts-ignore am falling back
       events => events.filter(e => e && (e.timestamp[1] || e.timestamp[0]) > Date.now()),
     )
     .then(

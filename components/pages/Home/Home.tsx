@@ -41,7 +41,7 @@ const Home: NextPage<{ canEdit?: boolean }> = (props) => {
   );
 
   return (
-    <Layout color="white.100">
+    <Layout>
       <Card>
         <Box display="flex" justifyContent="space-between" alignItems="baseline">
           <Text variant="heading" as="h1" mb={1}>Events</Text>

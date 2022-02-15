@@ -21,6 +21,10 @@ export type ComEventSummary = {
   description?: string,
   orderLink?: string | null,
   source: Sources,
+  approval: EvtApproval,
+  comicsHeadline?: string[],
+  comicsSupport?: string[],
+  comicsFeatured?: string[],
 }
 
 export type ComEvent = ComEventSummary & {
@@ -52,3 +56,12 @@ export enum Sources {
   GENERATED_DIRTY_SECRETS = 'GENERATED_DIRTY_SECRETS',
   GENERATED_GENERAL = 'GENERATED_GENERAL',
 }
+
+export enum EvtApproval {
+  PENDING_APPROVAL = 'PENDING_APPROVAL',
+  APPROVED_WITH_TRUST = 'APPROVED_WITH_TRUST',
+  APPROVED_MANUALLY = 'APPROVED_MANUALLY',
+  REJECTED = 'REJECTED',
+}
+
+export const defaultEvtApproval = EvtApproval.APPROVED_WITH_TRUST;

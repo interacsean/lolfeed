@@ -1,6 +1,6 @@
 import getEventbriteEvtId from './getEventbriteEvtId';
 import extractEventbriteEvtTime from './extractEventbriteEvtTime';
-import { ComEvent, TimestampPrecision } from '../../../../events/types';
+import { ComEvent, defaultEvtApproval, TimestampPrecision } from '../../../../events/types';
 import { EvtBrtEvtRaw, EvtBrtIndividualEvtDetailRaw, EvtBrtSeriesDataRaw } from './types';
 
 const getNormalisedEventbriteIndividualEvent = (
@@ -19,6 +19,7 @@ const getNormalisedEventbriteIndividualEvent = (
     timestampPrecision: TimestampPrecision.TIME,
     orderLink: ev.individualEventData.url,
     ...(ev.individualEventData.logo.url && { imgSrc: ev.individualEventData.logo.url }),
+    approval: defaultEvtApproval,
   }
 }
 
@@ -42,6 +43,7 @@ const getNormalisedEventbriteTopLevelEvent = (
       parseFloat(ev.offers.lowPrice),
       ...ev.offers.highPrice && parseFloat(ev.offers.highPrice) ? [parseFloat(ev.offers.highPrice)] : []
     ] as [number, number] : null,
+    approval: defaultEvtApproval,
   }
 }
 

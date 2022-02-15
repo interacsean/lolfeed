@@ -6,9 +6,9 @@ import { rocheyTrybookingEid } from './getRochey';
 const normaliseRocheyEvent = (ce: RocheyEvtRaw): ComEvent | null => {
   const rchEvt = getNormalisedTryBookingEvent(rocheyTrybookingEid, 'RCY', ce)
   return !rchEvt ? null : {
+    ...rchEvt,
     source: Sources.ROCHEY,
     venueName: 'The Rochester',
-    ...rchEvt,
   }
 }
 

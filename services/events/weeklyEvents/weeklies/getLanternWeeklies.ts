@@ -1,4 +1,4 @@
-import { ComEvent, Sources, TimestampPrecision } from '../../types';
+import { ComEvent, defaultEvtApproval, Sources, TimestampPrecision } from '../../types';
 import { Tags } from '../../tags/tags';
 import getNextNDates, { DayOfWeek } from '../../../../utils/date/getNextNDates';
 import { unconfirmedMessage } from './common';
@@ -22,6 +22,7 @@ const getLanternWeeklies = (now: number = Date.now()): ComEvent[] => {
       source: Sources.GENERATED_LAUGHS_AT_LANTERN,
       tags: [Tags.SHOWCASE, Tags.FREE],
       timezone: 'Australia/Melbourne',
+      approval: defaultEvtApproval,
     };
   });
 }

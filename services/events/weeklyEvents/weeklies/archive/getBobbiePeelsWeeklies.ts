@@ -1,4 +1,4 @@
-import { ComEvent, Sources, TimestampPrecision } from '../../../types';
+import { ComEvent, defaultEvtApproval, Sources, TimestampPrecision } from '../../../types';
 import { Tags } from '../../../tags/tags';
 import getNextNDates, { DayOfWeek } from '../../../../../utils/date/getNextNDates';
 import { unconfirmedMessage } from '../common';
@@ -24,6 +24,7 @@ ${unconfirmedMessage}`,
       source: Sources.GENERATED_BOBBY_PEELS,
       tags: [Tags.OPEN_MIC, Tags.FREE],
       timezone: 'Australia/Melbourne',
+      approval: defaultEvtApproval,
     };
   });
 }

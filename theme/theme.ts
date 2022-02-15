@@ -15,6 +15,9 @@ const theme = extendTheme({
       baseStyle: {
         preview: {
           py: 0,
+        },
+        input: {
+          py: 0,
         }
       }
     },

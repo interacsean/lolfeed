@@ -5,6 +5,7 @@ import { ComEvent } from '../types';
 import getGuerillaResistanceWeeklies from './weeklies/getGuerillaResistanceWeeklies';
 import getVoltaireWeeklies from './weeklies/getVoltaireWeeklies';
 import getLanternWeeklies from './weeklies/getLanternWeeklies';
+import { StrRecord } from '../../../types/StrRecord';
 
 const addWeeklyEvents = (evts: ComEvent[]): ComEvent[] => {
   const now = Date.now();

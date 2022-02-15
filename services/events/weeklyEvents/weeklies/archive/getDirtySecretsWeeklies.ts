@@ -1,4 +1,4 @@
-import { ComEvent, Sources, TimestampPrecision } from '../../../types';
+import { ComEvent, defaultEvtApproval, Sources, TimestampPrecision } from '../../../types';
 import { Tags } from '../../../tags/tags';
 import getNextNDates, { DayOfWeek } from '../../../../../utils/date/getNextNDates';
 import { unconfirmedMessage } from '../common';
@@ -24,6 +24,7 @@ const getDirtySecretsWeeklies = (now: number = Date.now()): ComEvent[] => {
       source: Sources.GENERATED_DIRTY_SECRETS,
       tags: [Tags.SHOWCASE, Tags.OPEN_MIC],
       timezone: 'Australia/Melbourne',
+      approval: defaultEvtApproval,
     };
   });
 }

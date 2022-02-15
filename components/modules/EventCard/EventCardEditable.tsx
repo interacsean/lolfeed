@@ -11,6 +11,7 @@ import {
   Select,
   Tag as ChakraTag,
   HStack,
+  TextProps
 } from '@chakra-ui/react';
 import {
   ArrowForwardIcon,
@@ -28,8 +29,8 @@ import useEventCardLogic from './useEventCardLogic';
 
 export type EventCardProps = {
   event: ComEventSummary,
-  onExit?: (event: ComEventSummary) => void,
-  onEdit?: (uid: string) => void;
+  onExit: (event: ComEventSummary) => void,
+  onEdit: (uid: string) => void;
   isEditing?: boolean;
   enableEdit?: boolean;
 }
@@ -45,10 +46,10 @@ const EventCardEditable = (props: EventCardProps) => {
     setEventField,
     sendEmptyIf,
     removeTag,
-    newTagOptions
+    newTagOptions,
+    approvalOptions,
+    onStatusChange,
   } = useEventCardLogic(props);
-
-  console.log('rr', props.event.uid)
 
   const price = typeof event.price === 'number' ? [event.price] : event.price;
   const priceDesc = !price ? null
@@ -87,19 +88,34 @@ const EventCardEditable = (props: EventCardProps) => {
           px={1 / 2}
           flex="1 0 0"
         >
+          {props.isEditing && (
+            <Box>
+              <Select
+                value={event.approval}
+                placeholder={`(${event.approval || 'select'})`}
+                onChange={onStatusChange}
+              >
+                {approvalOptions.map(
+                  a => <option value={a}>{a}</option>
+                )}
+              </Select>
+            </Box>
+          )}
           <Box display="flex">
-            <TitleWrapper href={(props.isEditing ? undefined : event.orderLink) || undefined} isExternal>
-              <Heading variant="title" flex="1 0 0" mb="0.25em" minWidth="6em">
-                <Editable
-                  isDisabled={!props.isEditing}
-                  defaultValue={event.title || (props.isEditing ? '{title}' : undefined)}
-                  onSubmit={sendEmptyIf(setEventField(['title']), '{title}')}
-                >
-                  <EditablePreview display="block" />
-                  <EditableInput as="textarea" />
-                </Editable>
-              </Heading>
-            </TitleWrapper>
+            <Box flex="1 0 0">
+              <TitleWrapper href={(props.isEditing ? undefined : event.orderLink) || undefined} isExternal>
+                <Heading variant="title" mb="0.25em" minWidth="6em">
+                  <Editable
+                    isDisabled={!props.isEditing}
+                    defaultValue={event.title || (props.isEditing ? '{title}' : undefined)}
+                    onSubmit={sendEmptyIf(setEventField(['title']), '{title}')}
+                  >
+                    <EditablePreview display="block" />
+                    <EditableInput as="textarea" />
+                  </Editable>
+                </Heading>
+              </TitleWrapper>
+            </Box>
             {props.isEditing ? (
               <>
                 <IconButton
@@ -150,6 +166,9 @@ const EventCardEditable = (props: EventCardProps) => {
                   <EditableInput as="textarea" />
                 </Editable>
               </Text>
+              {(event.comicsHeadline?.length && (
+                <Text variant="x">x</Text>
+              ))}
               {(event.tags || props.isEditing) && (
                 <HStack wrap="wrap">
                   {(event.tags || []).map(
@@ -160,31 +179,32 @@ const EventCardEditable = (props: EventCardProps) => {
                     />
                   )}
                   {props.isEditing && (
-                    <ChakraTag>
+                    <Box display="inline-block">
                       <Select
                         size="sm"
-                        border="none"
                         onChange={addTag}
                         placeholder="(add)"
                       >
                         {newTagOptions.map(
                           t => (
-                          <option value={t}>{t}</option>
-                        )
+                            <option value={t}>{t}</option>
+                          )
                         )}
                       </Select>
-                    </ChakraTag>
+                    </Box>
                   )}
                 </HStack>
               )}
             </Box>
-            <Box display="flex" width={'auto'} justifyContent="end">
-              <IconButton
-                aria-label="View"
-                iconProps={{ fontSize: "32px" }}
-                icon={ArrowForwardIcon}
-              />
-            </Box>
+            {!props.isEditing && (
+              <Box display="flex" width={'auto'} justifyContent="end">
+                <IconButton
+                  aria-label="View"
+                  iconProps={{ fontSize: "32px" }}
+                  icon={ArrowForwardIcon}
+                />
+              </Box>
+            )}
           </Box>
         </Box>
       </Box>

@@ -1,12 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { equals, isNil } from 'ramda';
 
-import { ComEvent, ComEventSummary, Sources } from '../../../services/events/types';
+import { ComEvent, ComEventSummary, EvtApproval, Sources } from '../../../services/events/types';
 import getEventRecord from '../../../services/database/events/getEventRecord';
 import { ifNotNullAsync } from 'errable';
 import upsertEvent from '../../../services/database/events/upsertEvent';
 import fillEventRecord from '../../../services/database/events/fillEventRecord';
-import { EvtApproval } from '../../../services/database/events/types';
 
 const postEvent = (uid: string, event: Partial<ComEventSummary & ComEvent>) => {
   return getEventRecord(uid)
@@ -16,9 +15,6 @@ const postEvent = (uid: string, event: Partial<ComEventSummary & ComEvent>) => {
           rawEvent: event, // todo: should be the default event?
           source: event.source || Sources.GENERATED_GENERAL, // todo: should reference actual venue is possible
           fieldOverrides: {}, // todo: should be diff between default and the `event`
-          meta: {
-            approval: EvtApproval.APPROVED_MANUALLY
-          }
         });
         const { comEvent } = curEventRecord;
 
