@@ -3,19 +3,21 @@ import colors from './colors';
 import TextTheme from './components/TextTheme';
 import HeadingTheme from './components/HeadingTheme';
 import space from './space';
+import TagTheme from './components/TagTheme';
 
 const theme = extendTheme({
   colors,
   components: {
     Text: TextTheme,
     Heading: HeadingTheme,
+    Tag: TagTheme,
     Editable: {
       baseStyle: {
         preview: {
           py: 0,
         }
       }
-    }
+    },
   },
 });
 

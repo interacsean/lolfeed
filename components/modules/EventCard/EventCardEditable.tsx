@@ -1,71 +1,54 @@
 import React from 'react';
-
-import { Box, Heading, Img, Text, Editable, EditableInput, EditablePreview, LinkBox } from '@chakra-ui/react';
-import { ArrowForwardIcon, CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
-import { format } from 'date-fns';
-import { getSpace } from '../../../theme/space';
+import {
+  Box,
+  Heading,
+  Img,
+  Text,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  LinkBox,
+  Select,
+  Tag as ChakraTag,
+  HStack,
+} from '@chakra-ui/react';
+import {
+  ArrowForwardIcon,
+  CheckIcon,
+  CloseIcon,
+  EditIcon,
+} from '@chakra-ui/icons';
 import { ComEventSummary } from '../../../services/events/types';
 import IconButton from '../../common/IconButton/IconButton';
-import { lensPath, set } from 'ramda';
-import saveEventOverrides from './saveEventOverrides';
 import renderDate from '../../../utils/date/renderDate';
 import layers from '../../../theme/layers';
 import { LinkOverlay } from '../../common/Link/Link';
 import Tag from '../../common/Tag/Tag';
-import { Tags } from '../../../services/events/tags/tags';
+import useEventCardLogic from './useEventCardLogic';
 
-type EventCardProps = {
+export type EventCardProps = {
   event: ComEventSummary,
   onExit?: (event: ComEventSummary) => void,
-  onEdit?: () => void;
+  onEdit?: (uid: string) => void;
   isEditing?: boolean;
   enableEdit?: boolean;
 }
 
 const defaultImageSrc = '/images/mic.jpg';
 
-const EventCardEditable = ({ event: initEvent, ...props }: EventCardProps) => {
-  const [ event, setEvent ] = React.useState(initEvent);
-  const saveThenExitEdit = React.useCallback(
-    () => {
-      saveEventOverrides(event).then(
-        () => props.onExit?.(event)
-      )
-    },
-    [props.onExit, event],
-  );
-  const cancelEdit = React.useCallback(
-    () => {
-      setEvent(initEvent);
-      props.onExit?.(initEvent)
-    },
-    [initEvent],
-  );
-  const setEventFieldVal = React.useCallback(
-    (fieldPath: string[], val: string) => setEvent(
-      prev => set(lensPath(fieldPath), val, prev)
-    ),
-    [],
-  );
-  const setEventField = React.useCallback(
-    (fieldPath: string[]) => (val: string) => setEventFieldVal(fieldPath, val),
-    [setEventFieldVal],
-  );
-  const sendEmptyIf = React.useCallback(
-    (fn: ((val: string) => void), placeholder: string) => (val: string) => {
-      fn(val === placeholder ? '' : val)
-    },
-    [],
-  );
-  const removeTag = React.useCallback(
-    (tagToRemove: Tags) => () => {
-      setEvent(ce => ({
-        ...ce,
-        tags: (ce.tags || []).filter(t => t !== tagToRemove)
-      }));
-    },
-    [],
-  );
+const EventCardEditable = (props: EventCardProps) => {
+  const {
+    addTag,
+    cancelEdit,
+    event,
+    saveThenExitEdit,
+    setEventField,
+    sendEmptyIf,
+    removeTag,
+    newTagOptions
+  } = useEventCardLogic(props);
+
+  console.log('rr', props.event.uid)
 
   const price = typeof event.price === 'number' ? [event.price] : event.price;
   const priceDesc = !price ? null
@@ -135,7 +118,7 @@ const EventCardEditable = ({ event: initEvent, ...props }: EventCardProps) => {
                 props.enableEdit && (
                 <IconButton
                   zIndex={layers.foreground}
-                  onClick={props.onEdit}
+                  onClick={() => props.onEdit(props.event.uid)}
                   aria-label={'Edit'}
                   icon={EditIcon}
                 />
@@ -167,9 +150,9 @@ const EventCardEditable = ({ event: initEvent, ...props }: EventCardProps) => {
                   <EditableInput as="textarea" />
                 </Editable>
               </Text>
-              {event.tags && (
-                <Box>
-                  {event.tags.map(
+              {(event.tags || props.isEditing) && (
+                <HStack wrap="wrap">
+                  {(event.tags || []).map(
                     t => <Tag
                       tag={t}
                       removable={props.isEditing}
@@ -177,9 +160,22 @@ const EventCardEditable = ({ event: initEvent, ...props }: EventCardProps) => {
                     />
                   )}
                   {props.isEditing && (
-                    '[add tag]'
+                    <ChakraTag>
+                      <Select
+                        size="sm"
+                        border="none"
+                        onChange={addTag}
+                        placeholder="(add)"
+                      >
+                        {newTagOptions.map(
+                          t => (
+                          <option value={t}>{t}</option>
+                        )
+                        )}
+                      </Select>
+                    </ChakraTag>
                   )}
-                </Box>
+                </HStack>
               )}
             </Box>
             <Box display="flex" width={'auto'} justifyContent="end">
@@ -197,4 +193,4 @@ const EventCardEditable = ({ event: initEvent, ...props }: EventCardProps) => {
 }
 
 
-export default EventCardEditable;
+export default React.memo(EventCardEditable);

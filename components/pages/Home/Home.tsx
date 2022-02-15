@@ -30,6 +30,16 @@ const Home: NextPage<{ canEdit?: boolean }> = (props) => {
   
   const filteredEvents = useFilterEvents(events, { filterShowType });
 
+  const onExit = React.useCallback(
+    (updatedEvent: ComEventSummary) => {
+      setEvents(evts => evts.map(
+        e => e.uid === updatedEvent.uid ? updatedEvent : e,
+      ))
+      setEditing(null)
+    },
+    [],
+  );
+
   return (
     <Layout color="white.100">
       <Card>
@@ -52,22 +62,18 @@ const Home: NextPage<{ canEdit?: boolean }> = (props) => {
             <Spinner size="xl" thickness="3px" color="action.100" />
           </Box>
         ) : (
-          filteredEvents.map((e, i) =>
-            <Box mb={2} key={e.uid}>
-              {i > 0 && <Hr mb={2} />}
-              <EventCardEditable
-                event={e}
-                isEditing={editing === e.uid}
-                enableEdit={props.canEdit}
-                onExit={(updatedEvent: ComEventSummary) => {
-                  setEvents(evts => evts.map(
-                    e => e.uid === updatedEvent.uid ? updatedEvent : e
-                  ))
-                  setEditing(null)
-                }}
-                onEdit={() => setEditing(e.uid)}
-              />
-            </Box>
+          filteredEvents.map((e, i) => {
+            return <Box mb={2} key={e.uid}>
+                {i > 0 && <Hr mb={2}/>}
+                <EventCardEditable
+                  event={e}
+                  isEditing={editing === e.uid}
+                  enableEdit={props.canEdit}
+                  onExit={onExit}
+                  onEdit={setEditing}
+                />
+              </Box>;
+            }
           )
         )}
       </Card>
