@@ -23,6 +23,7 @@ import ComicLink from '../ComicLink';
 import ComicAutocomplete from './ComicAutocomplete';
 
 export type EventCardProps = {
+  comicsList: string[],
   event: ComEventSummary,
   onExit: (event: ComEventSummary) => void,
   onEdit: (uid: string) => void;
@@ -44,7 +45,6 @@ const EventCardEditable = (props: EventCardProps) => {
     newTagOptions,
     approvalOptions,
     onStatusChange,
-    comics,
     addComic,
   } = useEventCardLogic(props);
 
@@ -171,7 +171,7 @@ const EventCardEditable = (props: EventCardProps) => {
                       <ComicLink>{c}</ComicLink>
                     ))}
                     {props.isEditing && (
-                      <ComicAutocomplete comics={comics} onChoose={addComic('comicsHeadline')} />
+                      <ComicAutocomplete comics={props.comicsList} onChoose={addComic('comicsHeadline')} />
                     )}
                   </>
                 )}
@@ -182,7 +182,7 @@ const EventCardEditable = (props: EventCardProps) => {
                       <ComicLink>{c}</ComicLink>
                     ))}
                     {props.isEditing && (
-                      <ComicAutocomplete comics={comics} onChoose={addComic('comicsSupport')} />
+                      <ComicAutocomplete comics={props.comicsList} onChoose={addComic('comicsSupport')} />
                     )}
                   </>
                 )}
@@ -193,7 +193,7 @@ const EventCardEditable = (props: EventCardProps) => {
                       <ComicLink>{c}</ComicLink>
                     ))}
                     {props.isEditing && (
-                      <ComicAutocomplete comics={comics} onChoose={addComic('comicsFeatured')} />
+                      <ComicAutocomplete comics={props.comicsList} onChoose={addComic('comicsFeatured')} />
                     )}
                   </>
                 )}

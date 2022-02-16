@@ -13,12 +13,6 @@ const approvalOptions = [
   EvtApproval.REJECTED,
 ];
 
-const comics = [
-  'Dan Rath',
-  'Dahn Rozario',
-  'Krutika Harale',
-]
-
 const useEventCardLogic = (props: EventCardProps) => {
   const [ event, setEvent ] = React.useState(props.event);
   const saveThenExitEdit = React.useCallback(
@@ -73,7 +67,7 @@ const useEventCardLogic = (props: EventCardProps) => {
     [],
   );
   const addComic = React.useCallback(
-    (type: keyof ComEvent) => (comicToAdd: string) => {
+    (type: 'comicsFeatured' | 'comicsSupport' | 'comicsHeadline') => (comicToAdd: string) => {
       if (comicToAdd) {
         setEvent((ce) => ({
           ...ce,
@@ -96,7 +90,6 @@ const useEventCardLogic = (props: EventCardProps) => {
     addTag: useEventTarget(addTag),
     approvalOptions,
     onStatusChange,
-    comics,
     addComic,
   }
 }

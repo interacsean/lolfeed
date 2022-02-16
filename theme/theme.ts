@@ -27,6 +27,4 @@ theme.components.Heading.sizes = {};
 theme.space = space;
 theme.components.Editable.baseStyle.preview.py = undefined;
 
-console.log(theme.components.Select);
-
 export default theme;

@@ -35,6 +35,7 @@ const ComicAutocomplete = (props: Props) => {
       <AutoComplete
         openOnFocus
         freeSolo
+        maxSuggestions={20}
       >
         <AutoCompleteInput
           value={searchVal}

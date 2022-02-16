@@ -23,7 +23,9 @@ function useFilterEvents(
   );
 }
 
-const Home: NextPage<{ canEdit?: boolean }> = (props) => {
+const Home: NextPage<{ canEdit?: boolean, comicsList?: string[] }> = (props) => {
+  const comicsList = props.comicsList || [];
+
   const { events, setEvents, loading } = useEventFeed();
   const [ filterShowType, setFilterShowType ] = React.useState<string | undefined>(undefined);
   const [ editing, setEditing ] = React.useState<null | string>();
@@ -66,6 +68,7 @@ const Home: NextPage<{ canEdit?: boolean }> = (props) => {
             return <Box mb={2} key={e.uid}>
                 {i > 0 && <Hr mb={2}/>}
                 <EventCardEditable
+                  comicsList={comicsList}
                   event={e}
                   isEditing={editing === e.uid}
                   enableEdit={props.canEdit}

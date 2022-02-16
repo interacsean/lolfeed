@@ -23,6 +23,9 @@ const x = `
  Kent comedy (Monday wkly)
  Red eye bar (monthly)
 
+Spleen Mondays
+https://www.facebook.com/groups/285368744865301/user/100034442053658/?__cft__[0]=AZUGeRxnE490H6oLTLNeWOn8hZHeOLLnNGAkzPrf28qeiRceg6jaPjGhxgMyVjqehCzr20sj7geMgag09rbx37ml2TKdA_nw7dCdPFH9D9FBG5XidKWVmp50up1QlsVw1JiCF0Mmf5eWCyVA6b-27wMEs9_LDXiCqwXa2aDk-vCtKLwCUDj3HwYprmgOgHiVJ1c&__tn__=-]K-R
+
 Kings of Comedy
 
 Last Thu of month @ The Distiller
@@ -30,6 +33,9 @@ https://www.facebook.com/groups/285368744865301/posts/4406327766102691/?comment_
 
 Cornerstone, Mondays
 https://www.facebook.com/cornerstonecomedyaus/
-`
+
+Comedy in the cellar - open mic
+https://www.facebook.com/pages/Melbourne-Victoria-Australia/116190411724975?__cft__[0]=AZUQo2ADVpjrCH_Em4KipGvbpkEQJUaUA_2-vQgRVt5AN903DAmvSjxUCyXBoYjkHioUscmOVizakK8caMIQRAb0GPZkXvRQc5ItLHDIpdNMYDhL_2U5jiAdwKUii9Z3sc0d7-AYoCOAvmvnMvF-2x9F8KeGKp6Sl-qRQ30yH0Gs7WecmVGwUehp3m4OmZrEjwg&__tn__=%2CP-R
+`;
 
 export default x;

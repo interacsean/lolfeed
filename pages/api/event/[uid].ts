@@ -6,6 +6,7 @@ import getEventRecord from '../../../services/database/events/getEventRecord';
 import { ifNotNullAsync } from 'errable';
 import upsertEvent from '../../../services/database/events/upsertEvent';
 import fillEventRecord from '../../../services/database/events/fillEventRecord';
+import addNewComics from '../../../services/comics/addNewComics';
 
 const comEventFieldNames = [
   'venueName',
@@ -54,6 +55,12 @@ const postEvent = (uid: string, event: Partial<ComEventSummary & ComEvent>) => {
             ),
           // todo: nested fields (venue
         };
+
+        addNewComics([
+          ...(event.comicsFeatured || []),
+          ...(event.comicsHeadline || []),
+          ...(event.comicsSupport || []),
+        ]);
         return {
           ...curEventRecord,
           fieldOverrides,
