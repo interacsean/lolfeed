@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Box,
+  Button,
   Editable,
   EditableInput,
   EditablePreview,
@@ -10,6 +11,7 @@ import {
   LinkBox,
   Select,
   Text,
+  useEditableControls,
 } from '@chakra-ui/react';
 import {
   ArrowForwardIcon,
@@ -67,6 +69,20 @@ const EventCardEditable = (props: EventCardProps) => {
   const Wrapper = props.isEditing ? Box : LinkBox;
   const TitleWrapper = props.isEditing ? Box : LinkOverlay;
 
+  function EditableControls() {
+    const { isEditing, getEditButtonProps } = useEditableControls();
+
+    return isEditing ? null : (
+      <IconButton
+        aria-label="Edit image source"
+        backgroundColor="white.100"
+        size="sm"
+        icon={EditIcon}
+        {...getEditButtonProps()}
+      />
+    );
+  }
+
   return (
     <Wrapper>
       <Box display="flex" alignItems="stretch">
@@ -79,7 +95,20 @@ const EventCardEditable = (props: EventCardProps) => {
             maxHeight={165}
             opacity={!event.imgSrc ? 0.1 : undefined}
           />
-          <Box position="absolute" top={1 / 2} right={1 / 2}></Box>
+          {props.isEditing && (
+            <Box position="absolute" top={1 / 2} right={1 / 2}>
+              <Editable
+                isDisabled={!props.isEditing}
+                defaultValue={
+                  event.imgSrc || (props.isEditing ? '{imgSrc}' : undefined)
+                }
+                onSubmit={sendEmptyIf(setEventField(['imgSrc']), '{imgSrc}')}
+              >
+                <EditableInput as="textarea" />
+                <EditableControls />
+              </Editable>
+            </Box>
+          )}
           {priceDesc ? (
             <Text variant="tag" position="absolute" left={1 / 3} bottom={1 / 4}>
               {priceDesc}
