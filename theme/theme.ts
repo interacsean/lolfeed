@@ -5,6 +5,9 @@ import HeadingTheme from './components/HeadingTheme';
 import space from './space';
 import TagTheme from './components/TagTheme';
 import InputTheme from './components/InputTheme';
+import PopoverTheme from './components/PopoverTheme';
+import EditableTheme from './components/EditableTheme';
+import SelectTheme from './components/SelectTheme';
 
 const theme = extendTheme({
   colors,
@@ -13,38 +16,9 @@ const theme = extendTheme({
     Heading: HeadingTheme,
     Tag: TagTheme,
     Input: InputTheme,
-    Editable: {
-      baseStyle: {
-        preview: {
-          py: 0,
-        },
-        input: {
-          py: 0,
-        }
-      }
-    },
-    Popover: {
-      baseStyle: {
-        content: {
-          backgroundColor: 'white',
-        },
-        body: {
-          px: 1 / 2,
-          py: 1 / 3,
-        },
-        footer: {
-          px: 1 / 2,
-          py: 1 / 3,
-        },
-        header: {
-          px: 1 / 2,
-          py: 1 / 3,
-        }
-      },
-      defaultProps: {
-        gutter: 1 / 2,
-      }
-    }
+    Editable: EditableTheme,
+    Popover: PopoverTheme,
+    Select: SelectTheme,
   },
 });
 
@@ -53,6 +27,6 @@ theme.components.Heading.sizes = {};
 theme.space = space;
 theme.components.Editable.baseStyle.preview.py = undefined;
 
-console.log(theme.components.Popover.baseStyle({}));
+console.log(theme.components.Select);
 
 export default theme;

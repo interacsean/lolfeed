@@ -4,7 +4,7 @@ import { lensPath, set, uniq } from 'ramda';
 import { Tags } from '../../../services/events/tags/tags';
 import { EventCardProps } from './EventCardEditable';
 import useEventTarget from '../../../utils/hooks/useEventTarget';
-import { EvtApproval } from '../../../services/events/types';
+import { ComEvent, EvtApproval } from '../../../services/events/types';
 
 const newTagOptions = Object.keys(Tags);
 const approvalOptions = [
@@ -72,6 +72,17 @@ const useEventCardLogic = (props: EventCardProps) => {
     },
     [],
   );
+  const addComic = React.useCallback(
+    (type: keyof ComEvent) => (comicToAdd: string) => {
+      if (comicToAdd) {
+        setEvent((ce) => ({
+          ...ce,
+          [type]: uniq((ce[type] || []).concat([comicToAdd]))
+        }));
+      }
+    },
+    [],
+  );
   const onStatusChange = useEventTarget(setEventField(['approval']));
 
   return {
@@ -86,8 +97,8 @@ const useEventCardLogic = (props: EventCardProps) => {
     approvalOptions,
     onStatusChange,
     comics,
+    addComic,
   }
-
 }
 
 export default useEventCardLogic;

@@ -7,6 +7,21 @@ import { ifNotNullAsync } from 'errable';
 import upsertEvent from '../../../services/database/events/upsertEvent';
 import fillEventRecord from '../../../services/database/events/fillEventRecord';
 
+const comEventFieldNames = [
+  'venueName',
+  'venueSlug',
+  'timestampPrecision',
+  'timestamp',
+  'tags',
+  'title',
+  'subTitle',
+  'imgSrc',
+  'price',
+  'description',
+  'comicsHeadline',
+  'comicsFeatured',
+  'comicsSupport',
+];
 const postEvent = (uid: string, event: Partial<ComEventSummary & ComEvent>) => {
   return getEventRecord(uid)
     .then(
@@ -19,7 +34,7 @@ const postEvent = (uid: string, event: Partial<ComEventSummary & ComEvent>) => {
         const { comEvent } = curEventRecord;
 
         const fieldOverrides: Partial<ComEvent> = {
-          ...['venueName', 'venueSlug', 'timestampPrecision', 'timestamp', 'tags', 'title', 'subTitle', 'imgSrc', 'price', 'description']
+          ...comEventFieldNames
             .reduce(
               (acc, key) => {
                 return {

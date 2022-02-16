@@ -1,24 +1,17 @@
 import React from 'react';
 import {
   Box,
-  Heading,
-  Img,
-  Text,
   Editable,
   EditableInput,
   EditablePreview,
+  Heading,
+  HStack,
+  Img,
   LinkBox,
   Select,
-  Tag as ChakraTag,
-  HStack,
-  TextProps
+  Text,
 } from '@chakra-ui/react';
-import {
-  ArrowForwardIcon,
-  CheckIcon,
-  CloseIcon,
-  EditIcon,
-} from '@chakra-ui/icons';
+import { ArrowForwardIcon, CheckIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
 import { ComEventSummary } from '../../../services/events/types';
 import IconButton from '../../common/IconButton/IconButton';
 import renderDate from '../../../utils/date/renderDate';
@@ -27,22 +20,7 @@ import { LinkOverlay } from '../../common/Link/Link';
 import Tag from '../../common/Tag/Tag';
 import useEventCardLogic from './useEventCardLogic';
 import ComicLink from '../ComicLink';
-import {
-  AutoComplete,
-  AutoCompleteInput,
-  AutoCompleteItem,
-  AutoCompleteList,
-} from '@choc-ui/chakra-autocomplete';
-
-const aclProps = {
-  mt: 1 / 4,
-  py: 1 / 3,
-};
-const aciProps = {
-  mx: 1 / 4,
-  py: 1 / 4,
-  px: 1 / 2,
-}
+import ComicAutocomplete from './ComicAutocomplete';
 
 export type EventCardProps = {
   event: ComEventSummary,
@@ -67,6 +45,7 @@ const EventCardEditable = (props: EventCardProps) => {
     approvalOptions,
     onStatusChange,
     comics,
+    addComic,
   } = useEventCardLogic(props);
 
   const price = typeof event.price === 'number' ? [event.price] : event.price;
@@ -106,21 +85,37 @@ const EventCardEditable = (props: EventCardProps) => {
           px={1 / 2}
           flex="1 0 0"
         >
-          {props.isEditing && (
-            <Box>
-              <Select
-                value={event.approval}
-                placeholder={`(${event.approval || 'select'})`}
-                onChange={onStatusChange}
-              >
-                {approvalOptions.map(
-                  a => <option value={a}>{a}</option>
-                )}
-              </Select>
-            </Box>
-          )}
           <Box display="flex">
             <Box flex="1 0 0">
+              {props.isEditing && (
+                <Box display="flex" alignItems="center">
+                  <Select
+                    size="sm"
+                    value={event.approval}
+                    placeholder={`(${event.approval || 'select'})`}
+                    onChange={onStatusChange}
+                  >
+                    {approvalOptions.map(
+                      a => <option value={a}>{a}</option>
+                    )}
+                  </Select>
+                  {props.isEditing && (
+                    <>
+                      <IconButton
+                        aria-label={'Save'}
+                        onClick={saveThenExitEdit}
+                        icon={CheckIcon}
+                      />
+                      <IconButton
+                        aria-label={'Cancel'}
+                        iconProps={{ fontSize: '18px' }}
+                        onClick={cancelEdit}
+                        icon={CloseIcon}
+                      />
+                    </>
+                  )}
+                </Box>
+              )}
               <TitleWrapper href={(props.isEditing ? undefined : event.orderLink) || undefined} isExternal>
                 <Heading variant="title" mb="0.25em" minWidth="6em">
                   <Editable
@@ -134,29 +129,13 @@ const EventCardEditable = (props: EventCardProps) => {
                 </Heading>
               </TitleWrapper>
             </Box>
-            {props.isEditing ? (
-              <>
-                <IconButton
-                  aria-label={'Save'}
-                  onClick={saveThenExitEdit}
-                  icon={CheckIcon}
-                />
-                <IconButton
-                  aria-label={'Cancel'}
-                  iconProps={{ fontSize: '18px' }}
-                  onClick={cancelEdit}
-                  icon={CloseIcon}
-                />
-              </>
-            ) : (
-              props.enableEdit && (
-                <IconButton
-                  zIndex={layers.foreground}
-                  onClick={() => props.onEdit(props.event.uid)}
-                  aria-label={'Edit'}
-                  icon={EditIcon}
-                />
-              )
+            {!props.isEditing && props.enableEdit && (
+              <IconButton
+                zIndex={layers.foreground}
+                onClick={() => props.onEdit(props.event.uid)}
+                aria-label={'Edit'}
+                icon={EditIcon}
+              />
             )}
           </Box>
           <Text variant="subTitle" mb={1 / 4}>
@@ -192,22 +171,7 @@ const EventCardEditable = (props: EventCardProps) => {
                       <ComicLink>{c}</ComicLink>
                     ))}
                     {props.isEditing && (
-                      <AutoComplete>
-                        <AutoCompleteInput
-                          placeholder="Search comics"
-                        />
-                        <AutoCompleteList {...aclProps}>
-                          {comics.map((comic) => (
-                            <AutoCompleteItem
-                              {...aciProps}
-                              key={`option-${comic}`}
-                              value={comic}
-                            >
-                              {comic}
-                            </AutoCompleteItem>
-                          ))}
-                        </AutoCompleteList>
-                      </AutoComplete>
+                      <ComicAutocomplete comics={comics} onChoose={addComic('comicsHeadline')} />
                     )}
                   </>
                 )}
@@ -217,6 +181,9 @@ const EventCardEditable = (props: EventCardProps) => {
                     {(event.comicsSupport || []).map(c => (
                       <ComicLink>{c}</ComicLink>
                     ))}
+                    {props.isEditing && (
+                      <ComicAutocomplete comics={comics} onChoose={addComic('comicsSupport')} />
+                    )}
                   </>
                 )}
                 {(!!event.comicsFeatured?.length || props.isEditing) && (
@@ -225,6 +192,9 @@ const EventCardEditable = (props: EventCardProps) => {
                     {(event.comicsFeatured || []).map(c => (
                       <ComicLink>{c}</ComicLink>
                     ))}
+                    {props.isEditing && (
+                      <ComicAutocomplete comics={comics} onChoose={addComic('comicsFeatured')} />
+                    )}
                   </>
                 )}
               </Box>
