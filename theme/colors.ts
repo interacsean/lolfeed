@@ -1,6 +1,6 @@
 const colors = {
   white: {
-    100: '#fff'
+    100: '#fff',
   },
   black: {
     100: '#111111',
@@ -8,17 +8,17 @@ const colors = {
     70: '#111111aa', // check math
   },
   primary: {
-    100: '#421fba'
+    100: '#421fba',
   },
   secondary: {
-    100: '#3cd273'
+    100: '#3cd273',
   },
   guide: {
     100: '#78909423',
   },
   action: {
-    100: '#789094'
-  }
+    100: '#789094',
+  },
 };
 
 export default colors;

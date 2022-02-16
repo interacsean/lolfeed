@@ -6,7 +6,7 @@ const SelectTheme = {
       },
       addon: {
         px: 1 / 2,
-      }
+      },
     },
     sm: {
       field: {
@@ -14,9 +14,9 @@ const SelectTheme = {
       },
       addon: {
         px: 1 / 2,
-      }
-    }
-  }
+      },
+    },
+  },
 };
 
 export default SelectTheme;

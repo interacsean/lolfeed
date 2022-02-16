@@ -10,13 +10,12 @@ import { StrRecord } from '../../../types/StrRecord';
 const addWeeklyEvents = (evts: ComEvent[]): ComEvent[] => {
   const now = Date.now();
 
-  const dbEvtIdMap = evts.map(e => e.uid).reduce(
-    (acc, item) => {
+  const dbEvtIdMap = evts
+    .map((e) => e.uid)
+    .reduce((acc, item) => {
       acc[item] = true;
       return acc;
-    },
-    {} as StrRecord<true>,
-  );
+    }, {} as StrRecord<true>);
 
   const baseWeeklies = [
     // ...getBobbiePeelsWeeklies(now),
@@ -28,12 +27,12 @@ const addWeeklyEvents = (evts: ComEvent[]): ComEvent[] => {
   ];
 
   const weekliesToAdd = baseWeeklies.filter(
-    wkly => dbEvtIdMap[wkly.uid] !== true
+    (wkly) => dbEvtIdMap[wkly.uid] !== true,
   );
 
   // Replace weeklies that have a db record
 
   return evts.concat(weekliesToAdd);
-}
+};
 
 export default addWeeklyEvents;

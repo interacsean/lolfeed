@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
-import usePartialledCallback from "./usePartialledCallback";
+import { useCallback, useState } from 'react';
+import usePartialledCallback from './usePartialledCallback';
 
 const useToggleState = (dflt: boolean = false) => {
   const [value, setValue] = useState(dflt);

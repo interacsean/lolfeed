@@ -20,12 +20,12 @@ import getEventbriteOrganizerEvents from '../common/eventbrite/getEventbriteOrga
 const getGeorgesBar = (): Promise<ApiErrorOr<GrgBarEvtRaw[]>> =>
   getEventbriteOrganizerEvents('georges-bar-32126450903');
 
-    // const structured = scrapy.extract(
-    //   data.replace('data-testid', 'datatestid')
-    //     .replace('data-spec', 'dataspec')
-    //     .replace('data-subcontent-key', 'datasubcontentkey'),
-    //   scrapeModel
-    // ) as { events?: GrgBarEvtRaw[] };
-    // return structured?.events || err({ message: 'Could not get GeorgesBar events', errors: structured });
+// const structured = scrapy.extract(
+//   data.replace('data-testid', 'datatestid')
+//     .replace('data-spec', 'dataspec')
+//     .replace('data-subcontent-key', 'datasubcontentkey'),
+//   scrapeModel
+// ) as { events?: GrgBarEvtRaw[] };
+// return structured?.events || err({ message: 'Could not get GeorgesBar events', errors: structured });
 
 export default getGeorgesBar;

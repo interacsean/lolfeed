@@ -52,29 +52,23 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
   const fileName = cliArgs[0] || (await makey.ask('My first question:'));
   const FileName = makey.toUpperCaseFirst(fileName);
   const ShortHand = await makey.ask('Short Hand version:');
-  
+
   makey.createFile(
     `./services/api/sources/${fileName}/get${FileName}.ts`,
-    makey.templateReplace(
-      tmplBody,
-      {
-        fileName,
-        FileName,
-        ShortHand,
-      }
-    ),
+    makey.templateReplace(tmplBody, {
+      fileName,
+      FileName,
+      ShortHand,
+    }),
   );
 
   makey.createFile(
     `./services/api/sources/${fileName}/normalise${FileName}Event.ts`,
-    makey.templateReplace(
-      tmplNormalise,
-      {
-        fileName,
-        FileName,
-        ShortHand,
-      }
-    ),
+    makey.templateReplace(tmplNormalise, {
+      fileName,
+      FileName,
+      ShortHand,
+    }),
   );
 
   makey.createFile(
@@ -84,6 +78,6 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
   imgSrc: string,
   title: string,
 }
-`
+`,
   );
-}
+};

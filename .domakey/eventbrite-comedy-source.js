@@ -41,29 +41,23 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
 
   makey.createFile(
     `./services/api/sources/${fileName}/get${FileName}.ts`,
-    makey.templateReplace(
-      tmplBody,
-      {
-        FileName,
-        ShortHand,
-        organiserPath,
-      }
-    ),
+    makey.templateReplace(tmplBody, {
+      FileName,
+      ShortHand,
+      organiserPath,
+    }),
   );
 
   makey.createFile(
     `./services/api/sources/${fileName}/normalise${FileName}Event.ts`,
-    makey.templateReplace(
-      tmplNormalise,
-      {
-        fileName,
-        FileName,
-        FILE_NAME,
-        code,
-        ShortHand,
-        Venue_Name,
-      }
-    ),
+    makey.templateReplace(tmplNormalise, {
+      fileName,
+      FileName,
+      FILE_NAME,
+      code,
+      ShortHand,
+      Venue_Name,
+    }),
   );
 
   makey.createFile(
@@ -71,6 +65,6 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
     `import { EvtBrtEvtRaw } from '../common/eventbrite/types';
 
 export type ${ShortHand}EvtRaw = EvtBrtEvtRaw;
-`
+`,
   );
-}
+};

@@ -1,9 +1,16 @@
-import { ComEvent, defaultEvtApproval, EvtApproval, Sources, TimestampPrecision } from '../../types';
+import {
+  ComEvent,
+  defaultEvtApproval,
+  EvtApproval,
+  Sources,
+  TimestampPrecision,
+} from '../../types';
 import { Tags } from '../../tags/tags';
 import getNextNDates, { DayOfWeek } from '../../../../utils/date/getNextNDates';
 import { unconfirmedMessage } from './common';
 
-const getVoltaireId = (date: Date) => `VTR-${date.toISOString().substring(0,10)}`;
+const getVoltaireId = (date: Date) =>
+  `VTR-${date.toISOString().substring(0, 10)}`;
 
 const getVoltaireWeeklies = (now: number = Date.now()): ComEvent[] => {
   const nextFourOccurrances = getNextNDates(4, DayOfWeek.Sunday, 19, 15);
@@ -24,6 +31,6 @@ const getVoltaireWeeklies = (now: number = Date.now()): ComEvent[] => {
       approval: defaultEvtApproval,
     };
   });
-}
+};
 
 export default getVoltaireWeeklies;

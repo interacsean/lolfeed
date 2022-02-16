@@ -1,5 +1,10 @@
 import getTryBookingEvtId from './getTryBookingEvtId';
-import { ComEvent, defaultEvtApproval, Sources, TimestampPrecision } from '../../../../events/types';
+import {
+  ComEvent,
+  defaultEvtApproval,
+  Sources,
+  TimestampPrecision,
+} from '../../../../events/types';
 import { TryBkgEvtRaw } from './types';
 import extractTryBookingEvtTime from './extractTryBookingEvtTime';
 
@@ -23,7 +28,7 @@ const getNormalisedTryBookingEvent = (
     orderLink: `https://www.trybooking.com/events/${eid}/sessions/${ev.orderEdid}/sections/${ev.orderAid}/tickets`,
     imgSrc: ev.imgSrc ? `https://www.trybooking.com${ev.imgSrc}` : undefined,
     approval: defaultEvtApproval,
-  }
+  };
 };
 
 export default getNormalisedTryBookingEvent;

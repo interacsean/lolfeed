@@ -1,8 +1,7 @@
 import fontWeights from '../fontWeights';
 import { getSpace } from '../space';
 
-const getFontSize = (n: number) =>
-  getSpace(n, true, 1.22);
+const getFontSize = (n: number) => getSpace(n, true, 1.22);
 
 const TextTheme = {
   variants: {
@@ -39,8 +38,8 @@ const TextTheme = {
       paddingLeft: 1 / 5,
       paddingRight: 1 / 5,
       borderRadius: getSpace(1 / 5),
-      boxShadow: '0 0 3px 0 rgba(0, 0, 0, 0.4)'
-    }
+      boxShadow: '0 0 3px 0 rgba(0, 0, 0, 0.4)',
+    },
   },
 };
 

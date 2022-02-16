@@ -3,9 +3,9 @@ const InputTheme = {
     md: {
       field: {
         px: 1,
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 
 export default InputTheme;

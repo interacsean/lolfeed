@@ -1,9 +1,17 @@
-import { ComEvent, defaultEvtApproval, Sources, TimestampPrecision } from '../../../types';
+import {
+  ComEvent,
+  defaultEvtApproval,
+  Sources,
+  TimestampPrecision,
+} from '../../../types';
 import { Tags } from '../../../tags/tags';
-import getNextNDates, { DayOfWeek } from '../../../../../utils/date/getNextNDates';
+import getNextNDates, {
+  DayOfWeek,
+} from '../../../../../utils/date/getNextNDates';
 import { unconfirmedMessage } from '../common';
 
-const getBobbiePeelId = (date: Date) => `BBP-${date.toISOString().substring(0,10)}`;
+const getBobbiePeelId = (date: Date) =>
+  `BBP-${date.toISOString().substring(0, 10)}`;
 
 const getBobbiePeelsWeeklies = (now: number = Date.now()): ComEvent[] => {
   const nextFourOccurrances = getNextNDates(4, DayOfWeek.Thursday, 20, 30);
@@ -27,6 +35,6 @@ ${unconfirmedMessage}`,
       approval: defaultEvtApproval,
     };
   });
-}
+};
 
 export default getBobbiePeelsWeeklies;

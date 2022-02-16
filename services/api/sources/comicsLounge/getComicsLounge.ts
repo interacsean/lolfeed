@@ -17,18 +17,27 @@ const scrapeModel = {
       timeRaw: '.otherinfo > div:nth-child(2)',
       bookingLink: '.otherinfo > div > .msbuy > a (href)',
       // price NA
-    }
+    },
   ],
-}
+};
 
-const getComicsLounge = (): Promise<ApiErrorOr<ComLngEvtRaw[]>> => axios.get(
-  `https://thecomicslounge.com.au/index.php/events`
-).then
-  (({ data }) => {
-    const structured = scrapy.extract(data.replace(/data-src/g, 'datasrc'), scrapeModel) as { events?: ComLngEvtRaw[] };
-    // todo: get details from each page
-    // todo: clean data
-    return structured?.events || err({ message: 'Could not get Comics Lounge events', errors: structured });
-  });
+const getComicsLounge = (): Promise<ApiErrorOr<ComLngEvtRaw[]>> =>
+  axios
+    .get(`https://thecomicslounge.com.au/index.php/events`)
+    .then(({ data }) => {
+      const structured = scrapy.extract(
+        data.replace(/data-src/g, 'datasrc'),
+        scrapeModel,
+      ) as { events?: ComLngEvtRaw[] };
+      // todo: get details from each page
+      // todo: clean data
+      return (
+        structured?.events ||
+        err({
+          message: 'Could not get Comics Lounge events',
+          errors: structured,
+        })
+      );
+    });
 
 export default getComicsLounge;

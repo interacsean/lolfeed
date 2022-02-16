@@ -1,4 +1,3 @@
-
 const x = ` 
  Yes All Women
  Raise the bar

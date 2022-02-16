@@ -3,12 +3,14 @@ import { Box, HStack, Container, PropsOf } from '@chakra-ui/react';
 import Link from '../common/Link/Link';
 
 type Props = {
-  children: React.ReactNode,
+  children: React.ReactNode;
 };
 
 const NavLink = ({ children, ...props }: PropsOf<typeof Link>) => (
-  <Link {...props} px={1 / 2} py={1 / 2}>{children}</Link>
-)
+  <Link {...props} px={1 / 2} py={1 / 2}>
+    {children}
+  </Link>
+);
 
 const Layout = (props: Props) => {
   return (
@@ -23,10 +25,13 @@ const Layout = (props: Props) => {
           </HStack>
         </Container>
       </Box>
-      <Box flex="1 0 0" pt="bodyTopPad" pb="bodyBottomPad" backgroundColor="primary.100">
-        <Container>
-          {props.children}
-        </Container>
+      <Box
+        flex="1 0 0"
+        pt="bodyTopPad"
+        pb="bodyBottomPad"
+        backgroundColor="primary.100"
+      >
+        <Container>{props.children}</Container>
       </Box>
     </Box>
   );

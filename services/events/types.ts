@@ -2,34 +2,34 @@ import { Tags } from './tags/tags';
 
 export type ComEventSummary = {
   uid: string;
-  title: string,
-  subTitle?: string,
-  timestamp: [number] | [number, number],
-  timestampPrecision: TimestampPrecision,
-  timezone: string,
-  venueName?: string,
-  venueSlug?: string,
-  imgSrc?: string,
-  tags?: Tags[],
+  title: string;
+  subTitle?: string;
+  timestamp: [number] | [number, number];
+  timestampPrecision: TimestampPrecision;
+  timezone: string;
+  venueName?: string;
+  venueSlug?: string;
+  imgSrc?: string;
+  tags?: Tags[];
   price?:
     | null
     | number
     | [number]
     | [number, string]
     | [number, number]
-    | [number, number, string],
-  description?: string,
-  orderLink?: string | null,
-  source: Sources,
-  approval: EvtApproval,
-  comicsHeadline?: string[],
-  comicsSupport?: string[],
-  comicsFeatured?: string[],
-}
+    | [number, number, string];
+  description?: string;
+  orderLink?: string | null;
+  source: Sources;
+  approval: EvtApproval;
+  comicsHeadline?: string[];
+  comicsSupport?: string[];
+  comicsFeatured?: string[];
+};
 
 export type ComEvent = ComEventSummary & {
-  writeup?: string,
-}
+  writeup?: string;
+};
 
 export enum TimestampPrecision {
   TIME = 'TIME',

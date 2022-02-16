@@ -8,14 +8,11 @@ import axios from 'axios';
 import { ComicRecord } from '../../../services/database/comics/types';
 
 const Admin: NextPage = (props) => {
-  const { data: comics } = useRemoteData<ComicRecord[]>(
-    () => axios.get(`${App.apiUri}/comic`)
+  const { data: comics } = useRemoteData<ComicRecord[]>(() =>
+    axios.get(`${App.apiUri}/comic`),
   );
-  const comicsList = React.useMemo(
-    () => comics?.map(c => c.name),
-    [comics],
-  );
+  const comicsList = React.useMemo(() => comics?.map((c) => c.name), [comics]);
   return <Home canEdit={true} comicsList={comicsList || []} />;
-}
+};
 
 export default Admin;

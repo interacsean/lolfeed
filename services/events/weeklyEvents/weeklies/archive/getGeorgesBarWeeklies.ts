@@ -1,9 +1,17 @@
-import { ComEvent, defaultEvtApproval, Sources, TimestampPrecision } from '../../../types';
+import {
+  ComEvent,
+  defaultEvtApproval,
+  Sources,
+  TimestampPrecision,
+} from '../../../types';
 import { Tags } from '../../../tags/tags';
-import getNextNDates, { DayOfWeek } from '../../../../../utils/date/getNextNDates';
+import getNextNDates, {
+  DayOfWeek,
+} from '../../../../../utils/date/getNextNDates';
 import { unconfirmedMessage } from '../common';
 
-const getGeorgesBarId = (date: Date) => `GGB-${date.toISOString().substring(0,10)}`;
+const getGeorgesBarId = (date: Date) =>
+  `GGB-${date.toISOString().substring(0, 10)}`;
 
 const getGeorgesBarWeeklies = (now: number = Date.now()): ComEvent[] => {
   const nextFourOccurrances = getNextNDates(4, DayOfWeek.Wednesday, 19, 30);
@@ -25,6 +33,6 @@ const getGeorgesBarWeeklies = (now: number = Date.now()): ComEvent[] => {
       approval: defaultEvtApproval,
     };
   });
-}
+};
 
 export default getGeorgesBarWeeklies;

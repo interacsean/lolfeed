@@ -1,9 +1,15 @@
-import { ComEvent, defaultEvtApproval, Sources, TimestampPrecision } from '../../types';
+import {
+  ComEvent,
+  defaultEvtApproval,
+  Sources,
+  TimestampPrecision,
+} from '../../types';
 import { Tags } from '../../tags/tags';
 import getNextNDates, { DayOfWeek } from '../../../../utils/date/getNextNDates';
 import { unconfirmedMessage } from './common';
 
-const getHighlanderId = (date: Date) => `HLD-${date.toISOString().substring(0,10)}`;
+const getHighlanderId = (date: Date) =>
+  `HLD-${date.toISOString().substring(0, 10)}`;
 
 const getHighlanderWeeklies = (now: number = Date.now()): ComEvent[] => {
   const nextFourOccurrances = getNextNDates(4, DayOfWeek.Tuesday, 20);
@@ -26,6 +32,6 @@ ${unconfirmedMessage}`,
       approval: defaultEvtApproval,
     };
   });
-}
+};
 
 export default getHighlanderWeeklies;

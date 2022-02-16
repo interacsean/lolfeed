@@ -15,19 +15,17 @@ export default function {{endpointName}}Route(
 `;
 
 module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
-  const fileName = cliArgs[0] || (await makey.ask('Endpoint path (from /pages/api/:'));
+  const fileName =
+    cliArgs[0] || (await makey.ask('Endpoint path (from /pages/api/:'));
 
   const endpointName = fileName.split('/').reverse()[0];
   const EndpointName = makey.toUpperCaseFirst(endpointName);
 
   makey.createFile(
     `./pages/api/${fileName}.ts`,
-    makey.templateReplace(
-      tmplBody,
-      {
-        endpointName,
-        EndpointName,
-      }
-    ),
+    makey.templateReplace(tmplBody, {
+      endpointName,
+      EndpointName,
+    }),
   );
-}
+};

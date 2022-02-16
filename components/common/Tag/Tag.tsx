@@ -13,12 +13,8 @@ const Tag = (props: Props) => {
   const tagTitle = tagTitles[props.tag];
   return tagTitle ? (
     <ChakraTag>
-      <TagLabel>
-        {tagTitle}
-      </TagLabel>
-      {props.removable && (
-        <TagCloseButton onClick={props.onRemove} />
-      )}
+      <TagLabel>{tagTitle}</TagLabel>
+      {props.removable && <TagCloseButton onClick={props.onRemove} />}
     </ChakraTag>
   ) : null;
 };

@@ -1,31 +1,47 @@
 import getBobbiePeels from './bobbiePeels/getBobbiePeels';
-import normaliseBobbiePeelsEvent, { getBobbiePeelsId } from './bobbiePeels/normaliseBobbiePeelsEvent';
+import normaliseBobbiePeelsEvent, {
+  getBobbiePeelsId,
+} from './bobbiePeels/normaliseBobbiePeelsEvent';
 import { ComEvent, Sources } from '../../events/types';
-import normaliseComicsLoungeEvent, { getComicsLoungeId } from './comicsLounge/normaliseComicsLoungeEvent';
+import normaliseComicsLoungeEvent, {
+  getComicsLoungeId,
+} from './comicsLounge/normaliseComicsLoungeEvent';
 import getComicsLounge from './comicsLounge/getComicsLounge';
-import normaliseComedyRepublicEvent, { getComedyRepublicId } from './comedyRepublic/normaliseComedyRepublicEvent';
+import normaliseComedyRepublicEvent, {
+  getComedyRepublicId,
+} from './comedyRepublic/normaliseComedyRepublicEvent';
 import getComedyRepublic from './comedyRepublic/getComedyRepublic';
-import normaliseDirtySecretsEvent, { getDirtySecretsId } from './dirtySecrets/normaliseDirtySecretsEvent';
-import normaliseGeorgesBarEvent, { getGeorgesBarId } from './georgesBar/normaliseGeorgesBarEvent';
+import normaliseDirtySecretsEvent, {
+  getDirtySecretsId,
+} from './dirtySecrets/normaliseDirtySecretsEvent';
+import normaliseGeorgesBarEvent, {
+  getGeorgesBarId,
+} from './georgesBar/normaliseGeorgesBarEvent';
 import getGeorgesBar from './georgesBar/getGeorgesBar';
 import getRochey, { getRocheyId } from './rochey/getRochey';
-import normaliseRubberChickenEvent, { getRubberChickenId } from './rubberChicken/normaliseRubberChickenEvent';
+import normaliseRubberChickenEvent, {
+  getRubberChickenId,
+} from './rubberChicken/normaliseRubberChickenEvent';
 import getRubberChicken from './rubberChicken/getRubberChicken';
-import normaliseVoltaireEvent, { getVoltaireId } from './voltaire/normaliseVoltaireEvent';
+import normaliseVoltaireEvent, {
+  getVoltaireId,
+} from './voltaire/normaliseVoltaireEvent';
 import getVoltaire from './voltaire/getVoltaire';
 import normaliseRocheyEvent from './rochey/normaliseRocheyEvent';
 import getDirtySecrets from './dirtySecrets/getDirtySecrets';
 import { MixedEvtRaw } from './types';
 import { ApiErrorOr } from '../../../utils/api/ApiErrorOr';
 import getLimboVoltaire from './limboVoltaire/getLimboVoltaire';
-import normaliseLimboVoltaireEvent, { getLimboVoltaireId } from './limboVoltaire/normaliseLimboVoltaireEvent';
+import normaliseLimboVoltaireEvent, {
+  getLimboVoltaireId,
+} from './limboVoltaire/normaliseLimboVoltaireEvent';
 
 type EventMeta<T extends MixedEvtRaw> = {
-  source: Sources,
-  getId: (ev: T) => string | null,
-  getEvents: () => Promise<ApiErrorOr<T[]>>,
-  normalise: (ev: T) => ComEvent | null
-}
+  source: Sources;
+  getId: (ev: T) => string | null;
+  getEvents: () => Promise<ApiErrorOr<T[]>>;
+  normalise: (ev: T) => ComEvent | null;
+};
 
 export const eventSources: EventMeta<any>[] = [
   {

@@ -7,12 +7,10 @@ export type ComicResponse = ApiErrResponse | ComicRecord[];
 
 export default function comicRoute(
   req: NextApiRequest,
-  res: NextApiResponse<ComicResponse>
+  res: NextApiResponse<ComicResponse>,
 ) {
   if (req.method === 'GET') {
-    return getComics().then(
-      comics => res.json(comics),
-    );
+    return getComics().then((comics) => res.json(comics));
   }
   return res.status(500).json({ message: 'Method not supported' });
 }

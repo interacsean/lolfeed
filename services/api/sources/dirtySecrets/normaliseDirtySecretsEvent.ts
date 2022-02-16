@@ -3,17 +3,18 @@ import getNormalisedEventbriteEvent from '../common/eventbrite/getNormalisedEven
 import getEventbriteEvtId from '../common/eventbrite/getEventbriteEvtId';
 import { EvtBrtEvtRaw } from '../common/eventbrite/types';
 
-export const getDirtySecretsId = (ce: EvtBrtEvtRaw) => getEventbriteEvtId('DTS', ce)
+export const getDirtySecretsId = (ce: EvtBrtEvtRaw) =>
+  getEventbriteEvtId('DTS', ce);
 
 const normaliseDirtySecretsEvent = (ce: EvtBrtEvtRaw): ComEvent | null => {
   const rest = getNormalisedEventbriteEvent('DTS', ce);
 
   if (!rest) return null;
-  return ({
+  return {
     ...rest,
     source: Sources.DIRTY_SECRETS,
-    venueName: 'Caz Reitop\'s Dirty Secrets',
-  });
-}
+    venueName: "Caz Reitop's Dirty Secrets",
+  };
+};
 
 export default normaliseDirtySecretsEvent;

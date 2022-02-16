@@ -14,26 +14,17 @@ const approvalOptions = [
 ];
 
 const useEventCardLogic = (props: EventCardProps) => {
-  const [ event, setEvent ] = React.useState(props.event);
-  const saveThenExitEdit = React.useCallback(
-    () => {
-      saveEventOverrides(event).then(
-        () => props.onExit?.(event)
-      )
-    },
-    [props.onExit, event],
-  );
-  const cancelEdit = React.useCallback(
-    () => {
-      setEvent(props.event);
-      props.onExit?.(props.event)
-    },
-    [props.event],
-  );
+  const [event, setEvent] = React.useState(props.event);
+  const saveThenExitEdit = React.useCallback(() => {
+    saveEventOverrides(event).then(() => props.onExit?.(event));
+  }, [props.onExit, event]);
+  const cancelEdit = React.useCallback(() => {
+    setEvent(props.event);
+    props.onExit?.(props.event);
+  }, [props.event]);
   const setEventFieldVal = React.useCallback(
-    (fieldPath: string[], val: string) => setEvent(
-      prev => set(lensPath(fieldPath), val, prev)
-    ),
+    (fieldPath: string[], val: string) =>
+      setEvent((prev) => set(lensPath(fieldPath), val, prev)),
     [],
   );
   const setEventField = React.useCallback(
@@ -41,8 +32,8 @@ const useEventCardLogic = (props: EventCardProps) => {
     [setEventFieldVal],
   );
   const sendEmptyIf = React.useCallback(
-    (fn: ((val: string) => void), placeholder: string) => (val: string) => {
-      fn(val === placeholder ? '' : val)
+    (fn: (val: string) => void, placeholder: string) => (val: string) => {
+      fn(val === placeholder ? '' : val);
     },
     [],
   );
@@ -50,31 +41,29 @@ const useEventCardLogic = (props: EventCardProps) => {
     (tagToRemove: Tags) => () => {
       setEvent((ce) => ({
         ...ce,
-        tags: (ce.tags || []).filter(t => t !== tagToRemove)
+        tags: (ce.tags || []).filter((t) => t !== tagToRemove),
       }));
     },
     [],
   );
-  const addTag = React.useCallback(
-    (tagToAdd: string) => {
-      if (tagToAdd) {
-        setEvent((ce) => ({
-          ...ce,
-          tags: uniq((ce.tags || []).concat([tagToAdd as Tags]))
-        }));
-      }
-    },
-    [],
-  );
+  const addTag = React.useCallback((tagToAdd: string) => {
+    if (tagToAdd) {
+      setEvent((ce) => ({
+        ...ce,
+        tags: uniq((ce.tags || []).concat([tagToAdd as Tags])),
+      }));
+    }
+  }, []);
   const addComic = React.useCallback(
-    (type: 'comicsFeatured' | 'comicsSupport' | 'comicsHeadline') => (comicToAdd: string) => {
-      if (comicToAdd) {
-        setEvent((ce) => ({
-          ...ce,
-          [type]: uniq((ce[type] || []).concat([comicToAdd]))
-        }));
-      }
-    },
+    (type: 'comicsFeatured' | 'comicsSupport' | 'comicsHeadline') =>
+      (comicToAdd: string) => {
+        if (comicToAdd) {
+          setEvent((ce) => ({
+            ...ce,
+            [type]: uniq((ce[type] || []).concat([comicToAdd])),
+          }));
+        }
+      },
     [],
   );
   const onStatusChange = useEventTarget(setEventField(['approval']));
@@ -91,7 +80,7 @@ const useEventCardLogic = (props: EventCardProps) => {
     approvalOptions,
     onStatusChange,
     addComic,
-  }
-}
+  };
+};
 
 export default useEventCardLogic;

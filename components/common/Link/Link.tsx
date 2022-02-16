@@ -1,7 +1,8 @@
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import {
   Link as ChakraLink,
-  LinkOverlay as ChakraLinkOverlay, LinkProps,
+  LinkOverlay as ChakraLinkOverlay,
+  LinkProps,
 } from '@chakra-ui/react';
 import { StrRecord } from '../../../types/StrRecord';
 
@@ -11,8 +12,8 @@ const isButton = (linkProps: StrRecord<any>) =>
   );
 
 type CombinedLinkProps = LinkProps & {
-  nextLinkProps?: Partial<NextLinkProps>,
-  _useChakraLinkOverlay?: boolean,
+  nextLinkProps?: Partial<NextLinkProps>;
+  _useChakraLinkOverlay?: boolean;
 };
 const Link = ({
   children,
@@ -44,6 +45,8 @@ const Link = ({
   );
 };
 
-export const LinkOverlay = (props: CombinedLinkProps) => <Link _useChakraLinkOverlay {...props} />;
+export const LinkOverlay = (props: CombinedLinkProps) => (
+  <Link _useChakraLinkOverlay {...props} />
+);
 
 export default Link;

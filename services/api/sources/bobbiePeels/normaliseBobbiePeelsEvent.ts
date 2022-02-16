@@ -3,17 +3,18 @@ import getNormalisedEventbriteEvent from '../common/eventbrite/getNormalisedEven
 import getEventbriteEvtId from '../common/eventbrite/getEventbriteEvtId';
 import { EvtBrtEvtRaw, EvtBrtSeriesDataRaw } from '../common/eventbrite/types';
 
-export const getBobbiePeelsId = (ce: EvtBrtEvtRaw) => getEventbriteEvtId('BBP', ce)
+export const getBobbiePeelsId = (ce: EvtBrtEvtRaw) =>
+  getEventbriteEvtId('BBP', ce);
 
 const normaliseBobbiePeelsEvent = (ce: EvtBrtEvtRaw): ComEvent | null => {
   const rest = getNormalisedEventbriteEvent('BBP', ce);
 
   if (!rest) return null;
-  return ({
+  return {
     ...rest,
     source: Sources.BOBBIE_PEELS,
     venueName: 'Bobbie Peels',
-  });
-}
+  };
+};
 
 export default normaliseBobbiePeelsEvent;

@@ -4,13 +4,14 @@ import getNormalisedTryBookingEvent from '../common/trybooking/getNormalisedTryB
 import { rocheyTrybookingEid } from './getRochey';
 
 const normaliseRocheyEvent = (ce: RocheyEvtRaw): ComEvent | null => {
-  const rchEvt = getNormalisedTryBookingEvent(rocheyTrybookingEid, 'RCY', ce)
-  return !rchEvt ? null : {
-    ...rchEvt,
-    source: Sources.ROCHEY,
-    venueName: 'The Rochester',
-  }
-}
-
+  const rchEvt = getNormalisedTryBookingEvent(rocheyTrybookingEid, 'RCY', ce);
+  return !rchEvt
+    ? null
+    : {
+        ...rchEvt,
+        source: Sources.ROCHEY,
+        venueName: 'The Rochester',
+      };
+};
 
 export default normaliseRocheyEvent;

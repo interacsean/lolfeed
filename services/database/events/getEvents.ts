@@ -3,12 +3,11 @@ import eventsCollection from './events';
 import { EvtRecord } from './types';
 
 // todo: only get events in next little while
-const getEvents = () => eventsCollection.get().then(
-  ds => {
+const getEvents = () =>
+  eventsCollection.get().then((ds) => {
     return ds.docs
-      .map(snap => snap.data())
+      .map((snap) => snap.data())
       .filter(compose(not, isEmpty)) as EvtRecord[];
-  }
-);
+  });
 
 export default getEvents;

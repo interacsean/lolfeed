@@ -13,41 +13,56 @@ import Hr from '../../common/Hr';
 
 function useFilterEvents(
   events: ComEventSummary[],
-  filters: {filterShowType: string | undefined}
+  filters: { filterShowType: string | undefined },
 ) {
   return React.useMemo(
-    () => events.filter(
-      evt => (!filters.filterShowType || (evt.tags as string[] || []).includes(filters.filterShowType))
-    ),
+    () =>
+      events.filter(
+        (evt) =>
+          !filters.filterShowType ||
+          ((evt.tags as string[]) || []).includes(filters.filterShowType),
+      ),
     [events, filters],
   );
 }
 
-const Home: NextPage<{ canEdit?: boolean, comicsList?: string[] }> = (props) => {
+const Home: NextPage<{ canEdit?: boolean; comicsList?: string[] }> = (
+  props,
+) => {
   const comicsList = props.comicsList || [];
 
   const { events, setEvents, loading } = useEventFeed();
-  const [ filterShowType, setFilterShowType ] = React.useState<string | undefined>(undefined);
-  const [ editing, setEditing ] = React.useState<null | string>();
-  
+  const [filterShowType, setFilterShowType] = React.useState<
+    string | undefined
+  >(undefined);
+  const [editing, setEditing] = React.useState<null | string>();
+
   const filteredEvents = useFilterEvents(events, { filterShowType });
 
-  const onExit = React.useCallback(
-    (updatedEvent: ComEventSummary) => {
-      setEvents(evts => evts.map(
-        e => e.uid === updatedEvent.uid ? updatedEvent : e,
-      ))
-      setEditing(null)
-    },
-    [],
-  );
+  const onExit = React.useCallback((updatedEvent: ComEventSummary) => {
+    setEvents((evts) =>
+      evts.map((e) => (e.uid === updatedEvent.uid ? updatedEvent : e)),
+    );
+    setEditing(null);
+  }, []);
 
   return (
     <Layout>
       <Card>
-        <Box display="flex" justifyContent="space-between" alignItems="baseline">
-          <Text variant="heading" as="h1" mb={1}>Events</Text>
-          <Box p={1 / 4} borderRadius={1000} border="1px solid" borderColor="guide.100">
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="baseline"
+        >
+          <Text variant="heading" as="h1" mb={1}>
+            Events
+          </Text>
+          <Box
+            p={1 / 4}
+            borderRadius={1000}
+            border="1px solid"
+            borderColor="guide.100"
+          >
             <Select
               value={filterShowType}
               placeholder="Show type"
@@ -65,8 +80,9 @@ const Home: NextPage<{ canEdit?: boolean, comicsList?: string[] }> = (props) => 
           </Box>
         ) : (
           filteredEvents.map((e, i) => {
-            return <Box mb={2} key={e.uid}>
-                {i > 0 && <Hr mb={2}/>}
+            return (
+              <Box mb={2} key={e.uid}>
+                {i > 0 && <Hr mb={2} />}
                 <EventCardEditable
                   comicsList={comicsList}
                   event={e}
@@ -75,13 +91,13 @@ const Home: NextPage<{ canEdit?: boolean, comicsList?: string[] }> = (props) => 
                   onExit={onExit}
                   onEdit={setEditing}
                 />
-              </Box>;
-            }
-          )
+              </Box>
+            );
+          })
         )}
       </Card>
     </Layout>
   );
-}
+};
 
 export default Home;
