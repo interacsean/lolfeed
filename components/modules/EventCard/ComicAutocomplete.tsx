@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import {
   AutoComplete,
   AutoCompleteInput,
@@ -29,9 +29,10 @@ const ComicAutocomplete = (props: Props) => {
   const [searchVal, setSearchVal] = React.useState('');
 
   return (
-    <Box display="flex">
+    <Flex alignItems="center">
       <AutoComplete openOnFocus freeSolo maxSuggestions={20}>
         <AutoCompleteInput
+          size="sm"
           value={searchVal}
           onChange={useEventTarget(setSearchVal)}
           placeholder="Search comics"
@@ -54,7 +55,7 @@ const ComicAutocomplete = (props: Props) => {
         icon={CheckIcon}
         onClick={() => props.onChoose(searchVal)}
       />
-    </Box>
+    </Flex>
   );
 };
 

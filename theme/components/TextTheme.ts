@@ -3,6 +3,12 @@ import { getSpace } from '../space';
 
 const getFontSize = (n: number) => getSpace(n, true, 1.22);
 
+const detail = {
+  fontWeight: fontWeights.normal,
+  fontSize: getFontSize(1 / 2),
+  color: 'black.70',
+  lineHeight: 1.2,
+};
 const TextTheme = {
   variants: {
     heading: {
@@ -21,11 +27,16 @@ const TextTheme = {
       color: 'black.90',
       lineHeight: 1.2,
     },
-    detail: {
-      fontWeight: fontWeights.normal,
-      fontSize: getFontSize(1 / 2),
-      color: 'black.70',
+    contentTitle: {
+      fontSize: getFontSize(1),
+      color: 'black.90',
+      fontWeight: fontWeights.bold,
       lineHeight: 1.2,
+    },
+    detail,
+    detail_featured: {
+      ...detail,
+      color: 'black.100',
     },
     content: {
       fontSize: getFontSize(1),

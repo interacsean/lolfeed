@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Box,
-  Button,
   Editable,
   EditableInput,
   EditablePreview,
@@ -11,6 +10,7 @@ import {
   LinkBox,
   Select,
   Text,
+  Wrap,
   useEditableControls,
 } from '@chakra-ui/react';
 import {
@@ -26,11 +26,14 @@ import layers from '../../../theme/layers';
 import { LinkOverlay } from '../../common/Link/Link';
 import Tag from '../../common/Tag/Tag';
 import useEventCardLogic from './useEventCardLogic';
-import ComicLink from '../ComicLink';
+import ComicLink from '../ComicLink/ComicLink';
 import ComicAutocomplete from './ComicAutocomplete';
+import ConditionalWrapper from '../../common/ConditionalWrapper/ConditionalWrapper';
+import { ComicRecord } from '../../../services/database/comics/types';
+import ComicList from './ComicList';
 
 export type EventCardProps = {
-  comicsList: string[];
+  comicsList: ComicRecord[];
   event: ComEventSummary;
   onExit: (event: ComEventSummary) => void;
   onEdit: (uid: string) => void;
@@ -115,7 +118,7 @@ const EventCardEditable = (props: EventCardProps) => {
             </Text>
           ) : null}
         </Box>
-        <Box py={1 / 3} px={1 / 2} flex="1 0 0">
+        <Box px={1 / 2} flex="1 0 0">
           <Box display="flex">
             <Box flex="1 0 0">
               {props.isEditing && (
@@ -221,56 +224,35 @@ const EventCardEditable = (props: EventCardProps) => {
                   <EditableInput as="textarea" />
                 </Editable>
               </Text>
-              <Box>
+              <Wrap spacing={1 / 4}>
                 {(!!event.comicsHeadline?.length || props.isEditing) && (
-                  <>
-                    <Text variant="detail" as="span">
-                      Headliner:
-                    </Text>
-                    {(event.comicsHeadline || []).map((c) => (
-                      <ComicLink>{c}</ComicLink>
-                    ))}
-                    {props.isEditing && (
-                      <ComicAutocomplete
-                        comics={props.comicsList}
-                        onChoose={addComic('comicsHeadline')}
-                      />
-                    )}
-                  </>
+                  <ComicList
+                    title="Headliner"
+                    isEditing={!!props.isEditing}
+                    comicsList={props.comicsList}
+                    comicNames={event.comicsHeadline}
+                    onAdd={addComic('comicsHeadline')}
+                  />
                 )}
                 {(!!event.comicsSupport?.length || props.isEditing) && (
-                  <>
-                    <Text variant="detail" as="span">
-                      Supporting:
-                    </Text>
-                    {(event.comicsSupport || []).map((c) => (
-                      <ComicLink>{c}</ComicLink>
-                    ))}
-                    {props.isEditing && (
-                      <ComicAutocomplete
-                        comics={props.comicsList}
-                        onChoose={addComic('comicsSupport')}
-                      />
-                    )}
-                  </>
+                  <ComicList
+                    title="Supporting"
+                    isEditing={!!props.isEditing}
+                    comicsList={props.comicsList}
+                    comicNames={event.comicsSupport}
+                    onAdd={addComic('comicsSupport')}
+                  />
                 )}
                 {(!!event.comicsFeatured?.length || props.isEditing) && (
-                  <>
-                    <Text variant="detail" as="span">
-                      Featuring:
-                    </Text>
-                    {(event.comicsFeatured || []).map((c) => (
-                      <ComicLink>{c}</ComicLink>
-                    ))}
-                    {props.isEditing && (
-                      <ComicAutocomplete
-                        comics={props.comicsList}
-                        onChoose={addComic('comicsFeatured')}
-                      />
-                    )}
-                  </>
+                  <ComicList
+                    title="Featuring"
+                    isEditing={!!props.isEditing}
+                    comicsList={props.comicsList}
+                    comicNames={event.comicsFeatured}
+                    onAdd={addComic('comicsFeatured')}
+                  />
                 )}
-              </Box>
+              </Wrap>
               {(event.tags || props.isEditing) && (
                 <HStack wrap="wrap">
                   {(event.tags || []).map((t) => (

@@ -10,6 +10,7 @@ import Layout from '../../layouts/Layout';
 import EventCardEditable from '../../modules/EventCard/EventCardEditable';
 import Card from '../../common/Card';
 import Hr from '../../common/Hr';
+import { ComicRecord } from '../../../services/database/comics/types';
 
 function useFilterEvents(
   events: ComEventSummary[],
@@ -26,7 +27,7 @@ function useFilterEvents(
   );
 }
 
-const Home: NextPage<{ canEdit?: boolean; comicsList?: string[] }> = (
+const Home: NextPage<{ canEdit?: boolean; comicsList?: ComicRecord[] }> = (
   props,
 ) => {
   const comicsList = props.comicsList || [];

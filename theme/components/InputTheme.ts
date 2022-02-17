@@ -5,6 +5,11 @@ const InputTheme = {
         px: 1,
       },
     },
+    sm: {
+      field: {
+        px: 1 / 2,
+      },
+    },
   },
 };
 

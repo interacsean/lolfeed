@@ -15,8 +15,7 @@ const requestComics = () =>
 const Admin: NextPage = (props) => {
   const { data: comics } = useRemoteData<ComicRecord[]>(requestComics);
 
-  const comicsList = React.useMemo(() => comics?.map((c) => c.name), [comics]);
-  return <Home canEdit={true} comicsList={comicsList || []} />;
+  return <Home canEdit={true} comicsList={comics || []} />;
 };
 
 export default Admin;

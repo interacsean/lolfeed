@@ -23,5 +23,8 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
     ComponentName: fileName,
   });
 
-  makey.createFile(`./components/${path}/${fileName}/index.tsx`, bodyFilled);
+  makey.createFile(
+    `./components/${path}/${fileName}/${fileName}.tsx`,
+    bodyFilled,
+  );
 };
