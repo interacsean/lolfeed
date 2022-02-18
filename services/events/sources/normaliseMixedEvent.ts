@@ -1,4 +1,4 @@
-import { ComEvent } from '../../events/types';
+import { ComEvent } from '../types';
 import { EvtRecord } from '../../database/events/types';
 import { eventSources } from './eventSources';
 

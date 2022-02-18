@@ -1,4 +1,4 @@
-import normaliseMixedEvent from '../../api/sources/normaliseMixedEvent';
+import normaliseMixedEvent from '../../events/sources/normaliseMixedEvent';
 import { mergeDeepLeft } from 'ramda';
 import { EvtRecord } from './types';
 import { ComEvent, defaultEvtApproval, EvtApproval } from '../../events/types';

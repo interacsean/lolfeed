@@ -2,7 +2,7 @@ import getBobbiePeels from './bobbiePeels/getBobbiePeels';
 import normaliseBobbiePeelsEvent, {
   getBobbiePeelsId,
 } from './bobbiePeels/normaliseBobbiePeelsEvent';
-import { ComEvent, Sources } from '../../events/types';
+import { ComEvent, Sources } from '../types';
 import normaliseComicsLoungeEvent, {
   getComicsLoungeId,
 } from './comicsLounge/normaliseComicsLoungeEvent';

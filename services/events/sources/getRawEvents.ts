@@ -1,5 +1,5 @@
 import { notErr } from 'errable';
-import { Sources } from '../../events/types';
+import { Sources } from '../types';
 import { MixedEvtRaw } from './types';
 import { eventSources } from './eventSources';
 

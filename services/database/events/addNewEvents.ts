@@ -2,8 +2,8 @@ import { FieldPath } from '@google-cloud/firestore';
 import eventsCollection from './events';
 import fillEventRecord from './fillEventRecord';
 import getEventRecord from './getEventRecord';
-import { RawEventAndInfo } from '../../api/sources/getRawEvents';
-import normaliseMixedEvent from '../../api/sources/normaliseMixedEvent';
+import { RawEventAndInfo } from '../../events/sources/getRawEvents';
+import normaliseMixedEvent from '../../events/sources/normaliseMixedEvent';
 
 const addNewEvents = async (events: RawEventAndInfo[]) => {
   for (const e in events) {

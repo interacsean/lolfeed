@@ -1,4 +1,4 @@
-import { ComEvent, Sources } from '../../../events/types';
+import { ComEvent, Sources } from '../../types';
 import getEventbriteEvtId from '../common/eventbrite/getEventbriteEvtId';
 import getNormalisedEventbriteEvent from '../common/eventbrite/getNormalisedEventbriteEvent';
 import { VltEvtRaw } from './types';

@@ -1,5 +1,5 @@
 import { RocheyEvtRaw } from './types';
-import { ComEvent, Sources } from '../../../events/types';
+import { ComEvent, Sources } from '../../types';
 import getNormalisedTryBookingEvent from '../common/trybooking/getNormalisedTryBookingEvent';
 import { rocheyTrybookingEid } from './getRochey';
 

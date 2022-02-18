@@ -1,6 +1,6 @@
 import { EvtRecord } from '../../../database/events/types';
 import { Sources } from '../../types';
-import { startsWith, uniq, any } from 'ramda';
+import { startsWith, uniq } from 'ramda';
 import { Tags } from '../../tags/tags';
 import { getDay } from 'date-fns';
 import anyAreTrue from '../../../../utils/flow/anyAreTrue';

@@ -4,7 +4,7 @@ import {
   defaultEvtApproval,
   Sources,
   TimestampPrecision,
-} from '../../../events/types';
+} from '../../types';
 import { not, isEmpty, compose } from 'ramda';
 import { parseFromTimeZone, parseFromString } from 'date-fns-timezone';
 import replaceMonthWithNumeric from '../../../../utils/date/replaceMonthWithNumeric';

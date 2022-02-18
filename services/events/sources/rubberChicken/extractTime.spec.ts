@@ -1,5 +1,5 @@
 import { extractTime } from './normaliseRubberChickenEvent';
-import { TimestampPrecision } from '../../../events/types';
+import { TimestampPrecision } from '../../types';
 
 describe('extractTime', () => {
   test('Finds date range with no time', () => {

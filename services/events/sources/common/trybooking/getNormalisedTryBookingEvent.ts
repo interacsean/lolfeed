@@ -4,7 +4,7 @@ import {
   defaultEvtApproval,
   Sources,
   TimestampPrecision,
-} from '../../../../events/types';
+} from '../../../types';
 import { TryBkgEvtRaw } from './types';
 import extractTryBookingEvtTime from './extractTryBookingEvtTime';
 

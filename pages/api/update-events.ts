@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import getRawEvents from '../../services/api/sources/getRawEvents';
+import getRawEvents from '../../services/events/sources/getRawEvents';
 import addNewEvents from '../../services/database/events/addNewEvents';
 import { err, fork } from 'errable';
 

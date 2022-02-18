@@ -4,7 +4,7 @@ import {
   ComEvent,
   defaultEvtApproval,
   TimestampPrecision,
-} from '../../../../events/types';
+} from '../../../types';
 import {
   EvtBrtEvtRaw,
   EvtBrtIndividualEvtDetailRaw,

@@ -9,7 +9,7 @@ import {
 } from './types';
 import { ApiErrorOr } from '../../../../utils/api/ApiErrorOr';
 import normaliseComedyRepublicEvent from './normaliseComedyRepublicEvent';
-import { ComEvent } from '../../../events/types';
+import { ComEvent } from '../../types';
 import catchErrors from '../../../../utils/api/catchErrors';
 
 const makePayload = () => ({

@@ -4,7 +4,7 @@ import {
   defaultEvtApproval,
   Sources,
   TimestampPrecision,
-} from '../../../events/types';
+} from '../../types';
 import { compose, isEmpty, not } from 'ramda';
 import { parseFromTimeZone } from 'date-fns-timezone';
 
