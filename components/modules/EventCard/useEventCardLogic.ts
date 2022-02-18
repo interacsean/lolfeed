@@ -66,6 +66,18 @@ const useEventCardLogic = (props: EventCardProps) => {
       },
     [],
   );
+  const removeComic = React.useCallback(
+    (type: 'comicsFeatured' | 'comicsSupport' | 'comicsHeadline') =>
+      (comicToRemove: string) => {
+        if (comicToRemove) {
+          setEvent((ce) => ({
+            ...ce,
+            [type]: (ce[type] || []).filter((c) => c !== comicToRemove),
+          }));
+        }
+      },
+    [],
+  );
   const onStatusChange = useEventTarget(setEventField(['approval']));
 
   return {
@@ -80,6 +92,7 @@ const useEventCardLogic = (props: EventCardProps) => {
     approvalOptions,
     onStatusChange,
     addComic,
+    removeComic,
   };
 };
 

@@ -56,6 +56,7 @@ const EventCardEditable = (props: EventCardProps) => {
     approvalOptions,
     onStatusChange,
     addComic,
+    removeComic,
   } = useEventCardLogic(props);
 
   const price = typeof event.price === 'number' ? [event.price] : event.price;
@@ -232,6 +233,7 @@ const EventCardEditable = (props: EventCardProps) => {
                     comicsList={props.comicsList}
                     comicNames={event.comicsHeadline}
                     onAdd={addComic('comicsHeadline')}
+                    onRemove={removeComic('comicsHeadline')}
                   />
                 )}
                 {(!!event.comicsSupport?.length || props.isEditing) && (
@@ -241,6 +243,7 @@ const EventCardEditable = (props: EventCardProps) => {
                     comicsList={props.comicsList}
                     comicNames={event.comicsSupport}
                     onAdd={addComic('comicsSupport')}
+                    onRemove={removeComic('comicsSupport')}
                   />
                 )}
                 {(!!event.comicsFeatured?.length || props.isEditing) && (
@@ -250,11 +253,12 @@ const EventCardEditable = (props: EventCardProps) => {
                     comicsList={props.comicsList}
                     comicNames={event.comicsFeatured}
                     onAdd={addComic('comicsFeatured')}
+                    onRemove={removeComic('comicsFeatured')}
                   />
                 )}
               </Wrap>
               {(event.tags || props.isEditing) && (
-                <HStack wrap="wrap">
+                <HStack wrap="wrap" mt={2}>
                   {(event.tags || []).map((t) => (
                     <Tag
                       tag={t}

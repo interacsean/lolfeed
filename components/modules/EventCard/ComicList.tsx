@@ -11,6 +11,7 @@ type Props = {
   comicsList: ComicRecord[];
   comicNames: string[] | undefined;
   onAdd: (name: string) => void;
+  onRemove: (name: string) => void;
 };
 
 const ComicList = (props: Props) => {
@@ -32,13 +33,19 @@ const ComicList = (props: Props) => {
         <Text variant="detail" as="span">
           {props.title}:
         </Text>
-        {(props.comicNames || []).map((c) => {
+      </ConditionalWrapper>
+      {!props.isEditing ? (
+        (props.comicNames || []).map((c) => {
           const foundComic = findComic(c) || c;
           return <ComicLink comic={foundComic} />;
-        })}
-      </ConditionalWrapper>
-      {props.isEditing && (
-        <ComicAutocomplete comics={allComicNames} onChoose={props.onAdd} />
+        })
+      ) : (
+        <ComicAutocomplete
+          comics={props.comicNames || []}
+          comicsList={allComicNames}
+          onAdd={props.onAdd}
+          onRemove={props.onRemove}
+        />
       )}
     </ConditionalWrapper>
   );

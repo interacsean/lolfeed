@@ -1,61 +1,71 @@
 import React from 'react';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Text, Box } from '@chakra-ui/react';
 import {
   AutoComplete,
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
+  AutoCompleteProps,
+  AutoCompleteCreatable,
+  AutoCompleteTag,
 } from '@choc-ui/chakra-autocomplete';
-import IconButton from '../../common/IconButton/IconButton';
 import { CheckIcon } from '@chakra-ui/icons';
+import IconButton from '../../common/IconButton/IconButton';
 import useEventTarget from '../../../utils/hooks/useEventTarget';
-
-const aclProps = {
-  mt: 1 / 4,
-  py: 1 / 3,
-};
-const aciProps = {
-  mx: 1 / 5,
-  py: 1 / 5,
-  px: 1 / 2,
-};
 
 type Props = {
   comics: string[];
-  onChoose: (name: string) => void;
+  comicsList: string[];
+  onAdd: (name: string) => void;
+  onRemove: (name: string) => void;
 };
 
 const ComicAutocomplete = (props: Props) => {
   const [searchVal, setSearchVal] = React.useState('');
 
+  const onSelectOption = React.useCallback(
+    (params: Parameters<Required<AutoCompleteProps>['onSelectOption']>[0]) => {
+      props.onAdd(params.item.value);
+    },
+    [props.onAdd],
+  );
+
   return (
-    <Flex alignItems="center">
-      <AutoComplete openOnFocus freeSolo maxSuggestions={20}>
-        <AutoCompleteInput
-          size="sm"
-          value={searchVal}
-          onChange={useEventTarget(setSearchVal)}
-          placeholder="Search comics"
-        />
-        <AutoCompleteList onSelectItem={console.log} {...aclProps}>
-          {props.comics.map((comic) => (
-            <AutoCompleteItem
-              key={`option-${comic}`}
-              value={comic}
-              onClick={() => setSearchVal(comic)}
-              {...aciProps}
-            >
-              {comic}
-            </AutoCompleteItem>
-          ))}
-        </AutoCompleteList>
-      </AutoComplete>
-      <IconButton
-        aria-label="Select"
-        icon={CheckIcon}
-        onClick={() => props.onChoose(searchVal)}
-      />
-    </Flex>
+    <AutoComplete
+      openOnFocus
+      creatable
+      multiple
+      maxSuggestions={20}
+      value={props.comics}
+      onSelectOption={onSelectOption}
+    >
+      <AutoCompleteInput size="sm" placeholder="Search comics">
+        {({ tags }) =>
+          tags.map((tag, tid) => (
+            <AutoCompleteTag
+              variant="subtle"
+              key={tid}
+              label={tag.label}
+              onRemove={() => props.onRemove(tag.label)}
+            />
+          ))
+        }
+      </AutoCompleteInput>
+      <AutoCompleteList>
+        {props.comicsList.map((comic) => (
+          <AutoCompleteItem
+            key={`option-${comic}`}
+            value={comic}
+            onClick={() => setSearchVal(comic)}
+          >
+            {comic}
+          </AutoCompleteItem>
+        ))}
+        <AutoCompleteCreatable>
+          {({ value }) => <Text fontStyle="italic">Add {value}</Text>}
+        </AutoCompleteCreatable>
+      </AutoCompleteList>
+    </AutoComplete>
   );
 };
 
