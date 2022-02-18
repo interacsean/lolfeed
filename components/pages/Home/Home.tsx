@@ -11,6 +11,7 @@ import EventCardEditable from '../../modules/EventCard/EventCardEditable';
 import Card from '../../common/Card';
 import Hr from '../../common/Hr';
 import { ComicRecord } from '../../../services/database/comics/types';
+import isVisible from '../../../services/events/isVisible';
 
 function useFilterEvents(
   events: ComEventSummary[],
@@ -20,8 +21,9 @@ function useFilterEvents(
     () =>
       events.filter(
         (evt) =>
-          !filters.filterShowType ||
-          ((evt.tags as string[]) || []).includes(filters.filterShowType),
+          isVisible(evt) &&
+          (!filters.filterShowType ||
+            ((evt.tags as string[]) || []).includes(filters.filterShowType)),
       ),
     [events, filters],
   );
