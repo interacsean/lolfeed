@@ -8,8 +8,7 @@ const get{{FileName}} = (): Promise<ApiErrorOr<{{ShortHand}}EvtRaw[]>> =>
 export default get{{FileName}};
 `;
 
-const tmplNormalise = `import { ComEvent, Sources } from '../../../events/types';
-import { EvtBrtEvtRaw } from '../common/eventbrite/types';
+const tmplNormalise = `import { ComEvent, Sources } from '../../types';
 import getEventbriteEvtId from '../common/eventbrite/getEventbriteEvtId';
 import getNormalisedEventbriteEvent from '../common/eventbrite/getNormalisedEventbriteEvent';
 import { {{ShortHand}}EvtRaw } from './types';
@@ -40,7 +39,7 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
   const FILE_NAME = makey.camelToSnakeCaps(fileName);
 
   makey.createFile(
-    `./services/api/sources/${fileName}/get${FileName}.ts`,
+    `./services/events/sources/${fileName}/get${FileName}.ts`,
     makey.templateReplace(tmplBody, {
       FileName,
       ShortHand,
@@ -49,7 +48,7 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
   );
 
   makey.createFile(
-    `./services/api/sources/${fileName}/normalise${FileName}Event.ts`,
+    `./services/events/sources/${fileName}/normalise${FileName}Event.ts`,
     makey.templateReplace(tmplNormalise, {
       fileName,
       FileName,
@@ -61,7 +60,7 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
   );
 
   makey.createFile(
-    `./services/api/sources/${fileName}/types.ts`,
+    `./services/events/sources/${fileName}/types.ts`,
     `import { EvtBrtEvtRaw } from '../common/eventbrite/types';
 
 export type ${ShortHand}EvtRaw = EvtBrtEvtRaw;

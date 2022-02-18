@@ -1,7 +1,7 @@
 import { ComEvent, Sources } from '../../types';
 import getNormalisedEventbriteEvent from '../common/eventbrite/getNormalisedEventbriteEvent';
 import getEventbriteEvtId from '../common/eventbrite/getEventbriteEvtId';
-import { EvtBrtEvtRaw, EvtBrtSeriesDataRaw } from '../common/eventbrite/types';
+import { EvtBrtEvtRaw } from '../common/eventbrite/types';
 
 export const getBobbiePeelsId = (ce: EvtBrtEvtRaw) =>
   getEventbriteEvtId('BBP', ce);

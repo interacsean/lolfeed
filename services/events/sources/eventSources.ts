@@ -35,6 +35,8 @@ import getLimboVoltaire from './limboVoltaire/getLimboVoltaire';
 import normaliseLimboVoltaireEvent, {
   getLimboVoltaireId,
 } from './limboVoltaire/normaliseLimboVoltaireEvent';
+import getCoopersInn, { getCoopersInnId } from './coopersInn/getCoopersInn';
+import normaliseCoopersInnEvent from './coopersInn/normaliseCoopersInnEvent';
 
 type EventMeta<T extends MixedEvtRaw> = {
   source: Sources;
@@ -97,5 +99,11 @@ export const eventSources: EventMeta<any>[] = [
     getId: getLimboVoltaireId,
     getEvents: getLimboVoltaire,
     normalise: normaliseLimboVoltaireEvent,
+  },
+  {
+    source: Sources.COOPERS_INN,
+    getId: getCoopersInnId,
+    getEvents: getCoopersInn,
+    normalise: normaliseCoopersInnEvent,
   },
 ];
