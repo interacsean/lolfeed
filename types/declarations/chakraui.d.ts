@@ -3,7 +3,7 @@ import { ComponentWithAs } from '@reach/utils';
 
 declare module '@chakra-ui/react' {
   interface ComponentWithVariant {
-    variant: string;
+    variant?: string;
   }
   interface MyTextProps extends ComponentWithVariant, chakraUiReact.TextProps {}
   const Text: ComponentWithAs<'p', MyTextProps>;

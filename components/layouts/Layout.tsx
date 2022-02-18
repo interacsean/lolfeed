@@ -7,7 +7,7 @@ type Props = {
 };
 
 const NavLink = ({ children, ...props }: PropsOf<typeof Link>) => (
-  <Link {...props} px={1 / 2} py={1 / 2}>
+  <Link {...props} px={3} py={3}>
     {children}
   </Link>
 );

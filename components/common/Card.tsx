@@ -6,9 +6,9 @@ const Card = ({ children, ...props }: BoxProps) => {
   return (
     <Box
       backgroundColor="white.100"
-      px={2}
-      py={1}
-      borderRadius={getSpace(1 / 3)}
+      px={5}
+      py={4}
+      borderRadius={'0.75rem'}
       {...props}
     >
       {children}

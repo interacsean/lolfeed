@@ -55,11 +55,11 @@ const Home: NextPage<{ canEdit?: boolean; comicsList?: ComicRecord[] }> = (
           justifyContent="space-between"
           alignItems="baseline"
         >
-          <Text variant="heading" as="h1" mb={1}>
+          <Text variant="heading" as="h1" mb={4}>
             Events
           </Text>
           <Box
-            p={1 / 4}
+            p={1}
             borderRadius={1000}
             border="1px solid"
             borderColor="guide.100"
@@ -82,8 +82,8 @@ const Home: NextPage<{ canEdit?: boolean; comicsList?: ComicRecord[] }> = (
         ) : (
           filteredEvents.map((e, i) => {
             return (
-              <Box mb={2} key={e.uid}>
-                {i > 0 && <Hr mb={2} />}
+              <Box mb={5} key={e.uid}>
+                {i > 0 && <Hr mb={5} />}
                 <EventCardEditable
                   comicsList={comicsList}
                   event={e}

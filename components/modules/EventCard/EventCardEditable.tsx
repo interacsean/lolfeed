@@ -99,7 +99,7 @@ const EventCardEditable = (props: EventCardProps) => {
             opacity={!event.imgSrc ? 0.1 : undefined}
           />
           {props.isEditing && (
-            <Box position="absolute" top={1 / 2} right={1 / 2}>
+            <Box position="absolute" top={2} right={2}>
               <Editable
                 isDisabled={!props.isEditing}
                 defaultValue={
@@ -113,12 +113,12 @@ const EventCardEditable = (props: EventCardProps) => {
             </Box>
           )}
           {priceDesc ? (
-            <Text variant="tag" position="absolute" left={1 / 3} bottom={1 / 4}>
+            <Text variant="tag" position="absolute" left={1} bottom={1 / 2}>
               {priceDesc}
             </Text>
           ) : null}
         </Box>
-        <Box px={1 / 2} flex="1 0 0">
+        <Box px={3} flex="1 0 0">
           <Box display="flex">
             <Box flex="1 0 0">
               {props.isEditing && (
@@ -179,7 +179,7 @@ const EventCardEditable = (props: EventCardProps) => {
               />
             )}
           </Box>
-          <Text variant="subTitle" mb={1 / 4}>
+          <Text variant="subTitle" mb={1}>
             <Editable
               isDisabled={!props.isEditing}
               defaultValue={
@@ -198,10 +198,10 @@ const EventCardEditable = (props: EventCardProps) => {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            mt={1 / 4}
+            mt={1}
           >
             <Box flex="1 0 0" alignSelf="stretch">
-              <Text variant="detail" mb={1 / 5}>
+              <Text variant="detail" mb={1 / 2}>
                 {renderDate(
                   event.timestamp,
                   event.timestampPrecision,
@@ -224,7 +224,7 @@ const EventCardEditable = (props: EventCardProps) => {
                   <EditableInput as="textarea" />
                 </Editable>
               </Text>
-              <Wrap spacing={1 / 4}>
+              <Wrap>
                 {(!!event.comicsHeadline?.length || props.isEditing) && (
                   <ComicList
                     title="Headliner"

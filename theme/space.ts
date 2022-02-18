@@ -18,21 +18,6 @@ export const getSpace = (
 };
 
 const space = {
-  [1 / 8]: getSpace(1 / 8),
-  [1 / 7]: getSpace(1 / 7),
-  [1 / 6]: getSpace(1 / 6),
-  [1 / 5]: getSpace(1 / 5),
-  [1 / 4]: getSpace(1 / 4),
-  [1 / 3]: getSpace(1 / 3),
-  [1 / 2]: getSpace(1 / 2),
-  1: getSpace(1),
-  2: getSpace(2),
-  3: getSpace(3),
-  4: getSpace(4),
-  5: getSpace(5),
-  6: getSpace(6),
-  7: getSpace(7),
-  8: getSpace(8),
   bodyHPadBase: getSpace(1),
   bodyTopPad: getSpace(1 / 2),
   bodyBottomPad: getSpace(2),

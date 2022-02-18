@@ -1,8 +1,8 @@
 import { extendTheme } from '@chakra-ui/react';
 import colors from './colors';
+import space from './space';
 import TextTheme from './components/TextTheme';
 import HeadingTheme from './components/HeadingTheme';
-import space from './space';
 import TagTheme from './components/TagTheme';
 import InputTheme from './components/InputTheme';
 import PopoverTheme from './components/PopoverTheme';
@@ -20,11 +20,11 @@ const theme = extendTheme({
     Popover: PopoverTheme,
     Select: SelectTheme,
   },
+  space,
 });
 
 // override values
 theme.components.Heading.sizes = {};
-theme.space = space;
 theme.components.Editable.baseStyle.preview.py = undefined;
 
 export default theme;
