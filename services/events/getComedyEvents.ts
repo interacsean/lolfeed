@@ -9,21 +9,19 @@ const applyOverrides = (evt: EvtRecord) => {
 };
 
 const getComedyEvents = () => {
-  return (
-    getEvents()
-      .then(map(processCustomRules))
-      .then(map(applyOverrides))
-      .then(map(prop('comEvent')))
-      // .then(addWeeklyEvents)
-      .then(
-        // @ts-ignore am falling back
-        (events) =>
-          events.filter(
-            (e) => e && (e.timestamp[1] || e.timestamp[0]) > Date.now(),
-          ),
-      )
-      .then((events) => events.sort((a, b) => a.timestamp[0] - b.timestamp[0]))
-  );
+  return getEvents()
+    .then(map(processCustomRules))
+    .then(map(applyOverrides))
+    .then(map(prop('comEvent')))
+    .then(addWeeklyEvents)
+    .then(
+      // @ts-ignore am falling back
+      (events) =>
+        events.filter(
+          (e) => e && (e.timestamp[1] || e.timestamp[0]) > Date.now(),
+        ),
+    )
+    .then((events) => events.sort((a, b) => a.timestamp[0] - b.timestamp[0]));
 };
 
 export default getComedyEvents;

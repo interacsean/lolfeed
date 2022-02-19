@@ -4,10 +4,12 @@ import {
   EvtApproval,
   Sources,
   TimestampPrecision,
-} from '../../types';
-import { Tags } from '../../tags/tags';
-import getNextNDates, { DayOfWeek } from '../../../../utils/date/getNextNDates';
-import { unconfirmedMessage } from './common';
+} from '../../../types';
+import { Tags } from '../../../tags/tags';
+import getNextNDates, {
+  DayOfWeek,
+} from '../../../../../utils/date/getNextNDates';
+import { unconfirmedMessage } from '../common';
 
 const getVoltaireId = (date: Date) =>
   `VTR-${date.toISOString().substring(0, 10)}`;
