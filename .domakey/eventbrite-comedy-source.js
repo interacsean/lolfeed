@@ -21,7 +21,7 @@ const normalise{{FileName}}Event = (ce: {{ShortHand}}EvtRaw): ComEvent | null =>
   if (!rest) return null;
   return ({
     ...rest,
-    source: Sources.{{FILE_NAME}},
+    source: Sources.{{SOURCE_TYPE}},
     venueName: '{{Venue_Name}}',
   });
 }
@@ -36,6 +36,7 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
   const code = await makey.ask('Three Letter Code:');
   const organiserPath = await makey.ask('EventBrite /o/{path}:');
   const Venue_Name = await makey.ask('Venue name:');
+  const SOURCE_TYPE = await makey.ask('Sources enum key:');
   const FILE_NAME = makey.camelToSnakeCaps(fileName);
 
   makey.createFile(
@@ -56,6 +57,7 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
       code,
       ShortHand,
       Venue_Name,
+      SOURCE_TYPE,
     }),
   );
 
@@ -65,5 +67,20 @@ module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
 
 export type ${ShortHand}EvtRaw = EvtBrtEvtRaw;
 `,
+  );
+
+  makey.editFile(`./services/events/sources/eventSources.ts`, (file) =>
+    file.replace(
+      `  },
+];`,
+      `  },
+  {
+    source: Sources.${SOURCE_TYPE},
+    getId: get${FileName}Id,
+    getEvents: get${FileName},
+    normalise: normalise${FileName}Event,
+  },
+];`,
+    ),
   );
 };
