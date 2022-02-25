@@ -3,10 +3,12 @@ import {
   defaultEvtApproval,
   Sources,
   TimestampPrecision,
-} from '../../types';
-import { Tags } from '../../tags/tags';
-import getNextNDates, { DayOfWeek } from '../../../../utils/date/getNextNDates';
-import { unconfirmedMessage } from './common';
+} from '../../../types';
+import { Tags } from '../../../tags/tags';
+import getNextNDates, {
+  DayOfWeek,
+} from '../../../../../utils/date/getNextNDates';
+import { unconfirmedMessage } from '../common';
 
 const getLanternId = (date: Date) =>
   `LNT-${date.toISOString().substring(0, 10)}`;

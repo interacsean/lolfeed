@@ -41,6 +41,10 @@ import normaliseRaiseTheBarEvent, {
   getRaiseTheBarId,
 } from './raiseTheBar/normaliseRaiseTheBarEvent';
 import getRaiseTheBar from './raiseTheBar/getRaiseTheBar';
+import normaliseLanternEvent, {
+  getLanternId,
+} from './lantern/normaliseLanternEvent';
+import getLantern from './lantern/getLantern';
 
 type EventMeta<T extends MixedEvtRaw> = {
   source: Sources;
@@ -115,5 +119,11 @@ export const eventSources: EventMeta<any>[] = [
     getId: getRaiseTheBarId,
     getEvents: getRaiseTheBar,
     normalise: normaliseRaiseTheBarEvent,
+  },
+  {
+    source: Sources.LANTERN,
+    getId: getLanternId,
+    getEvents: getLantern,
+    normalise: normaliseLanternEvent,
   },
 ];

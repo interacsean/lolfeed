@@ -1,5 +1,4 @@
 import { ComEvent } from '../types';
-import getLanternWeeklies from './weeklies/getLanternWeeklies';
 import getGasoWeeklies from './weeklies/getGasoWeeklies';
 import { StrRecord } from '../../../types/StrRecord';
 import getGuerillaResistanceWeeklies from './weeklies/getGuerillaResistanceWeeklies';
