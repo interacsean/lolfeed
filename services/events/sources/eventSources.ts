@@ -45,6 +45,10 @@ import normaliseLanternEvent, {
   getLanternId,
 } from './lantern/normaliseLanternEvent';
 import getLantern from './lantern/getLantern';
+import normaliseComedyCellarEvent, {
+  getComedyCellarId,
+} from './comedyCellar/normaliseComedyCellarEvent';
+import getComedyCellar from './comedyCellar/getComedyCellar';
 
 type EventMeta<T extends MixedEvtRaw> = {
   source: Sources;
@@ -125,5 +129,11 @@ export const eventSources: EventMeta<any>[] = [
     getId: getLanternId,
     getEvents: getLantern,
     normalise: normaliseLanternEvent,
+  },
+  {
+    source: Sources.COMEDY_IN_THE_CELLAR,
+    getId: getComedyCellarId,
+    getEvents: getComedyCellar,
+    normalise: normaliseComedyCellarEvent,
   },
 ];

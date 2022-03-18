@@ -32,7 +32,7 @@ export default normalise{{FileName}}Event;
 module.exports = async ({ cliArgs, cliFlags, templateName, makey }) => {
   const fileName = cliArgs[0] || (await makey.ask('My first question:'));
   const FileName = makey.toUpperCaseFirst(fileName);
-  const ShortHand = await makey.ask('Short Hand version:');
+  const ShortHand = await makey.ask('Short Hand version (6 chrs):');
   const code = await makey.ask('Three Letter Code:');
   const organiserPath = await makey.ask('EventBrite /o/{path}:');
   const Venue_Name = await makey.ask('Venue name:');
