@@ -50,7 +50,7 @@ import normaliseComedyCellarEvent, {
 } from './comedyCellar/normaliseComedyCellarEvent';
 import getComedyCellar from './comedyCellar/getComedyCellar';
 
-type EventMeta<T extends EvtRaw> = {
+export type EventMeta<T extends EvtRaw> = {
   source: Sources;
   getId: (ev: T) => string | null;
   getEvents: () => Promise<ApiErrorOr<T[]>>;

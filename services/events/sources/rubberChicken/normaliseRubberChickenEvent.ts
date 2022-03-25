@@ -68,7 +68,6 @@ export const extractTime = (rawDesc: string) => {
     const dateString = `${day3.padStart(2, '0')} ${replaceMonthWithNumeric(
       month3,
     )} ${year} ${timeWithMins}${ampm3.toUpperCase()}`;
-    // return dateString;
     const timestamp = [
       parseFromString(dateString, 'DD MM YYYY H:mmA').getTime(),
     ];
@@ -88,7 +87,6 @@ const normaliseRubberChickenEvent = (ce: RbrChkEvtRaw): ComEvent | null => {
     uid: getRubberChickenId(ce),
     source: Sources.RUBBER_CHICKEN,
     title,
-    // ...ce.subTitle && { subTitle: ce.subTitle },
     venueName: 'The Rubber Chicken, South Melbourne',
     timezone: 'Australia/Melbourne',
     timestamp,

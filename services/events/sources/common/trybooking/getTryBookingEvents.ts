@@ -32,7 +32,10 @@ const getTryBookingEvents = (eid: string) =>
           ...common,
           ...ev,
         })) ||
-        err({ message: 'Could not get Try Booking events', errors: structured })
+        err({
+          message: 'Could not get Try Booking events',
+          errors: [structured],
+        })
       );
     });
 

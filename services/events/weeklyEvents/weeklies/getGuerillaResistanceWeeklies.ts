@@ -22,7 +22,6 @@ const getGuerillaResistanceWeeklies = (
       timestampPrecision: TimestampPrecision.TIME,
       title: 'Guerilla Stand-up Comedy',
       description: unconfirmedMessage,
-      //subTitle: Headliner usually available
       venueName: 'The Resistance',
       orderLink: 'https://theresistance.net.au/',
       timestamp: [date.getTime()],

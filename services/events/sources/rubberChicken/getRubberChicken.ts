@@ -25,12 +25,11 @@ const getRubberChicken = (): Promise<ApiErrorOr<RbrChkEvtRaw[]>> =>
         .replace(/data-product_id/g, 'dataproductid'),
       scrapeModel,
     ) as { events?: RbrChkEvtRaw[] };
-    // todo: clean
     return (
       structured?.events ||
       err({
         message: 'Could not get Rubber Chicken events',
-        errors: structured,
+        errors: [structured],
       })
     );
   });

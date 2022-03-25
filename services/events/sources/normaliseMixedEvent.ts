@@ -11,7 +11,7 @@ const normaliseMixedEvent = (
       `Unknown source when normalising rawEvent: ${event.source}`,
     );
   }
-  // @ts-ignore (should work if mapping is correct above)
+  // @ts-ignore (should work if eventSources mapping is correct)
   return foundSource.normalise(event.rawEvent);
 };
 
