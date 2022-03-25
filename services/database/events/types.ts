@@ -1,9 +1,9 @@
 import { ComEvent, EvtApproval, Sources } from '../../events/types';
-import { MixedEvtRaw } from '../../events/sources/types';
+import { EvtRaw } from '../../events/sources/types';
 
 export type EvtRecord = {
   source: Sources;
-  rawEvent: MixedEvtRaw;
+  rawEvent: EvtRaw;
   comEvent: ComEvent;
   fieldOverrides: Partial<ComEvent>;
   meta: {

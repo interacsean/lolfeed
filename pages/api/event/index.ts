@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { ComEvent, ComEventSummary } from '../../../services/events/types';
 import { fork } from 'errable';
 import getComedyEvents from '../../../services/events/getComedyEvents';
+import { ApiErrResponse } from '../../../utils/api/ApiErrResponse';
 
 export type EventResponse = {
   events: ComEventSummary[];
@@ -12,7 +13,7 @@ let cachedResult: EventResponse | null = null;
 
 export default function eventsRoute(
   req: NextApiRequest,
-  res: NextApiResponse<EventResponse>,
+  res: NextApiResponse<EventResponse | ApiErrResponse>,
 ) {
   if (USE_CACHE && cachedResult !== null) {
     res.json(cachedResult);
@@ -26,8 +27,10 @@ export default function eventsRoute(
         res.json(cachedResult);
       },
       (err) => {
-        // @ts-ignore
-        res.status(400).json(err);
+        res.status(400).json({
+          message: err?.message || 'Could not complete',
+          errors: [err],
+        });
       },
     ),
   );

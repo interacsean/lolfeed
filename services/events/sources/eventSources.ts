@@ -29,7 +29,7 @@ import normaliseVoltaireEvent, {
 import getVoltaire from './voltaire/getVoltaire';
 import normaliseRocheyEvent from './rochey/normaliseRocheyEvent';
 import getDirtySecrets from './dirtySecrets/getDirtySecrets';
-import { MixedEvtRaw } from './types';
+import { EvtRaw } from './types';
 import { ApiErrorOr } from '../../../utils/api/ApiErrorOr';
 import getLimboVoltaire from './limboVoltaire/getLimboVoltaire';
 import normaliseLimboVoltaireEvent, {
@@ -50,7 +50,7 @@ import normaliseComedyCellarEvent, {
 } from './comedyCellar/normaliseComedyCellarEvent';
 import getComedyCellar from './comedyCellar/getComedyCellar';
 
-type EventMeta<T extends MixedEvtRaw> = {
+type EventMeta<T extends EvtRaw> = {
   source: Sources;
   getId: (ev: T) => string | null;
   getEvents: () => Promise<ApiErrorOr<T[]>>;

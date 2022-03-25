@@ -1,3 +1,5 @@
+import { EvtRaw } from '../types';
+
 export type ComRepGuestToken = {
   Token: string;
   TokenExpiryTime: number;
@@ -11,7 +13,7 @@ export type ComRepGuestTokenResponse = {
     GuestToken: ComRepGuestToken;
   };
 };
-export type ComRepEvtRaw = {
+export interface ComRepEvtRaw extends EvtRaw {
   EventId: number;
   EventLine1: string;
   EventLine2: string;
@@ -45,7 +47,8 @@ export type ComRepEvtRaw = {
   EventSoldOutStatus: null | string;
   EventSoldOutMessage: null | string;
   IsHiddenInSales: null | string;
-};
+}
+
 export type ComRepEvtResponse = {
   Errors: any;
   Result: {

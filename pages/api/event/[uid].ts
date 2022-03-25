@@ -12,6 +12,7 @@ import { ifNotNullAsync } from 'errable';
 import upsertEvent from '../../../services/database/events/upsertEvent';
 import fillEventRecord from '../../../services/database/events/fillEventRecord';
 import addNewComics from '../../../services/comics/addNewComics';
+import { ApiErrResponse } from '../../../utils/api/ApiErrResponse';
 
 const comEventFieldNames = [
   'venueName',
@@ -79,15 +80,28 @@ const postEvent = (uid: string, event: Partial<ComEventSummary & ComEvent>) => {
     );
 };
 
-export default function eventRoute(req: NextApiRequest, res: NextApiResponse) {
+type Response =
+  | {
+      complete: true;
+    }
+  | ApiErrResponse;
+
+export default function eventRoute(
+  req: NextApiRequest,
+  res: NextApiResponse<Response>,
+) {
   if (req.method === 'POST') {
     return postEvent(req.query.uid as string, req.body)
       .then(() => {
-        res.json({ done: true });
+        res.json({ complete: true });
       })
       .catch((e: any) => {
-        res.status(400).json({ error: e.message || 'Unknown error' });
+        res
+          .status(400)
+          .json({ message: e.message || 'Unknown error', errors: [e] });
       });
   }
-  return res.status(400).json({ error: 'Invalid method' });
+  return res
+    .status(400)
+    .json({ message: 'Unsupported method', errors: [req.method] });
 }

@@ -1,3 +1,5 @@
+import { EvtRaw } from '../../types';
+
 export type EvtBrtSeriesDataRaw = {
   startDate: string;
   endDate: string;
@@ -61,7 +63,20 @@ export type EvtBrtIndividualEvtDetailRaw = {
   };
 };
 
-export type EvtBrtEvtRaw = {
-  seriesData: EvtBrtSeriesDataRaw;
+export interface EvtBrtEvtRaw extends EvtRaw {
+  seriesData?: EvtBrtSeriesDataRaw;
   individualEventData: EvtBrtIndividualEvtDetailRaw | null;
+}
+
+export type EvtBrtEvtRawWithIndEvt = {
+  seriesData?: EvtBrtSeriesDataRaw;
+  individualEventData: EvtBrtIndividualEvtDetailRaw;
 };
+
+export const isEvtBrtEvtWithIndEvt = (
+  evtBrtEvtRaw: EvtBrtEvtRaw,
+): evtBrtEvtRaw is EvtBrtEvtRawWithIndEvt => !!evtBrtEvtRaw.individualEventData;
+
+export const isEvtBrtEvtWithSeriesData = (
+  evtBrtEvtRaw: EvtBrtEvtRaw,
+): evtBrtEvtRaw is Required<EvtBrtEvtRaw> => !!evtBrtEvtRaw.seriesData;

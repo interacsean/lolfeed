@@ -5,11 +5,4 @@ import { GrgBarEvtRaw } from './georgesBar/types';
 import { RocheyEvtRaw } from './rochey/types';
 import { RbrChkEvtRaw } from './rubberChicken/types';
 
-export type MixedEvtRaw =
-  | ComRepEvtRaw
-  | ComLngEvtRaw
-  | DtyScrEvtRaw
-  | GrgBarEvtRaw
-  | RocheyEvtRaw
-  | RbrChkEvtRaw
-  | {};
+export type EvtRaw = {};

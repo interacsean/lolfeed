@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, HStack, Container, PropsOf } from '@chakra-ui/react';
-import Link from '../common/Link/Link';
+import Link from '../../common/Link/Link';
 
 type Props = {
   children: React.ReactNode;

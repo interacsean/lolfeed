@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, BoxProps } from '@chakra-ui/react';
-import { getSpace } from '../../theme/space';
+import { getSpace } from '../../../theme/space';
 
 const Card = ({ children, ...props }: BoxProps) => {
   return (

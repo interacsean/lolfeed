@@ -1,4 +1,6 @@
-export type ComLngEvtRaw = {
+import { EvtRaw } from '../types';
+
+export interface ComLngEvtRaw extends EvtRaw {
   imgSrc: string;
   title: string;
   subTitle: string;
@@ -6,4 +8,4 @@ export type ComLngEvtRaw = {
   dateRawFinish: string;
   timeRaw: string;
   bookingLink: string;
-};
+}

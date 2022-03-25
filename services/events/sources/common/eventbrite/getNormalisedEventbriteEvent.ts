@@ -7,13 +7,15 @@ import {
 } from '../../../types';
 import {
   EvtBrtEvtRaw,
-  EvtBrtIndividualEvtDetailRaw,
+  EvtBrtEvtRawWithIndEvt,
   EvtBrtSeriesDataRaw,
+  isEvtBrtEvtWithIndEvt,
+  isEvtBrtEvtWithSeriesData,
 } from './types';
 
-const getNormalisedEventbriteIndividualEvent = (
+export const getNormalisedEventbriteIndividualEvent = (
   idPrefix: string,
-  ev: EvtBrtEvtRaw & { individualEventData: EvtBrtIndividualEvtDetailRaw },
+  ev: EvtBrtEvtRawWithIndEvt,
 ): Omit<ComEvent, 'source' | 'uid'> | null => {
   return {
     title: ev.individualEventData.name.text,
@@ -70,10 +72,11 @@ const getNormalisedEventbriteEvent = (
   ev: EvtBrtEvtRaw,
 ): Omit<ComEvent, 'source'> | null => {
   const uid = getEventbriteEvtId(idPrefix, ev);
-  const rest = ev.individualEventData
-    ? // @ts-ignore just checked
-      getNormalisedEventbriteIndividualEvent(idPrefix, ev)
-    : getNormalisedEventbriteTopLevelEvent(idPrefix, ev.seriesData);
+  const rest = isEvtBrtEvtWithIndEvt(ev)
+    ? getNormalisedEventbriteIndividualEvent(idPrefix, ev)
+    : isEvtBrtEvtWithSeriesData(ev)
+    ? getNormalisedEventbriteTopLevelEvent(idPrefix, ev.seriesData)
+    : null;
   if (!uid || !rest) return null;
   return {
     uid,
