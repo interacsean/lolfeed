@@ -1,3 +1,3 @@
-import Home from '../components/pages/Home/Home';
+import Home from '../client/components/pages/Home/Home';
 
 export default Home;

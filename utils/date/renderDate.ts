@@ -1,6 +1,6 @@
 import * as dateFnsTz from 'date-fns-timezone';
 import { format } from 'date-fns';
-import { TimestampPrecision } from '../../services/events/types';
+import { TimestampPrecision } from '../../domain/events/types';
 
 const renderDate = (
   times: [number] | [number, number],

@@ -1,3 +1,3 @@
-import Admin from '../components/pages/Admin/Admin';
+import Admin from '../client/components/pages/Admin/Admin';
 
 export default Admin;
