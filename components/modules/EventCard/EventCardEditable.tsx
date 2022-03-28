@@ -24,7 +24,7 @@ import IconButton from '../../common/IconButton/IconButton';
 import renderDate from '../../../utils/date/renderDate';
 import layers from '../../../theme/layers';
 import { LinkOverlay } from '../../common/Link/Link';
-import Tag from '../../common/Hr/Tag';
+import Tag from '../../common/Tag/Tag';
 import useEventCardLogic from './useEventCardLogic';
 import ComicLink from '../ComicLink/ComicLink';
 import ComicAutocomplete from './ComicAutocomplete';

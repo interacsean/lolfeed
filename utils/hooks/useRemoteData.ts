@@ -1,7 +1,7 @@
 import React from 'react';
-
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { StrRecord } from '../../types/StrRecord';
+import App from '../../config/App';
 
 function isStrRecord<T>(
   variable: T | StrRecord<unknown>,
@@ -15,7 +15,9 @@ const useRemoteData = <T>(axiosPromiseFn: () => Promise<AxiosResponse<T>>) => {
   const [errors, setErrors] = React.useState<string[] | null>(null);
   React.useEffect(function init() {
     setIsLoading(true);
-    console.log('Making request');
+    if (App.isDev) {
+      console.log('Making request');
+    }
     axiosPromiseFn()
       .then(({ data: axData, status }) => {
         if (status !== 200) {

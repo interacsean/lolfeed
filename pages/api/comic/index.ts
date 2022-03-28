@@ -12,5 +12,8 @@ export default function comicRoute(
   if (req.method === 'GET') {
     return getComics().then((comics) => res.json(comics));
   }
-  return res.status(500).json({ message: 'Method not supported' });
+  return res.status(404).json({
+    message: 'Unsupported method',
+    errors: [`Unsupported method: ${req.method}`],
+  });
 }

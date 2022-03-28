@@ -23,7 +23,7 @@ const theme = extendTheme({
   space,
 });
 
-// override values
+// unset values
 theme.components.Heading.sizes = {};
 theme.components.Editable.baseStyle.preview.py = undefined;
 

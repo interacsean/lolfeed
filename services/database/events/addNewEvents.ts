@@ -4,11 +4,12 @@ import fillEventRecord from './fillEventRecord';
 import getEventRecord from './getEventRecord';
 import { RawEventAndInfo } from '../../events/sources/getRawEvents';
 import normaliseMixedEvent from '../../events/sources/normaliseMixedEvent';
+import asyncMap from '../../../utils/flow/asyncLoop';
 
 const addNewEvents = async (events: RawEventAndInfo[]) => {
-  for (const e in events) {
-    const { uid, ...event } = events[e];
-    if (!uid) continue;
+  asyncMap(async (eventRecord) => {
+    const { uid, ...event } = eventRecord;
+    if (!uid) return;
 
     const prelimNormEvent = normaliseMixedEvent(event);
     if (
@@ -16,7 +17,7 @@ const addNewEvents = async (events: RawEventAndInfo[]) => {
       (prelimNormEvent.timestamp[1] || prelimNormEvent.timestamp[0]) <
         Date.now()
     ) {
-      continue;
+      return;
     }
 
     const currRecord = await getEventRecord(uid);
@@ -34,7 +35,8 @@ const addNewEvents = async (events: RawEventAndInfo[]) => {
             ],
           },
     );
-  }
+    return;
+  }, events);
   return {};
 };
 

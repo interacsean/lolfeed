@@ -5,11 +5,11 @@ import useEventTarget from '../../../utils/hooks/useEventTarget';
 import { ComEventSummary } from '../../../services/events/types';
 import { Tags } from '../../../services/events/tags/tags';
 import tagTitles from '../../../services/events/tags/tagTitles';
-import useEventFeed from '../../../services/events/useEventFeed';
+import useEventFeed from '../../../services/api/useEventFeed';
 import Layout from '../../layouts/Layout/Layout';
 import EventCardEditable from '../../modules/EventCard/EventCardEditable';
 import Card from '../../common/Card/Card';
-import Hr from '../../common/Hr';
+import Hr from '../../common/Hr/Hr';
 import { ComicRecord } from '../../../services/database/comics/types';
 import isVisible from '../../../services/events/isVisible';
 

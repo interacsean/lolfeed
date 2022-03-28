@@ -1,9 +1,9 @@
 import reportError from '../../services/reporting/reportError';
 import { err } from 'errable';
 
-const catchErrorsWithMsg = (msg: string) => (e: any) => {
+const catchErrorsWithMsg = (msg: string) => (error: any) => {
   reportError(msg);
-  return err({ message: msg, e });
+  return err({ message: msg, error });
 };
 
 export default catchErrorsWithMsg;

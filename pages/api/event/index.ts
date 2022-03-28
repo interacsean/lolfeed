@@ -21,12 +21,12 @@ export default function eventsRoute(
   }
 
   return getComedyEvents().then(
-    fork<any, ComEvent[]>(
+    fork<unknown, ComEvent[]>(
       (comedyEventResult) => {
         cachedResult = { events: comedyEventResult };
         res.json(cachedResult);
       },
-      (err) => {
+      (err: any) => {
         res.status(400).json({
           message: err?.message || 'Could not complete',
           errors: [err],

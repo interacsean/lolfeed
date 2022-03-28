@@ -1,7 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
 import App from '../../config/App';
-import { ComEventSummary } from './types';
+import { ComEventSummary } from '../events/types';
 import { EventResponse } from '../../pages/api/event';
 
 const useEventFeed = () => {

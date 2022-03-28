@@ -1,15 +1,17 @@
 import normaliseMixedEvent from '../../events/sources/normaliseMixedEvent';
 import { mergeDeepLeft } from 'ramda';
 import { EvtRecord } from './types';
-import { ComEvent, defaultEvtApproval, EvtApproval } from '../../events/types';
+import { ComEvent, defaultEvtApproval } from '../../events/types';
+
+type PartialEvent = Partial<Omit<EvtRecord, 'meta'>> & {
+  meta?: Partial<EvtRecord['meta']>;
+} & Pick<EvtRecord, 'source' | 'rawEvent'>;
 
 /**
  * Prefill an EvtRecord based on source data, and optional existing EvtRecord
  */
 const fillEventRecord = (
-  event: Partial<Omit<EvtRecord, 'meta'>> & {
-    meta?: Partial<EvtRecord['meta']>;
-  } & Pick<EvtRecord, 'source' | 'rawEvent'>,
+  event: PartialEvent,
   currRecord: null | EvtRecord = null,
 ): EvtRecord | null => {
   const comEvent = normaliseMixedEvent(event);

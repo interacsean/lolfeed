@@ -2,7 +2,7 @@ import { compose, isEmpty, not } from 'ramda';
 import eventsCollection from './events';
 import { EvtRecord } from './types';
 
-// todo: only get events in next little while
+// todo: only get events in near future
 const getEvents = () =>
   eventsCollection.get().then((ds) => {
     return ds.docs

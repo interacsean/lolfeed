@@ -1,10 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { equals, isNil } from 'ramda';
-
 import {
   ComEvent,
   ComEventSummary,
-  EvtApproval,
   Sources,
 } from '../../../services/events/types';
 import getEventRecord from '../../../services/database/events/getEventRecord';
@@ -29,12 +27,13 @@ const comEventFieldNames = [
   'comicsFeatured',
   'comicsSupport',
 ];
-const postEvent = (uid: string, event: Partial<ComEventSummary & ComEvent>) => {
+
+const action = (uid: string, event: Partial<ComEventSummary & ComEvent>) => {
   return getEventRecord(uid)
     .then((curEventRecord) => {
       if (!curEventRecord)
         return fillEventRecord({
-          rawEvent: event, // todo: should be the default event?
+          rawEvent: event,
           source: event.source || Sources.GENERATED_GENERAL, // todo: should reference actual venue is possible
           fieldOverrides: {}, // todo: should be diff between default and the `event`
         });
@@ -91,17 +90,20 @@ export default function eventRoute(
   res: NextApiResponse<Response>,
 ) {
   if (req.method === 'POST') {
-    return postEvent(req.query.uid as string, req.body)
+    return action(req.query.uid as string, req.body)
       .then(() => {
         res.json({ complete: true });
       })
-      .catch((e: any) => {
+      .catch((err: any) => {
         res
           .status(400)
-          .json({ message: e.message || 'Unknown error', errors: [e] });
+          .json({ message: err?.message || 'Unknown error', errors: [err] });
       });
   }
   return res
-    .status(400)
-    .json({ message: 'Unsupported method', errors: [req.method] });
+    .status(404)
+    .json({
+      message: 'Unsupported method',
+      errors: [`Unsupported method: ${req.method}`],
+    });
 }
